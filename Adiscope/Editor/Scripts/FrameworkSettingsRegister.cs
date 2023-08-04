@@ -1,0 +1,333 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+
+using Adiscope.Editor;
+
+namespace Adiscope
+{
+    public static class FrameworkSettingsRegister
+    {
+        public const string SERVICE_JSON_KEY_ADMOB         = "com.google.android.gms.ads.APPLICATION_ID";
+        public const string SERVICE_JSON_KEY_APPLOVIN      = "applovin.sdk.key";
+
+        private const string SERVICE_JSON_KEY_ADISCOPE      = "adiscope";
+        private const string SERVICE_JSON_KEY_NETWORK       = "network";
+        private const string SERVICE_JSON_KEY_ADS           = "ads";
+        private const string SERVICE_JSON_KEY_SETTINGS      = "settings";
+        private const string SERVICE_JSON_KEY_REWARDEDVIDEO = "rewardedVideoAd";
+        private const string SERVICE_JSON_KEY_INTERSTITIAL  = "interstitialAd";
+
+        private static string SettingsPath  = "Packages/com.tnk.adiscope/Editor/Adiscope.asset";
+        private static string[] OS_Type     = { "None", "AOS & iOS", "AOS", "iOS" };
+        private static string[] AOS_Type    = { "None", "AOS(iOS 기능 추가 시 자동 추가)", "AOS", "None(iOS 기능 추가 시 자동 추가)" };
+        private static string[] iOS_Type    = { "None", "iOS(AOS 기능 추가 시 자동 추가)", "None(AOS 기능 추가 시 자동 추가)", "iOS" };
+
+
+        [SettingsProvider]
+        public static SettingsProvider CreateSettingsProvider()
+        {
+            return new SettingsProvider("Project/AdiscopeSDK", SettingsScope.Project)
+            {
+                guiHandler = (searchContext) =>
+                {
+                    string filePath = "Packages/com.tnk.adiscope/package.json";
+                    string json = File.ReadAllText(filePath);
+                    ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
+                    
+                    var serialized = new SerializedObject(Load());
+                    EditorGUILayout.HelpBox(string.Format("Version {0}", pj.version), MessageType.None);
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    if (GUILayout.Button("Settings Android from json file", GUILayout.Height(30))) {
+                        SettingsJson(EditorUtility.OpenFilePanel("Settings Android from json file", null, "json"), true);
+                    }
+                    if (GUILayout.Button("Settings iOS from json file", GUILayout.Height(30))) {
+                        SettingsJson(EditorUtility.OpenFilePanel("Settings iOS from json file", null, "json"), false);
+                    }
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+                    EditorGUILayout.Space();
+
+                    EditorGUI.BeginChangeCheck();
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_mediaID_aos"), new GUIContent("Media ID(AOS)"));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_mediaSecret_aos"), new GUIContent("Media Secret(AOS)"));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_mediaID_ios"), new GUIContent("Media ID(iOS)"));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_mediaSecret_ios"), new GUIContent("Media Secret(iOS)"));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_subDomain"), new GUIContent("Sub Domain"));
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int admobAdapter = serialized.FindProperty("_admobAdapter").intValue;
+                    admobAdapter = EditorGUILayout.Popup("AdMob Adapter", admobAdapter, OS_Type);
+                    serialized.FindProperty("_admobAdapter").intValue = admobAdapter;
+                    int admanagerAdapter = serialized.FindProperty("_admanagerAdapter").intValue;
+                    admanagerAdapter = EditorGUILayout.Popup("Admanager Adapter", admanagerAdapter, iOS_Type);
+                    serialized.FindProperty("_admanagerAdapter").intValue = admanagerAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUI.BeginDisabledGroup(admobAdapter == 0 || admobAdapter == 3);
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_aos"), new GUIContent("AdMob App Key(AOS)"));
+                    EditorGUI.EndDisabledGroup();
+                    EditorGUI.BeginDisabledGroup((admobAdapter == 0 || admobAdapter == 2) && (admanagerAdapter == 0 || admanagerAdapter == 2));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_ios"), new GUIContent("AdMob App Key(iOS)"));
+                    EditorGUI.EndDisabledGroup();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
+                    maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, AOS_Type);
+                    serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
+                    int appLovinAdapter = serialized.FindProperty("_applovinAdapter").intValue;
+                    appLovinAdapter = EditorGUILayout.Popup("AppLovin Adapter", appLovinAdapter, OS_Type);
+                    serialized.FindProperty("_applovinAdapter").intValue = appLovinAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUI.BeginDisabledGroup((appLovinAdapter+maxAdapter) < 1);
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_applovinKey"), new GUIContent("AppLovin SDK Key"));
+                    EditorGUI.EndDisabledGroup ();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int chartboostAdapter = serialized.FindProperty("_chartboostAdapter").intValue;
+                    chartboostAdapter = EditorGUILayout.Popup("Chartboost Adapter", chartboostAdapter, OS_Type);
+                    serialized.FindProperty("_chartboostAdapter").intValue = chartboostAdapter;
+
+                    int fanAdapter = serialized.FindProperty("_fanAdapter").intValue;
+                    fanAdapter = EditorGUILayout.Popup("Fan Adapter", fanAdapter, OS_Type);
+                    serialized.FindProperty("_fanAdapter").intValue = fanAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int inmobiAdapter = serialized.FindProperty("_inmobiAdapter").intValue;
+                    inmobiAdapter = EditorGUILayout.Popup("Inmobi Adapter", inmobiAdapter, AOS_Type);
+                    serialized.FindProperty("_inmobiAdapter").intValue = inmobiAdapter;
+
+                    int ironsourceAdapter = serialized.FindProperty("_ironsourceAdapter").intValue;
+                    ironsourceAdapter = EditorGUILayout.Popup("Ironsource Adapter", ironsourceAdapter, OS_Type);
+                    serialized.FindProperty("_ironsourceAdapter").intValue = ironsourceAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int mobvistaAdapter = serialized.FindProperty("_mobvistaAdapter").intValue;
+                    mobvistaAdapter = EditorGUILayout.Popup("Mobvista Adapter", mobvistaAdapter, OS_Type);
+                    serialized.FindProperty("_mobvistaAdapter").intValue = mobvistaAdapter;
+
+                    int pangleAdapter = serialized.FindProperty("_pangleAdapter").intValue;
+                    pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, AOS_Type);
+                    serialized.FindProperty("_pangleAdapter").intValue = pangleAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int smaatoAdapter = serialized.FindProperty("_smaatoAdapter").intValue;
+                    smaatoAdapter = EditorGUILayout.Popup("Smaato Adapter", smaatoAdapter, AOS_Type);
+                    serialized.FindProperty("_smaatoAdapter").intValue = smaatoAdapter;
+
+                    int tapjoyAdapter = serialized.FindProperty("_tapjoyAdapter").intValue;
+                    tapjoyAdapter = EditorGUILayout.Popup("Tapjoy Adapter", tapjoyAdapter, OS_Type);
+                    serialized.FindProperty("_tapjoyAdapter").intValue = tapjoyAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int unityadsAdapter = serialized.FindProperty("_unityadsAdapter").intValue;
+                    unityadsAdapter = EditorGUILayout.Popup("Unityads Adapter", unityadsAdapter, OS_Type);
+                    serialized.FindProperty("_unityadsAdapter").intValue = unityadsAdapter;
+
+                    int vungleAdapter = serialized.FindProperty("_vungleAdapter").intValue;
+                    vungleAdapter = EditorGUILayout.Popup("Vungle Adapter", vungleAdapter, OS_Type);
+                    serialized.FindProperty("_vungleAdapter").intValue = vungleAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    EditorGUILayout.EndFoldoutHeaderGroup();
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        serialized.ApplyModifiedProperties();
+                    }
+
+                    EditorGUILayout.Space();
+                    EditorGUILayout.Space();
+                    if (GUILayout.Button("Create Adiscope Android Files", GUILayout.Height(30)))
+                    {
+                        BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles();
+                    }
+                },
+                
+                keywords = new HashSet<string>(new[] { "Adiscope", "AdiscopeSDK", "MediaId" })
+            };
+        }
+
+        public static FrameworkSettings Load()
+        {
+            var settings = AssetDatabase.LoadAssetAtPath<FrameworkSettings>(SettingsPath);
+
+            if (settings == null)
+            {
+                settings = ScriptableObject.CreateInstance<FrameworkSettings>();
+                AssetDatabase.CreateAsset(settings, SettingsPath);
+                AssetDatabase.SaveAssets();
+            }
+
+            return settings;
+        }
+
+        // json 파일로 세팅값들 설정
+        private static void SettingsJson(string filePath, bool isAndroid) {
+            FileManager fm = new FileManager();
+            Dictionary<string, object> settings = fm.ReadJsonFile(filePath);
+            if (settings == null) {
+                Debug.LogError("can't get service setting from: " + filePath);
+                return;
+            }
+
+            var serialized = new SerializedObject(Load());
+            // adiscope 값 설정
+            if (!settings.ContainsKey(SERVICE_JSON_KEY_ADISCOPE) || settings[SERVICE_JSON_KEY_ADISCOPE] == null) {
+                Debug.LogError("missing json key [" + SERVICE_JSON_KEY_ADISCOPE + "] from service setting");
+            } else {
+                Dictionary<string, object> adiscopeInfo = settings[SERVICE_JSON_KEY_ADISCOPE] as Dictionary<string, object>;
+                if (!adiscopeInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) || adiscopeInfo[SERVICE_JSON_KEY_SETTINGS] == null) {
+                    Debug.LogError("missing json key [" + SERVICE_JSON_KEY_SETTINGS + "] from service setting");
+                } else {
+                    Dictionary<string, object> adiscopeInfoSettings = adiscopeInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                    if (isAndroid) {
+                        serialized.FindProperty("_mediaID_aos").stringValue = adiscopeInfoSettings["adiscope_media_id"].ToString();
+                        serialized.FindProperty("_mediaSecret_aos").stringValue = adiscopeInfoSettings["adiscope_media_secret"].ToString();
+                        serialized.FindProperty("_subDomain").stringValue = adiscopeInfoSettings["adiscope_sub_domain"].ToString();
+                    } else {
+                        serialized.FindProperty("_mediaID_ios").stringValue = adiscopeInfoSettings["adiscope_media_id"].ToString();
+                        serialized.FindProperty("_mediaSecret_ios").stringValue = adiscopeInfoSettings["adiscope_media_secret"].ToString();
+                    }
+                    serialized.ApplyModifiedProperties();
+                }
+            }
+
+            // adapter 사용 유무 및 Key 설정
+            if (!settings.ContainsKey(SERVICE_JSON_KEY_NETWORK) || settings[SERVICE_JSON_KEY_NETWORK] == null) {
+                Debug.LogError("missing json key [" + SERVICE_JSON_KEY_NETWORK + "] from service setting");
+            } else {
+                Dictionary<string, object> adiscopeNetworks = settings[SERVICE_JSON_KEY_NETWORK] as Dictionary<string, object>;
+                foreach (string adNetworkName in adiscopeNetworks.Keys) {
+                    if (AdiscopeAdapterSettings.GetIsSetting(adNetworkName, isAndroid)) {
+                        Dictionary<string, object> networkInfo = adiscopeNetworks[adNetworkName] as Dictionary<string, object>;
+                        Dictionary<string, object> networkInfoAds = networkInfo[SERVICE_JSON_KEY_ADS] as Dictionary<string, object>;
+                        bool rewardedVideoAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDEDVIDEO].ToString());
+                        bool interstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_INTERSTITIAL].ToString());
+                        if (rewardedVideoAdEnabled || interstitialAdEnabled) {
+                            int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
+                            if (isAndroid) {
+                                if (adapter < 1) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 2;
+                                } else if (adapter == 1 || adapter == 3) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 1;
+                                }
+                            } else {
+                                if (adapter < 1) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 3;
+                                } else if (adapter == 1 || adapter == 2) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 1;
+                                }
+                            }
+                        }
+
+                        if (AdiscopeAdapterSettings.ADMOB == adNetworkName) {
+                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                            string admobKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                            if (admobKey != null && admobKey.Length > 0) {
+                                if (isAndroid) {
+                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
+                                } else {
+                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                                }
+                            }
+                        }
+                        if (AdiscopeAdapterSettings.ADMANAGER == adNetworkName) {
+                            string admobKey = serialized.FindProperty("_admobAppKey_aos").stringValue;
+                            if (!isAndroid) {
+                                admobKey = serialized.FindProperty("_admobAppKey_ios").stringValue;
+                            }
+                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                            string admanagerKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                            if (admanagerKey != null && admanagerKey.Length > 0 && (admobKey == null || admobKey.Length < 1)) {
+                                if (isAndroid) {
+                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admanagerKey;
+                                } else {
+                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admanagerKey;
+                                }
+                            }
+                        }
+
+                        if (AdiscopeAdapterSettings.APPLOVIN == adNetworkName || AdiscopeAdapterSettings.MAX == adNetworkName) {
+                            string applovinSecret = serialized.FindProperty("_applovinKey").stringValue;
+                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                            string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
+                            if (applovinKey != null && applovinKey.Length > 0 && (applovinSecret == null || applovinSecret.Length < 1)) {
+                                serialized.FindProperty("_applovinKey").stringValue = applovinKey;
+                            }
+                        }
+                    }
+                }
+                serialized.ApplyModifiedProperties();
+            }
+        }
+    }
+
+    static class AdiscopeAdapterSettings {
+        public const string ADMOB      = "admob";
+        public const string ADMANAGER  = "admanager";
+        public const string MAX        = "max";
+        public const string APPLOVIN   = "applovin";
+        private const string CHARTBOOST = "chartboost";
+        private const string FAN        = "fan";
+        private const string INMOBI     = "inmobi";
+        private const string IRONSOURCE = "ironsource";
+        private const string MOBVISTA   = "mobvista";
+        private const string PANGLE     = "pangle";
+        private const string SMAATO     = "smaato";
+        private const string TAPJOY     = "tapjoy";
+        private const string UNITYADS   = "unityads";
+        private const string VUNGLE     = "vungle";
+
+        public static bool GetIsSetting(string network, bool isAndroid) {
+            if (isAndroid) {
+                switch (network) {
+                    case ADMOB:
+                    case CHARTBOOST:
+                    case IRONSOURCE:
+                    case UNITYADS:
+                    case MAX:
+                    case APPLOVIN:
+                    case FAN:
+                    case INMOBI:
+                    case MOBVISTA:
+                    case PANGLE:
+                    case SMAATO:
+                    case TAPJOY:
+                    case VUNGLE:
+                    return true;
+                    default: return false;
+                }
+            } else {
+                switch (network) {
+                    case ADMANAGER:
+                    case ADMOB:
+                    case VUNGLE:
+                    case CHARTBOOST:
+                    case FAN:
+                    case MOBVISTA:
+                    case TAPJOY:
+                    case IRONSOURCE:
+                    case UNITYADS:
+                    case APPLOVIN:
+                    return true;
+                    default: return false;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,12 @@
+<dependencies>
+  <androidPackages>
+    <repositories>
+      <repository>https://maven.google.com</repository>
+    </repositories>
+    <repositories>
+      <repository>https://repository.adiscope.com/repository/adiscope/</repository>
+    </repositories>
+    <androidPackage spec="com.google.android.gms:play-services-ads:20.6.0" />
+    <androidPackage spec="com.nps.adiscope:adiscopeCore:3.0.0.0" />
+  </androidPackages>
+</dependencies>

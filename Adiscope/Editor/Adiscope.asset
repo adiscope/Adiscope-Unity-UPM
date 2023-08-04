@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81793af10884b3a81ed308cd741648, type: 3}
+  m_Name: Adiscope
+  m_EditorClassIdentifier: 
+  _mediaID_aos: 
+  _mediaSecret_aos: 
+  _mediaID_ios: 
+  _mediaSecret_ios: 
+  _subDomain: 
+  _admobAdapter: 0
+  _admobAppKey_aos: 
+  _admobAppKey_ios: 
+  _maxAdapter: 0
+  _applovinAdapter: 0
+  _applovinKey: 
+  _admanagerAdapter: 0
+  _chartboostAdapter: 0
+  _fanAdapter: 0
+  _inmobiAdapter: 0
+  _ironsourceAdapter: 0
+  _mobvistaAdapter: 0
+  _pangleAdapter: 0
+  _smaatoAdapter: 0
+  _tapjoyAdapter: 0
+  _unityadsAdapter: 0
+  _vungleAdapter: 0

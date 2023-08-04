@@ -1,0 +1,13 @@
+{
+  "name": "com.tnk.adiscope",
+  "displayName": "Adiscope SDK",
+  "version": "3.0.0",
+  "description": "Adiscope SDK (Unity)",
+  "unity": "2021.3",
+  "keywords": [ "Ad", "Adiscope" ],
+  "author": {
+      "name": "ADISCOPE",
+      "url": "https://www.adiscope.com"
+  },
+  "dependencies": {}
+}
