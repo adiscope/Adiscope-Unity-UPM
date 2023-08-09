@@ -6,6 +6,7 @@
 - `Build > Custom Base Gradle Template` 체크를 설정
 - `Build > Custom Gradle Properties Template` 체크를 설정
 - `Build > Custom Gradle Settings Template` 체크를 설정
+<br/>
 
 ## android.enableR8 제거
 ![playerAndroidproperties](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/1f874038-a23a-4486-ad18-267aa7fb326e)   

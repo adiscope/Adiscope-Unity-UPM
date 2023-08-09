@@ -20,10 +20,26 @@ namespace Adiscope
         private const string SERVICE_JSON_KEY_REWARDEDVIDEO = "rewardedVideoAd";
         private const string SERVICE_JSON_KEY_INTERSTITIAL  = "interstitialAd";
 
-        private static string SettingsPath  = "Packages/com.tnk.adiscope/Editor/Adiscope.asset";
+        private const string PATH_ADISCOPE_EDITOR           = "/Adiscope/Editor";
+        private static string SettingsPath                  = "Assets/Adiscope/Editor/Adiscope.asset";
+
         private static string[] OS_Type     = { "None", "AOS & iOS", "AOS", "iOS" };
         private static string[] AOS_Type    = { "None", "AOS(iOS 기능 추가 시 자동 추가)", "AOS", "None(iOS 기능 추가 시 자동 추가)" };
         private static string[] iOS_Type    = { "None", "iOS(AOS 기능 추가 시 자동 추가)", "None(AOS 기능 추가 시 자동 추가)", "iOS" };
+
+
+
+        /// <summary>
+        /// install plugins without UI prompt
+        /// </summary>
+        /// <param name="androidJsonFilePath">path of (mediaId)_AndroidAdiscope.json</param>
+        /// <param name="iOSJsonFilePath">path of (mediaId)_iOSAdiscope.json</param>
+        public static bool AdiscopeImportJson(string androidJsonFilePath, string iOSJsonFilePath) {
+            SettingsJson(androidJsonFilePath, true);
+            SettingsJson(iOSJsonFilePath, false);
+            return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false);
+        }
+
 
 
         [SettingsProvider]
@@ -33,6 +49,8 @@ namespace Adiscope
             {
                 guiHandler = (searchContext) =>
                 {
+                    CreateAdiscopeFrameworksDirectory();
+
                     string filePath = "Packages/com.tnk.adiscope/package.json";
                     string json = File.ReadAllText(filePath);
                     ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
@@ -154,7 +172,13 @@ namespace Adiscope
                     EditorGUILayout.Space();
                     if (GUILayout.Button("Create Adiscope Android Files", GUILayout.Height(30)))
                     {
-                        BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles();
+                        if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)) { // Manifest 파일 생성
+                            EditorUtility.ClearProgressBar();
+                            EditorUtility.DisplayDialog("Succeed to install", "파일이 정상적으로 생성되었습니다.", "닫기");
+                        } else {
+                            EditorUtility.ClearProgressBar();
+                            EditorUtility.DisplayDialog("Failed to install", "파일 생성 실패", "닫기");
+                        }
                     }
                 },
                 
@@ -165,7 +189,6 @@ namespace Adiscope
         public static FrameworkSettings Load()
         {
             var settings = AssetDatabase.LoadAssetAtPath<FrameworkSettings>(SettingsPath);
-
             if (settings == null)
             {
                 settings = ScriptableObject.CreateInstance<FrameworkSettings>();
@@ -235,14 +258,16 @@ namespace Adiscope
                             }
                         }
 
-                        if (AdiscopeAdapterSettings.ADMOB == adNetworkName) {
+                        if (AdiscopeAdapterSettings.ADMOB == adNetworkName && networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
                             Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
-                            string admobKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
-                            if (admobKey != null && admobKey.Length > 0) {
-                                if (isAndroid) {
-                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
-                                } else {
-                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                            if (networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB) && networkInfoSettings[SERVICE_JSON_KEY_ADMOB] != null) {
+                                string admobKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                                if (admobKey != null && admobKey.Length > 0) {
+                                    if (isAndroid) {
+                                        serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
+                                    } else {
+                                        serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                                    }
                                 }
                             }
                         }
@@ -251,28 +276,42 @@ namespace Adiscope
                             if (!isAndroid) {
                                 admobKey = serialized.FindProperty("_admobAppKey_ios").stringValue;
                             }
-                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
-                            string admanagerKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
-                            if (admanagerKey != null && admanagerKey.Length > 0 && (admobKey == null || admobKey.Length < 1)) {
-                                if (isAndroid) {
-                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admanagerKey;
-                                } else {
-                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admanagerKey;
+                            if ((admobKey == null || admobKey.Length < 1) && networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
+                                Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                                if (networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB) && networkInfoSettings[SERVICE_JSON_KEY_ADMOB] != null) {
+                                    string admanagerKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                                    if (admanagerKey != null && admanagerKey.Length > 0) {
+                                        if (isAndroid) {
+                                            serialized.FindProperty("_admobAppKey_aos").stringValue = admanagerKey;
+                                        } else {
+                                            serialized.FindProperty("_admobAppKey_ios").stringValue = admanagerKey;
+                                        }
+                                    }
                                 }
                             }
                         }
 
                         if (AdiscopeAdapterSettings.APPLOVIN == adNetworkName || AdiscopeAdapterSettings.MAX == adNetworkName) {
                             string applovinSecret = serialized.FindProperty("_applovinKey").stringValue;
-                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
-                            string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
-                            if (applovinKey != null && applovinKey.Length > 0 && (applovinSecret == null || applovinSecret.Length < 1)) {
-                                serialized.FindProperty("_applovinKey").stringValue = applovinKey;
+                            if (networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
+                                Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                                string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
+                                if (applovinKey != null && applovinKey.Length > 0 && (applovinSecret == null || applovinSecret.Length < 1)) {
+                                    serialized.FindProperty("_applovinKey").stringValue = applovinKey;
+                                }
                             }
                         }
                     }
                 }
                 serialized.ApplyModifiedProperties();
+            }
+        }
+
+        private static void CreateAdiscopeFrameworksDirectory()
+        {
+            if (!Directory.Exists(Application.dataPath + PATH_ADISCOPE_EDITOR))
+            {
+                Directory.CreateDirectory(Application.dataPath + PATH_ADISCOPE_EDITOR);
             }
         }
     }

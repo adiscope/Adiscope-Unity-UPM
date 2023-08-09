@@ -1,5 +1,5 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.1-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-2.1.8-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
@@ -18,21 +18,34 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
+#### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
 #### [Adiscope Sample App](./docs/sampleapp.md)
 #### [Adiscope Error Information](./docs/error_info.md)
-#### [Releases](.//releases)
+#### [Releases](../../releases)
 #### [LICENSE](./LICENSE)
 <br/>
 
 
 ## Add the Adiscope package to Your Project
 ### 1. Unity Package Manager window
+#### A. Git URL
 ![packagemanagerUrl](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/dc096371-e276-4386-b70f-d2bdec06c2ad)   
-- Unity project를 열어서 navigate에서 `Window -> Package Manager -> + -> Add package from Git URL` 선택
+가. Unity의 `Window` > `Package Manager` 메뉴 클릭<br/>
+나. Package Manager의 왼쪽 상단 `플러스(+)` 버튼 > `Add package from git URL` 버튼 클릭<br/>
+다. 아래 링크를 붙여넣고 `Add` 버튼 클릭<br/>
 ```
-https://github.com/adiscope/Adiscope-Unity-UPM?path=Adiscope
+https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 ```
-- Add Url   
+> - [결과 확인](./docs/upm_result.md#1-a-unity-package-manager-window---git-url)
+<br/>
+
+#### B. tarball
+![packagemanagerTarball](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/5b1ed637-de37-4798-9520-8f2652f7059d)   
+가. [Releases](../../releases) 페이지에서 필요한 SDK 버전의 `Assets` > `com.tnk.adiscope.tgz` 버튼을 클릭하여 tarball 파일 다운로드<br/>
+나. Unity의 `Window` > `Package Manager` 메뉴 클릭<br/>
+다. Package Manager의 왼쪽 상단 `플러스(+)` 버튼 > `Add package from tarball` 버튼 클릭<br/>
+라. 다운로드받은 tgz 파일을 선택<br/>
+> - [결과 확인](./docs/upm_result.md#1-b-unity-package-manager-window---tarball)
 <br/>
 
 ### 2. Download External Dependency Manager for Unity
@@ -42,7 +55,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM?path=Adiscope
 - `external-dependency-manager-*.unitypackage` 파일을 다운로드
 - Unity project를 열어서 navigate에서 `Assets -> Import Package -> Custom Package` 선택
 - `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`   
-> - [결과 확인](./docs/upm_result.md#1-download-external-dependency-manager-for-unity)
+> - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity)
 <br/>
 
 ### 3. Project Settings - Player
@@ -61,27 +74,37 @@ https://github.com/adiscope/Adiscope-Unity-UPM?path=Adiscope
 - `Build > Custom Main Gradle Template` 체크를 설정
 - `Build > Custom Gradle Properties Template` 체크를 설정
 > - [2022.3.4f1, 2022.3.5f1 변경 설정 확인](./docs/other_unity_version.md)
-> - [결과 확인](./docs/upm_result.md#2-project-settings---player)
+> - [결과 확인](./docs/upm_result.md#3-project-settings---player)
 <br/>
 
-### 4. Project Settings - AdiscopeSDK
+### 4. AdiscopeSDK Settings
+#### 가. Import to Stript
+```csharp
+FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json>, <iOS_Json>);
+```
+- '/Library/PackageCache/com.tnk.adiscope/Editor/Scripts/FrameworkSettingsRegister.cs' 파일에 있는 함수 호출
+- 관리자에게 전달 받은 Android & iOS의 Json 파일 위치 입력
+> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
+<br/>
+
+#### 나. Project Settings - AdiscopeSDK
 ![adiscopeJson](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/c45205bb-7533-4087-976a-ff228688f6eb)  
 - Unity project를 열어서 navigate에서 `Edit -> Project Settings`로 Project Settings 창을 열어 `AdiscopeSDK`를 선택   
 - `Settings Android from json file`를 선택하여 전달받은 Android.json 파일을 선택   
 - `Settings iOS from json file`를 선택하여 전달받은 iOS.json 파일을 선택   
-- 설정 값들이 자동 세팅되며 확인 후 수정이 가능
+- Dashboard의 값은 Adiscope 설정 값들로 자동 세팅
+- Dashboard의 값을 직접 수정 후 `Create Adiscope Android Files`를 선택하면 해당 값으로 앱 설정 됨
 <br/>
 
-### 5. Project Settings - AdiscopeSDK(세팅 파일 생성)
 ![adiscopeMake](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/c000f8f1-5c9c-4730-94d1-86e0778faa5c)
 - `Create Adiscope Android Files`를 선택
 - 인터넷이 연결되어 있어야 함
-> - [결과 확인](./docs/upm_result.md#3-project-settings---adiscopesdk)
+> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
 <br/>
 
-### 6. External Dependency Manager 설정
+### 5. External Dependency Manager 설정
 Unity project를 열어서 navigate에서 `Assets -> External Dependency Manager -> Android Resolver -> Resolver(or Force Resolver)`를 선택   
-> - [결과 확인](./docs/upm_result.md#4-external-dependency-manager-%EC%84%A4%EC%A0%95)
+> - [결과 확인](./docs/upm_result.md#5-external-dependency-manager-%EC%84%A4%EC%A0%95)
 
 <br/><br/>
 
@@ -369,6 +392,11 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 
 <br/><br/>
 
+## Xcode Archive Error
+> - [해결 방법](./docs/apple_store_error.md)
+
+<br/><br/>
+
 ## Adiscope Sample App
 > - [적용 방법 확인](./docs/sampleapp.md)
 
@@ -380,7 +408,7 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 <br/><br/>
 
 ## Releases
-> - [Releases](.//releases)
+> - [Releases](../../releases)
 
 <br/><br/>
 

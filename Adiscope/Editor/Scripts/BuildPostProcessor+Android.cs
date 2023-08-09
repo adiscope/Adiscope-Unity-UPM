@@ -19,9 +19,9 @@ namespace Adiscope
         private const string DISPLAY_PROGRESS_DIALOG_TITLE = "Adiscope Install";
         #endregion
 
-        public static void CreateAdiscopeAndroidFiles()
+        public static bool CreateAdiscopeAndroidFiles(bool isProgress)
         {
-            if(CopyAdiscopeFrameworks(
+            bool isFrameworks = CopyAdiscopeFrameworks(
                 new List<AdiscopeFrameworkAndroidType>()
                 {
                     AdiscopeFrameworkAndroidType.Admob,
@@ -38,34 +38,30 @@ namespace Adiscope
                     AdiscopeFrameworkAndroidType.Tapjoy,
                     AdiscopeFrameworkAndroidType.Vungle
                 }
-            )){
-                UpdateAndroidManifest();
-            }
+            , isProgress);
+            bool isUpdate = UpdateAndroidManifest(isProgress);
+            return (isFrameworks && isUpdate);
         }
 
         /*** AndroidManifest 파일 생성 start ***/
-        private static void UpdateAndroidManifest()
+        private static bool UpdateAndroidManifest(bool isProgress)
         {
-            if (EditorUtility.DisplayCancelableProgressBar(
-                    DISPLAY_PROGRESS_DIALOG_TITLE,
-                    "Update AndroidManifest.xml",
-                    0.8f
-                )){
-                EditorUtility.ClearProgressBar();
-                return;
+            if (isProgress) {
+                if (EditorUtility.DisplayCancelableProgressBar(
+                        DISPLAY_PROGRESS_DIALOG_TITLE,
+                        "Update AndroidManifest.xml",
+                        0.8f
+                    )){
+                    EditorUtility.ClearProgressBar();
+                    return false;
+                }
             }
 
             ManifestHandler manifestHandler = GetManifestHandler();     // Manifest에 필수 항목 추가
             string manifestPath = CreateAdiscopeManifestDirectory();    // 폴더 생성
             manifestPath += "/AndroidManifest.xml";                     // 파일명 지정
 
-            if(manifestHandler.WriteXmlFile(manifestPath)){ // Manifest 파일 생성
-                EditorUtility.ClearProgressBar();
-                EditorUtility.DisplayDialog("Succeed to install", "파일이 정상적으로 생성되었습니다.", "닫기");
-            }else{
-                EditorUtility.ClearProgressBar();
-                EditorUtility.DisplayDialog("Failed to install", "파일 생성 실패", "닫기");
-            }
+            return manifestHandler.WriteXmlFile(manifestPath);
         }
 
         private static ManifestHandler GetManifestHandler()
@@ -143,11 +139,11 @@ namespace Adiscope
         /*** AndroidManifest 파일 생성 end ***/
 
         /*** edm4u를 설정 하기 위해 adapter 파일 생성 start ***/
-        private static bool CopyAdiscopeFrameworks(List<AdiscopeFrameworkAndroidType> usingFrameworks)
+        private static bool CopyAdiscopeFrameworks(List<AdiscopeFrameworkAndroidType> usingFrameworks, bool isProgress)
         {
             DeleteAdiscopeFrameworks(); // 기존 adapter edm4u 파일 삭제
             CreateAdiscopeFrameworksDirectory(); // edm4u 파일을 copy 할 폴더 생성
-            return FileDownloadEdm4uAdapter(usingFrameworks); // edm4u 파일 다운로드
+            return FileDownloadEdm4uAdapter(usingFrameworks, isProgress); // edm4u 파일 다운로드
         }
 
         private static void DeleteAdiscopeFrameworks()
@@ -181,7 +177,7 @@ namespace Adiscope
             }
         }
 
-        private static bool FileDownloadEdm4uAdapter(List<AdiscopeFrameworkAndroidType> usingFrameworks)
+        private static bool FileDownloadEdm4uAdapter(List<AdiscopeFrameworkAndroidType> usingFrameworks, bool isProgress)
         {
             float progress = 0.4f / usingFrameworks.Count;
             float totalProgress = 0.4f + progress;
@@ -192,16 +188,19 @@ namespace Adiscope
                     continue;
                 }
 
-                if (EditorUtility.DisplayCancelableProgressBar(
-                        DISPLAY_PROGRESS_DIALOG_TITLE,
-                        "Download Adapter Files",
-                        totalProgress))
-                {
-                    EditorUtility.ClearProgressBar();
-                    return false;
+                if (isProgress) {
+                    if (EditorUtility.DisplayCancelableProgressBar(
+                            DISPLAY_PROGRESS_DIALOG_TITLE,
+                            "Download Adapter Files",
+                            totalProgress))
+                    {
+                        EditorUtility.ClearProgressBar();
+                        return false;
+                    }
+
+                    totalProgress += progress;
                 }
 
-                totalProgress += progress;
                 if(!DownloadAdapterFile(type.GetFilePath(), type.GetFileName())){
                     EditorUtility.ClearProgressBar();
                     EditorUtility.DisplayDialog("Failed to install", "파일 생성 실패", "닫기");
