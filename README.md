@@ -80,7 +80,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 ### 4. AdiscopeSDK Settings
 #### 가. Import to Stript
 ```csharp
-FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json>, <iOS_Json>);
+FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json_Path>, <iOS_Json_Path>);
 ```
 - '/Library/PackageCache/com.tnk.adiscope/Editor/Scripts/FrameworkSettingsRegister.cs' 파일에 있는 함수 호출
 - 관리자에게 전달 받은 Android & iOS의 Json 파일 위치 입력
