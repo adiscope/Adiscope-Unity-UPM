@@ -1,5 +1,5 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.2-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-2.1.8-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 

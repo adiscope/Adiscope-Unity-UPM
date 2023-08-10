@@ -13,9 +13,9 @@ namespace Adiscope
     class BuildPostProcessorForAndroid
     {
         #region CONST VARIABLES
-        private const string PATH_ADISCOPE              = "/Adiscope";
-        private const string PATH_ADISCOPE_EDITOR       = "/Adiscope/Editor";
-        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/Adiscope.androidlib";
+        private const string PATH_ADISCOPE_FILES        = "/Adiscope/AdiscopeAppSettingsFiles";
+        private const string PATH_ADISCOPE_EDITOR       = "/Adiscope/AdiscopeAppSettingsFiles/Editor";
+        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/AdiscopeAppSettingsFiles/Adiscope.androidlib";
         private const string DISPLAY_PROGRESS_DIALOG_TITLE = "Adiscope Install";
         #endregion
 
@@ -150,7 +150,7 @@ namespace Adiscope
         {
             if (Directory.Exists(Application.dataPath + PATH_ADISCOPE_EDITOR))
             {
-                string path = Application.dataPath + PATH_ADISCOPE;
+                string path = Application.dataPath + PATH_ADISCOPE_FILES;
                 foreach (string directory in Directory.GetDirectories(path))
                 {
                     try
