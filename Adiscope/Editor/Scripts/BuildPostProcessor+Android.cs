@@ -15,8 +15,9 @@ namespace Adiscope
         #region CONST VARIABLES
         private const string PATH_ADISCOPE_FILES        = "/Adiscope/AdiscopeAppSettingsFiles";
         private const string PATH_ADISCOPE_EDITOR       = "/Adiscope/AdiscopeAppSettingsFiles/Editor";
-        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/AdiscopeAppSettingsFiles/Adiscope.androidlib";
+        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/AdiscopeAppSettingsFiles/Plugins/Adiscope.androidlib";
         private const string DISPLAY_PROGRESS_DIALOG_TITLE = "Adiscope Install";
+        private const string PROJECT_PROPERTIES_CONTENT = "android.library=true";
         #endregion
 
         public static bool CreateAdiscopeAndroidFiles(bool isProgress)
@@ -39,9 +40,39 @@ namespace Adiscope
                     AdiscopeFrameworkAndroidType.Vungle
                 }
             , isProgress);
-            bool isUpdate = UpdateAndroidManifest(isProgress);
-            return (isFrameworks && isUpdate);
+            bool isUpdateManifest = UpdateAndroidManifest(isProgress);
+            bool isUpdateProperties = UpdateProperties(isProgress);
+
+            return (isFrameworks && isUpdateManifest && isUpdateProperties);
         }
+
+        /*** properties 파일 생성 start ***/
+        private static bool UpdateProperties(bool isProgress) {
+            if (isProgress) {
+                if (EditorUtility.DisplayCancelableProgressBar(
+                        DISPLAY_PROGRESS_DIALOG_TITLE,
+                        "Update project.properties",
+                        0.9f
+                    )){
+                    EditorUtility.ClearProgressBar();
+                    return false;
+                }
+            }
+
+            string propertiesPath = CreateAdiscopeManifestDirectory();      // 폴더 생성
+            propertiesPath += "/project.properties";                         // 파일명 지정
+
+            try {
+                File.WriteAllText(propertiesPath, PROJECT_PROPERTIES_CONTENT);
+            } catch (Exception e) {
+                Debug.LogError("failed to write file: " + propertiesPath);
+                Debug.LogError("" + e);
+                return false;
+            }
+
+            return true;
+        }
+        /*** properties 파일 생성 end ***/
 
         /*** AndroidManifest 파일 생성 start ***/
         private static bool UpdateAndroidManifest(bool isProgress)

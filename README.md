@@ -1,5 +1,5 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.2-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.3-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-2.1.8-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
@@ -54,7 +54,8 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - [External Dependency Manager for Unity - 사이트 이동](https://github.com/googlesamples/unity-jar-resolver#getting-started)   
 - `external-dependency-manager-*.unitypackage` 파일을 다운로드
 - Unity project를 열어서 navigate에서 `Assets -> Import Package -> Custom Package` 선택
-- `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`   
+- `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`
+- Unity version `2022.2+` 에서는 `1.2.176+` 사용    
 > - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity)
 <br/>
 

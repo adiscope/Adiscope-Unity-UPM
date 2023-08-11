@@ -35,9 +35,24 @@ namespace Adiscope
         /// <param name="androidJsonFilePath">path of (mediaId)_AndroidAdiscope.json</param>
         /// <param name="iOSJsonFilePath">path of (mediaId)_iOSAdiscope.json</param>
         public static bool AdiscopeImportJson(string androidJsonFilePath, string iOSJsonFilePath) {
-            SettingsJson(androidJsonFilePath, true);
-            SettingsJson(iOSJsonFilePath, false);
-            return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false);
+            bool isAndroidPath  = (androidJsonFilePath != string.Empty && androidJsonFilePath.Trim().Length > 0);
+            bool isiOSPath      = (iOSJsonFilePath != string.Empty && iOSJsonFilePath.Trim().Length > 0);
+
+            if (isAndroidPath) {
+                SettingsJson(androidJsonFilePath, true);
+            }
+
+            if (isiOSPath) {
+                SettingsJson(iOSJsonFilePath, false);
+            }
+
+            if (isAndroidPath) {
+                return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false);
+            } else if (isiOSPath) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
 
@@ -49,8 +64,6 @@ namespace Adiscope
             {
                 guiHandler = (searchContext) =>
                 {
-                    CreateAdiscopeFrameworksDirectory();
-
                     string filePath = "Packages/com.tnk.adiscope/package.json";
                     string json = File.ReadAllText(filePath);
                     ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
@@ -191,6 +204,7 @@ namespace Adiscope
             var settings = AssetDatabase.LoadAssetAtPath<FrameworkSettings>(SettingsPath);
             if (settings == null)
             {
+                CreateAdiscopeFrameworksDirectory();
                 settings = ScriptableObject.CreateInstance<FrameworkSettings>();
                 AssetDatabase.CreateAsset(settings, SettingsPath);
                 AssetDatabase.SaveAssets();
@@ -201,6 +215,10 @@ namespace Adiscope
 
         // json 파일로 세팅값들 설정
         private static void SettingsJson(string filePath, bool isAndroid) {
+            if (filePath == string.Empty || filePath.Trim().Length < 1) {
+                return;
+            }
+
             FileManager fm = new FileManager();
             Dictionary<string, object> settings = fm.ReadJsonFile(filePath);
             if (settings == null) {
@@ -241,8 +259,8 @@ namespace Adiscope
                         Dictionary<string, object> networkInfoAds = networkInfo[SERVICE_JSON_KEY_ADS] as Dictionary<string, object>;
                         bool rewardedVideoAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDEDVIDEO].ToString());
                         bool interstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_INTERSTITIAL].ToString());
-                        if (rewardedVideoAdEnabled || interstitialAdEnabled) {
                             int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
+                        if (rewardedVideoAdEnabled || interstitialAdEnabled) {
                             if (isAndroid) {
                                 if (adapter < 1) {
                                     serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 2;
@@ -254,6 +272,20 @@ namespace Adiscope
                                     serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 3;
                                 } else if (adapter == 1 || adapter == 2) {
                                     serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 1;
+                                }
+                            }
+                        } else {
+                            if (isAndroid) {
+                                if (adapter == 1) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 3;
+                                } else if (adapter == 2) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 0;
+                                }
+                            } else {
+                                if (adapter == 1) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 2;
+                                } else if (adapter == 3) {
+                                    serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 0;
                                 }
                             }
                         }
