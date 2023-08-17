@@ -303,6 +303,10 @@ public class AdiscopeExample : MonoBehaviour
             this.AddOutputMessage("Initialized Flag: " + Adiscope.Sdk.GetCoreInstance().IsInitialized());
         });
 
+        this.AddButton("Print Unity SDK Version", () => {
+            this.AddOutputMessage("SDK Versions => " + Adiscope.Sdk.GetOptionGetter().GetUnitySDKVersion());
+        });
+
         this.AddButton("Print SDK Version", () => {
             this.AddOutputMessage("SDK Versions => " + Adiscope.Sdk.GetOptionGetter().GetSDKVersion());
         });

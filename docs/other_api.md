@@ -53,6 +53,11 @@ Adiscope.Sdk.GetCoreInstance().IsInitialized();
 Adiscope.Sdk.GetOptionGetter().GetSDKVersion();
 ```
 
+### Unity SDK Versions
+```
+Adiscope.Sdk.GetOptionGetter().GetUnitySDKVersion();
+```
+
 ### Network Versions
 ```
 Adiscope.Sdk.GetOptionGetter().GetNetworkVersions();

@@ -49,6 +49,12 @@
 /// Adiscope SDK의 버전정보입니다. 
 - (NSString *)getSDKVersion;
 
+/// Adiscope Unity SDK의 버전정보입니다.(Unity가 아닐 시 Adiscope SDK의 버전정보)
+- (NSString *)getUnitySDKVersion;
+
+/// 프로젝트에서 Orientation의 Portrait가 없을 시 AppDelegate에서 조건으로 추가 해야합니다.(iOS 16+)
+- (BOOL)isOfferwallViewPortrait;
+
 /// Offerwall의 IDFA경고 팝업을 띄울지 판단하는 Flag입니다.
 /// useOfferwallWarningPopup NO일 경우에 IDFA Warning팝업을 보여주지 않습니다. 기본값은 YES입니다.
 @property (nonatomic) BOOL useOfferwallWarningPopup;

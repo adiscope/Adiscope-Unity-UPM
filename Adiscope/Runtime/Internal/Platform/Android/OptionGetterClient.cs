@@ -15,7 +15,20 @@ namespace Adiscope.Internal.Platform.Android
 {
 	internal class OptionGetterClient : IOptionGetterClient
 	{
-		public OptionGetterClient() { }
+		private AndroidJavaObject activity;
+
+		public OptionGetterClient() {
+			using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
+            {
+                if (unityPlayer == null)
+                {
+                    Debug.LogError("Android.CoreClient<Constructor> UnityPlayer: null");
+                    return;
+                }
+
+                this.activity = unityPlayer.GetStatic<AndroidJavaObject>(Values.MTD_CURRENT_ACTIVITY);
+            }
+		}
 
 		#region APIs 
 
@@ -50,6 +63,26 @@ namespace Adiscope.Internal.Platform.Android
 		public string GetSDKVersion() 
 		{
 			return getSDKVersion();
+		}
+
+		public string GetUnitySDKVersion() 
+		{
+			using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
+			{
+				if (this.activity == null)
+                {
+                    Debug.LogError("Android.CoreClient<Initialize> UnityPlayerActivity: null");
+                    return "";
+                }
+				
+				if (jc == null)
+				{
+					Debug.LogError("Android.CoreClient<Initialize> " +
+						Values.PKG_ADISCOPE + ": null");
+					return "";
+				}
+				return jc.CallStatic<string>(Values.MTD_GET_UNITY_SDK_VERSION, this.activity);
+			}
 		}
 
 		#endregion

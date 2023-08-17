@@ -29,6 +29,7 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_GET_OPTION_SETTER_INSTANCE = "getOptionSetterInstance";
         public const string MTD_GET_NETWORK_VERSIONS = "getNetworkVersions";
         public const string MTD_GET_SDK_VERSION = "getSDKVersion";
+        public const string MTD_GET_UNITY_SDK_VERSION = "getUnitySDKVersion";
         public const string MTD_INITIALIZE = "initialize";
         public const string MTD_ISINITIALIZE = "isInitialized";
         public const string MTD_SET_USER_ID = "setUserId";

@@ -30,6 +30,12 @@ namespace Adiscope.Internal.Platform.IOS {
 			return getSDKVersion();
 		}
 
+		[DllImport ("__Internal")]
+		private static extern string getUnitySDKVersion();
+		public string GetUnitySDKVersion() {
+			return getUnitySDKVersion();
+		}
+
 #endregion
 
 	}

@@ -110,6 +110,9 @@ namespace Adiscope
             handler.AddMetaData(
                 "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"" + GetGoogleAdsApplicationId() + "\" />"
             );
+            handler.AddMetaData(
+                "<meta-data android:name=\"adiscope_unity_sdk_version\" android:value=\"" + GetUnityVersion() + "\" />"
+            );
 
             // 상세 이동을 위해서 추가
             handler.AddActivity(
@@ -166,6 +169,13 @@ namespace Adiscope
         private static SerializedObject GetSettingsRegisterSerializedObject() {
             var settings = FrameworkSettingsRegister.Load();
             return new SerializedObject(settings);
+        }
+
+        private static string GetUnityVersion() {
+            string filePath = "Packages/com.tnk.adiscope/package.json";
+            string json = File.ReadAllText(filePath);
+            ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
+            return pj.version;
         }
         /*** AndroidManifest 파일 생성 end ***/
 
@@ -298,15 +308,15 @@ namespace Adiscope
         private const string VUNGLE_FILE_NAME       = "VungleDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.0.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.1.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.1.0/";
         private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.0.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.1.0/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string INMOBI_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
+        private const string INMOBI_FILE_PATH       = ADISCOPE_FILE_PATH + "3.1.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.1.0/";
         private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string SMAATO_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string TAPJOY_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";

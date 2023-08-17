@@ -9,6 +9,7 @@ namespace Adiscope.Internal.Interface
     internal interface IOptionGetterClient
     {
         string GetNetworkVersions();
+        string GetUnitySDKVersion();
         string GetSDKVersion();
     }
 }

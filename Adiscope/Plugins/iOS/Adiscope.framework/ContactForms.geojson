@@ -12,7 +12,7 @@
             "layout": "const",
             "title": "참여한 날짜",
             "precondition": true,
-            "placeholder": "예시 : 2018.01.16 오후 2시쯤"
+            "placeholder": "예시 : 23.01.01 14시쯤 (미참여시 ‘없음’ 입력)"
           },
           {
             "id": "content",
@@ -26,7 +26,7 @@
             "layout": "textField",
             "title": "이름",
             "precondition": true,
-            "placeholder": "이벤트 참여한 본인의 이름을 입력해 주세요."
+            "placeholder": "이벤트 참여/문의한 본인의 이름을 입력해주세요."
           },
           {
             "id": "phoneNum",

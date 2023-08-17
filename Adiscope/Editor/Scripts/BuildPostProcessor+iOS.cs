@@ -8,6 +8,7 @@ using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 using Adiscope.Extension;
 
@@ -187,6 +188,11 @@ namespace Adiscope.PostProcessor
             if (appLovinKey != null && appLovinKey.Length > 0) {
                 InsertInfoPlist(root.root, "AppLovinSdkKey", appLovinKey);
             }
+
+            string filePath = "Packages/com.tnk.adiscope/package.json";
+            string json = File.ReadAllText(filePath);
+            ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
+            InsertInfoPlist(root.root, "AdiscopeUnitySDKVersion", pj.version);
 
             root.WriteToFile(plistPath);
         }

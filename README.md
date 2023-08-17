@@ -1,7 +1,7 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.0.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-2.1.8-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.1.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.1.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.1.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - Unity Editor : 2021.3.8f1, 2022.3.4f1, 2022.3.5f1
 - Android Target API Level : 31+
@@ -19,6 +19,7 @@
 - [Interstitial](#6-interstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
 #### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
+#### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
 #### [Adiscope Sample App](./docs/sampleapp.md)
 #### [Adiscope Error Information](./docs/error_info.md)
 #### [Releases](../../releases)
@@ -395,6 +396,11 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 
 ## Xcode Archive Error
 > - [해결 방법](./docs/apple_store_error.md)
+
+<br/><br/>
+
+## iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)
+> - [적용 방법 확인](./docs/apple_orientations.md)
 
 <br/><br/>
 
