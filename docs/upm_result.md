@@ -21,11 +21,11 @@
 <br/><br/><br/>
 
 ## 4. AdiscopeSDK Settings
-<img width="705" alt="upmResultAdiscope1" src="https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/933f69d1-5829-4971-ad50-13c87a716079"><br/>
-<img width="736" alt="upmResultAdiscope2" src="https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/028ab3a6-cba2-4828-9599-6ab4ece48c8d"><br/>
+![upmResultAdiscope1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/96da65b4-a7f4-46fa-b654-4bedc1d97ba9)
+![upmResultAdiscope2](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/b891640f-8800-45ff-8c7b-654cf4c68114)<br/>
 - `Your Project 폴더 -> Assets -> Adiscope` 폴더 생성 확인<br/>
-- `Your Project 폴더 -> Assets -> Adiscope -> Adiscope.androidlib`에서 "AndroidManifest.xml" 파일 생성 확인<br/>
-- `Your Project 폴더 -> Assets -> Adiscope -> Editor`에서 "*Dependencies.xml" 파일 생성 확인
+- `Your Project 폴더 -> Assets -> Adiscope -> AdiscopeAppSettingsFiles -> Plugins- > Adiscope.androidlib`에서 "AndroidManifest.xml" 파일 생성 확인<br/>
+- `Your Project 폴더 -> Assets -> Adiscope -> AdiscopeAppSettingsFiles -> Editor`에서 "*Dependencies.xml" 파일 생성 확인
 <br/><br/><br/>
 
 ## 5. External Dependency Manager 설정
