@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Adiscope
@@ -72,49 +73,19 @@ namespace Adiscope
         [SerializeField]
         int _vungleAdapter;
 
-        public static string MediaID_AOS { get; private set; }
+        public static string MediaID_AOS { get { 
+            var serialized = new SerializedObject(FrameworkSettingsRegister.Load());
+            return serialized.FindProperty("_mediaID_aos").stringValue; 
+        } }
 
-        public static string MediaSecret_AOS { get; private set; }
-
-        public static string MediaID_iOS { get; private set; }
-
-        public static string MediaSecret_iOS { get; private set; }
-
-        public static string SubDomain { get; private set; }
-
-        public static int AdmobAdapter { get; private set; }
-
-        public static string AdMobAppKey_AOS { get; private set; }
-
-        public static string AdMobAppKey_iOS { get; private set; }
-
-        public static int MaxAdapter { get; private set; }
-
-        public static int AppLovinAdapter { get; private set; }
-
-        public static string AppLovinKey { get; private set; }
-
-        public static int AdmanagerAdapter { get; private set; }
-
-        public static int ChartboostAdapter { get; private set; }
-
-        public static int FanAdapter { get; private set; }
-
-        public static int InmobiAdapter { get; private set; }
-
-        public static int IronsourceAdapter { get; private set; }
-
-        public static int MobvistaAdapter { get; private set; }
-
-        public static int PangleAdapter { get; private set; }
-
-        public static int SmaatoAdapter { get; private set; }
-
-        public static int TapjoyAdapter { get; private set; }
-
-        public static int UnityAdsAdapter { get; private set; }
-
-        public static int VungleAdapter { get; private set; }
+        public static string MediaID_iOS { get { 
+            var serialized = new SerializedObject(FrameworkSettingsRegister.Load());
+            return serialized.FindProperty("_mediaID_ios").stringValue; 
+        } }
+        public static string SubDomain { get { 
+            var serialized = new SerializedObject(FrameworkSettingsRegister.Load());
+            return serialized.FindProperty("_subDomain").stringValue; 
+        } }
     }
 
     public class ParsingPackageJson : MonoBehaviour

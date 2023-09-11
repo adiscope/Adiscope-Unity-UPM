@@ -182,32 +182,8 @@ namespace Adiscope
         /*** edm4u를 설정 하기 위해 adapter 파일 생성 start ***/
         private static bool CopyAdiscopeFrameworks(List<AdiscopeFrameworkAndroidType> usingFrameworks, bool isProgress)
         {
-            DeleteAdiscopeFrameworks(); // 기존 adapter edm4u 파일 삭제
             CreateAdiscopeFrameworksDirectory(); // edm4u 파일을 copy 할 폴더 생성
             return FileDownloadEdm4uAdapter(usingFrameworks, isProgress); // edm4u 파일 다운로드
-        }
-
-        private static void DeleteAdiscopeFrameworks()
-        {
-            if (Directory.Exists(Application.dataPath + PATH_ADISCOPE_EDITOR))
-            {
-                string path = Application.dataPath + PATH_ADISCOPE_FILES;
-                foreach (string directory in Directory.GetDirectories(path))
-                {
-                    try
-                    {
-                        Directory.Delete(directory, true);
-                    }
-                    catch (IOException)
-                    {
-                        Directory.Delete(directory, true);
-                    }
-                    catch (UnauthorizedAccessException)
-                    {
-                        Directory.Delete(directory, true);
-                    }
-                }
-            }
         }
 
         private static void CreateAdiscopeFrameworksDirectory()
