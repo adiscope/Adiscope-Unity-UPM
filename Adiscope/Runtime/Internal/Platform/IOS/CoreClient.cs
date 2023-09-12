@@ -53,9 +53,9 @@ namespace Adiscope.Internal.Platform.IOS
 
 		public void Initialize(string mediaId, string mediaSecret, string callbackTag, Action<bool> callback)
         {
-            var key = Guid.NewGuid().ToString();
             if (callback != null) 
             { 
+                string key = Guid.NewGuid().ToString();
                 keyOfInitialize = key;
                 initHandleMap.Add(key, callback); 
             }
@@ -144,7 +144,7 @@ namespace Adiscope.Internal.Platform.IOS
             if (callback == null)
                 return "";
 
-            var key = Guid.NewGuid().ToString();
+            string key = Guid.NewGuid().ToString();
             handlerMap.Add(key, callback);
             return key;
         }
