@@ -228,46 +228,11 @@ rewardedVideoAd.Load(UNIT_ID);
 - `OnRewardedVideoAdLoaded` callback이 호출되면 load가 완료
 - `Load`가 실행되면 `OnLoaded` 와 `OnFailedToLoad` 중 하나의 callback은 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
+- Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음 번 Show를 준비
 - Load & Show 후 다시 Load를 하려 할 때 Load 는 Show 이후 언제든 호출가능
 - 광고가 Show되는 동안 다음 광고를 load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 - Show의 callback 인 `OnClosed`에서 다시 Load를 하는 것을 권장 
   - Abusing 방지를 위해 Rewarded Video Ad를 연속으로 보여주는 것을 제한하여 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 Show를 할 수 있도로록 Admin page에서 서비스 설정 가능
-- Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
-  - 별도의 불리언 변수를 생성하고 `OnLoaded`와 `OnFailedToLoad` 콜백을 받아 로드 상태를 별도로 체크할 수 있음
-```csharp
-  /* 로드 상태를 체크하여 로드 수행 전과 후에만 load, show하도록 처리하는 예시 */
-    
-  // 로드 중인지 체크하는 불리언 변수 초기화
-  private bool isLoading = false;
-  private string UNIT_ID = ""; // 유닛명으로 관리자를 통해 발급
-  
-  private void LoadRewardedVideo(){
-      if(!isLoading){
-          rewardedVideoAd.Load(UNIT_ID);
-          isLoading = true;
-      }
-  }
-  
-  private void ShowRewardedVideo(){
-    if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
-      // show ad here
-    } else {
-      // do something else
-    }
-  }
-
-  ...
-  
-  // RV load 성공 시의 이벤트 콜백을 처리하는 함수  
-  private void OnRewardedVideoAdLoadedCallback(object sender, Adiscope.Model.LoadResult args) { 
-     isLoading = false;
-  }
-    
-  // RV load 실패 시의 이벤트 콜백을 처리하는 함수
-  private void OnRewardedVideoAdFailedToLoadCallback(object sender, Adiscope.Model.LoadFailure args) { 
-     isLoading = false;
-  }
-```
 
 #### D. IsLoaded
 ```csharp
@@ -365,42 +330,6 @@ interstitialAd.Load(UNIT_ID);
 ```
 - 특정 유닛에 속한 ad 네크워크들의 광고를 load
 - `OnInterstitialAdLoaded` callback이 호출되면 load가 완료
-- Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
-  - 별도의 불리언 변수를 생성하고 `OnLoaded`와 `OnFailedToLoad` 콜백을 받아 로드 상태를 별도로 체크할 수 있음
-```csharp
-  /* 로드 상태를 체크하여 로드 수행 전과 후에만 load, show하도록 처리하는 예시 */
-    
-  // 로드 중인지 체크하는 불리언 변수 초기화
-  private bool isLoading = false;
-  private string UNIT_ID = ""; // 유닛명으로 관리자를 통해 발급
-  
-  private void LoadInterstitial(){
-      if(!isLoading){
-          interstitialAd.Load(UNIT_ID);
-          isLoading = true;
-      }
-  }
-  
-  private void ShowInterstitial(){
-    if (interstitialAd.IsLoaded(UNIT_ID)) {
-      // show ad here
-    } else {
-      // do something else
-    }
-  }
-
-  ...
-  
-  // 인터스티셜 load 성공 시의 이벤트 콜백을 처리하는 함수  
-  private void OnInterstitialAdLoadedCallback(object sender, Adiscope.Model.LoadResult args) { 
-     isLoading = false;
-  }
-    
-  // 인터스티셜 load 실패 시의 이벤트 콜백을 처리하는 함수
-  private void OnInterstitialAdFailedToLoadCallback(object sender, Adiscope.Model.LoadFailure args) { 
-     isLoading = false;
-  }
-```
 
 #### D. IsLoaded
 ```csharp
