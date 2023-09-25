@@ -139,8 +139,10 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 ```
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
-- `CHILD_YN`는 기본 "", 어린이 앱일 시 `"YES"`, 어린이 앱이 아닐 시 `"NO"`
+- `CHILD_YN`는 기본 "", 사용자가 어린이일 경우 `"YES"`, 어린이가 아닐 시 `"NO"`
     - Only Android
+    - 전체이용가 매체일 경우 사용자의 어린이 여부 전달이 필요함 ([구글 가족 정책](https://support.google.com/googleplay/android-developer/answer/9893335#!?zippy_activeEl=families-policy%23families-policy) 에 필수로 준수해야 함)
+    - 값을 전달하지 않을 경우, 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize)
 <br/>
 
