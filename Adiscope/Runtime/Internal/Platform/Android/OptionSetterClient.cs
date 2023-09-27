@@ -92,6 +92,11 @@ namespace Adiscope.Internal.Platform.Android
             // Not Support this Platform
         }
 
+		public void ShowMaxMediationDebugger() 
+        {
+            // Not Support this Platform
+        }
+
 #endregion
 
         // ToString implementation to be used in Android native

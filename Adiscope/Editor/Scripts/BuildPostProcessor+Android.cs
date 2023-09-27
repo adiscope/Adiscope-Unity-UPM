@@ -52,7 +52,7 @@ namespace Adiscope
                 if (EditorUtility.DisplayCancelableProgressBar(
                         DISPLAY_PROGRESS_DIALOG_TITLE,
                         "Update project.properties",
-                        0.9f
+                        0.6f
                     )){
                     EditorUtility.ClearProgressBar();
                     return false;
@@ -81,7 +81,7 @@ namespace Adiscope
                 if (EditorUtility.DisplayCancelableProgressBar(
                         DISPLAY_PROGRESS_DIALOG_TITLE,
                         "Update AndroidManifest.xml",
-                        0.8f
+                        0.5f
                     )){
                     EditorUtility.ClearProgressBar();
                     return false;
@@ -182,8 +182,52 @@ namespace Adiscope
         /*** edm4u를 설정 하기 위해 adapter 파일 생성 start ***/
         private static bool CopyAdiscopeFrameworks(List<AdiscopeFrameworkAndroidType> usingFrameworks, bool isProgress)
         {
+            DeleteAdiscopeFrameworks(usingFrameworks); // 사용 안 하는 adapter edm4u 파일 삭제
             CreateAdiscopeFrameworksDirectory(); // edm4u 파일을 copy 할 폴더 생성
             return FileDownloadEdm4uAdapter(usingFrameworks, isProgress); // edm4u 파일 다운로드
+        }
+
+        private static void DeleteAdiscopeFrameworks(List<AdiscopeFrameworkAndroidType> usingFrameworks)
+        {
+            string path = Application.dataPath + PATH_ADISCOPE_EDITOR;
+            if (Directory.Exists(path))
+            {
+                foreach (string filename in Directory.GetFiles(path, "*.xml"))
+                {
+                    foreach (AdiscopeFrameworkAndroidType type in usingFrameworks) {
+                        if (!type.GetAdapterEnable() && filename.Contains(type.GetFileName())) {
+                            try
+                            {
+                                File.Delete(filename);
+                            }
+                            catch (IOException)
+                            {
+                                File.Delete(filename);
+                            }
+                            catch (UnauthorizedAccessException)
+                            {
+                                File.Delete(filename);
+                            }
+
+                            string metaFilename = filename + ".meta";
+                            if (File.Exists(metaFilename)) {
+                                try
+                                {
+                                    File.Delete(metaFilename);
+                                }
+                                catch (IOException)
+                                {
+                                    File.Delete(metaFilename);
+                                }
+                                catch (UnauthorizedAccessException)
+                                {
+                                    File.Delete(metaFilename);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private static void CreateAdiscopeFrameworksDirectory()
@@ -197,7 +241,7 @@ namespace Adiscope
         private static bool FileDownloadEdm4uAdapter(List<AdiscopeFrameworkAndroidType> usingFrameworks, bool isProgress)
         {
             float progress = 0.4f / usingFrameworks.Count;
-            float totalProgress = 0.4f + progress;
+            float totalProgress = 0.1f + progress;
             foreach (AdiscopeFrameworkAndroidType type in usingFrameworks)
             {
                 if (!type.GetAdapterEnable())

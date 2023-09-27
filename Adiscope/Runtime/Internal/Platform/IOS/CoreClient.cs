@@ -68,14 +68,29 @@ namespace Adiscope.Internal.Platform.IOS
             this.Initialize(mediaId, mediaSecret, callbackTag, callback);
         }
 
-        void ICoreClient.Initialize(InitAction callback)
+		[DllImport("__Internal")]
+		private static extern void unityInitializePlist(string callbackTag, onInitializedCallback callback);
+
+        public void Initialize(Action<bool> callback)
         {
-            
+            this.Initialize(callback, "");
         }
 
-        void ICoreClient.Initialize(InitAction callback, string callbackTag, string childYN)
+        public void Initialize(Action<bool> callback, string callbackTag)
         {
-            
+            var key = Guid.NewGuid().ToString();
+            if (callback != null) 
+            { 
+                keyOfInitialize = key;
+                initHandleMap.Add(key, callback); 
+            }
+
+			unityInitializePlist(callbackTag, OnInitializdCallback);
+        }
+
+        public void Initialize(Action<bool> callback, string callbackTag, string childYN)
+        {
+            this.Initialize(callback, callbackTag);
         }
 
         [DllImport ("__Internal")]
@@ -147,11 +162,6 @@ namespace Adiscope.Internal.Platform.IOS
             string key = Guid.NewGuid().ToString();
             handlerMap.Add(key, callback);
             return key;
-        }
-
-        public void Initialize(InitAction callback, string callbackTag)
-        {
-            throw new NotImplementedException();
         }
     }
 }

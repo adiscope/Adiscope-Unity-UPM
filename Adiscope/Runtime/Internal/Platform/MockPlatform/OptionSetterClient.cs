@@ -37,6 +37,11 @@ namespace Adiscope.Internal.Platform.MockPlatform
         public void SetEnabledForcedOpenApplicationSetting(bool enabledForcedOpenApplicationSetting)
         {
         }
+
+        public void ShowMaxMediationDebugger() 
+        {
+        }
+        
         #endregion
     }
 }

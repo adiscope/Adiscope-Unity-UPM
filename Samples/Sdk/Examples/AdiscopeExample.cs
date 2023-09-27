@@ -186,7 +186,6 @@ public class AdiscopeExample : MonoBehaviour
         this.AddTextField("Callback Tag", TextFieldType.CallbackTag);
         this.AddTextField("Child YN", TextFieldType.ChildYN);
 
-#if UNITY_ANDROID
 
         this.AddButton("Initialize", () =>
         {
@@ -254,7 +253,6 @@ public class AdiscopeExample : MonoBehaviour
             }, CALLBACK_TAG, CHILD_YN);
 
         });
-#endif
 
         this.AddButton("Initialize(mediaId, mediaSecret, callbackTag, listener)", () => {
             string secretKey = AdiscopeItemFetcher.FetchMediaScretKey(MEDIA_ID);
@@ -303,12 +301,12 @@ public class AdiscopeExample : MonoBehaviour
             this.AddOutputMessage("Initialized Flag: " + Adiscope.Sdk.GetCoreInstance().IsInitialized());
         });
 
-        this.AddButton("Print Unity SDK Version", () => {
-            this.AddOutputMessage("SDK Versions => " + Adiscope.Sdk.GetOptionGetter().GetUnitySDKVersion());
-        });
-
         this.AddButton("Print SDK Version", () => {
             this.AddOutputMessage("SDK Versions => " + Adiscope.Sdk.GetOptionGetter().GetSDKVersion());
+        });
+
+        this.AddButton("Print Unity SDK Version", () => {
+            this.AddOutputMessage("SDK Versions => " + Adiscope.Sdk.GetOptionGetter().GetUnitySDKVersion());
         });
 
         this.AddButton("Print Network Version", () => {
@@ -323,6 +321,13 @@ public class AdiscopeExample : MonoBehaviour
                 else this.AddOutputMessage("  <= result : " + result);
             });
         });
+
+#if UNITY_IOS
+        this.AddButton("Print Show Max Mediation Debugger", () => {
+            Adiscope.Sdk.GetOptionSetter().ShowMaxMediationDebugger();
+            this.AddOutputMessage("Show Max Mediation Debugger");
+        });
+#endif
 
         // Offerwall
         this.AddSpacer();

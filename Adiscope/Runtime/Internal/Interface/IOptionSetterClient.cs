@@ -17,5 +17,6 @@ namespace Adiscope.Internal.Interface
         void SetUseOfferwallWarningPopup(bool useOfferwallWarningPopup);
         void SetUseAppTrackingTransparencyPopup(bool useAppTrackingTransparencyPopup);
         void SetEnabledForcedOpenApplicationSetting(bool enabledForcedOpenApplicationSetting);
+        void ShowMaxMediationDebugger();
     }
 }

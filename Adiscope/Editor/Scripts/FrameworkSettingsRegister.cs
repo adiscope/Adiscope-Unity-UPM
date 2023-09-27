@@ -46,10 +46,13 @@ namespace Adiscope
                 SettingsJson(iOSJsonFilePath, false);
             }
 
-            if (isAndroidPath) {
+            if (isAndroidPath && isiOSPath) {
+                return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false) 
+                        && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(false);
+            } else if (isAndroidPath) {
                 return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false);
             } else if (isiOSPath) {
-                return true;
+                return BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(false);
             } else {
                 return false;
             }
@@ -109,7 +112,7 @@ namespace Adiscope
 
                     GUILayout.BeginHorizontal();
                     int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
-                    maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, AOS_Type);
+                    maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
                     int appLovinAdapter = serialized.FindProperty("_applovinAdapter").intValue;
                     appLovinAdapter = EditorGUILayout.Popup("AppLovin Adapter", appLovinAdapter, OS_Type);
@@ -148,7 +151,7 @@ namespace Adiscope
                     serialized.FindProperty("_mobvistaAdapter").intValue = mobvistaAdapter;
 
                     int pangleAdapter = serialized.FindProperty("_pangleAdapter").intValue;
-                    pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, AOS_Type);
+                    pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, OS_Type);
                     serialized.FindProperty("_pangleAdapter").intValue = pangleAdapter;
                     GUILayout.EndHorizontal();
                     EditorGUILayout.Space();
@@ -159,7 +162,7 @@ namespace Adiscope
                     serialized.FindProperty("_smaatoAdapter").intValue = smaatoAdapter;
 
                     int tapjoyAdapter = serialized.FindProperty("_tapjoyAdapter").intValue;
-                    tapjoyAdapter = EditorGUILayout.Popup("Tapjoy Adapter", tapjoyAdapter, OS_Type);
+                    tapjoyAdapter = EditorGUILayout.Popup("Tapjoy Adapter", tapjoyAdapter, AOS_Type);
                     serialized.FindProperty("_tapjoyAdapter").intValue = tapjoyAdapter;
                     GUILayout.EndHorizontal();
                     EditorGUILayout.Space();
@@ -185,7 +188,8 @@ namespace Adiscope
                     EditorGUILayout.Space();
                     if (GUILayout.Button("Create Adiscope Android Files", GUILayout.Height(30)))
                     {
-                        if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)) { // Manifest 파일 생성
+                        if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)       // Manifest 파일 생성
+                            && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(true)) {
                             EditorUtility.ClearProgressBar();
                             EditorUtility.DisplayDialog("Succeed to install", "파일이 정상적으로 생성되었습니다.", "닫기");
                         } else {
@@ -391,10 +395,12 @@ namespace Adiscope
                     case CHARTBOOST:
                     case FAN:
                     case MOBVISTA:
-                    case TAPJOY:
+                    // case TAPJOY:
                     case IRONSOURCE:
                     case UNITYADS:
                     case APPLOVIN:
+                    case MAX:
+                    case PANGLE:
                     return true;
                     default: return false;
                 }

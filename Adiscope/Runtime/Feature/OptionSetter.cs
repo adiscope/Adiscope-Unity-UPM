@@ -74,5 +74,10 @@ namespace Adiscope.Feature
         {
             client.SetUseAppTrackingTransparencyPopup(enabledForcedOpenApplicationSetting);
         }
+
+        public void ShowMaxMediationDebugger() 
+        { 
+            client.ShowMaxMediationDebugger(); 
+        }
     }
 }

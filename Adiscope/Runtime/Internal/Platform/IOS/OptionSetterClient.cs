@@ -58,6 +58,12 @@ namespace Adiscope.Internal.Platform.IOS
 			setEnabledForcedOpenApplicationSetting(enabledForcedOpenApplicationSetting);
 		}
 
+		[DllImport ("__Internal")]
+		private static extern void showMaxMediationDebugger();
+		public void ShowMaxMediationDebugger() {
+			showMaxMediationDebugger();
+		}
+
 		#endregion
 	}
 }

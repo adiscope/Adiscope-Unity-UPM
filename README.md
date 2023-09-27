@@ -1,7 +1,7 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.1.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.2.0-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.1.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.1.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - Unity Editor : 2021.3.8f1, 2022.3.4f1, 2022.3.5f1
 - Android Target API Level : 31+
@@ -80,16 +80,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 <br/>
 
 ### 4. AdiscopeSDK Settings
-#### 가. Import to Stript
-```csharp
-FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json_Path>, <iOS_Json_Path>);
-```
-- '/Library/PackageCache/com.tnk.adiscope/Editor/Scripts/FrameworkSettingsRegister.cs' 파일에 있는 함수 호출
-- 관리자에게 전달 받은 Android & iOS의 Json 파일 위치 입력
-> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
-<br/>
-
-#### 나. Project Settings - AdiscopeSDK
+#### 가. Project Settings - AdiscopeSDK
 ![adiscopeJson](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/c45205bb-7533-4087-976a-ff228688f6eb)  
 - Unity project를 열어서 navigate에서 `Edit -> Project Settings`로 Project Settings 창을 열어 `AdiscopeSDK`를 선택   
 - `Settings Android from json file`를 선택하여 전달받은 Android.json 파일을 선택   
@@ -104,9 +95,24 @@ FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json_Path>, <iOS_Json_Path
 > - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
 <br/>
 
-### 5. External Dependency Manager 설정
-Unity project를 열어서 navigate에서 `Assets -> External Dependency Manager -> Android Resolver -> Resolver(or Force Resolver)`를 선택   
-> - [결과 확인](./docs/upm_result.md#5-external-dependency-manager-%EC%84%A4%EC%A0%95)
+#### 나. Import to Stript
+```csharp
+FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json_Path>, <iOS_Json_Path>);
+```
+- '/Library/PackageCache/com.tnk.adiscope/Editor/Scripts/FrameworkSettingsRegister.cs' 파일에 있는 함수 호출
+- 관리자에게 전달 받은 Android & iOS의 Json 파일 위치 입력
+> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
+<br/>
+
+### 5. External Dependency Manager 설정 (Android 전용)
+- Unity project를 열어서 navigate에서 `Assets -> External Dependency Manager -> Android Resolver -> Resolver(or Force Resolver)`를 선택   
+> - [결과 확인](./docs/upm_result.md#5-external-dependency-manager-%EC%84%A4%EC%A0%95-android-%EC%A0%84%EC%9A%A9)
+<br/>
+
+### 6. CocoaPods 사용 (iOS 전용)
+- Build된 Project에서 Unity-iPhone.xcodeproj가 아닌 `Unity-iPhone.xcworkspace`로 실행
+- CocoaPods가 설치 안 되어 있으면 수동 설치 
+> - [결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
 
 <br/><br/>
 
@@ -124,6 +130,26 @@ using Adiscope;
 <br/>
 
 ### 2. Initialize
+#### 가. Code에서 Media 없이 Initialize 방법
+```csharp
+Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
+    if (isSuccess) {
+        // Initialize Call Back
+    } else {
+        // Initialize Fail
+    }
+}, CALLBACK_TAG, CHILD_YN);
+```
+- Android는 `Adiscope.androidlib`폴더 내의 `AndroidManifest.xml`에 `adiscope_media_id`가 있어야 함 ([파일 위치 확인](./docs/upm_result.md#4-adiscopesdk-settings))
+- iOS는 Build된 Project에서 `Info.plist` 파일에서 `AdiscopeMediaId`가 있어야 함 ([Info.plist 확인](./docs/upm_result.md#7-infoplist%EC%9D%98-adiscopemediaid-%ED%99%95%EC%9D%B8-ios-%EC%A0%84%EC%9A%A9))
+- 반드시 unity의 main thread에서 실행
+- App 실행 시 1회 설정 권장
+- Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
+  - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
+> - [Other Initialize API](./docs/other_api.md#initialize)
+<br/>
+
+#### 나. Code에서 직접 Media 넣어서 Initialize 방법
 ```csharp
 private string MEDIA_ID = "";        // 관리자를 통해 발급
 private string MEDIA_SECRET = "";    // 관리자를 통해 발급
@@ -139,10 +165,8 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 ```
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
-- `CHILD_YN`는 기본 "", 사용자가 어린이일 경우 `"YES"`, 어린이가 아닐 시 `"NO"`
-    - Only Android
-    - 전체이용가 매체일 경우 사용자의 어린이 여부 전달이 필요함 ([구글 가족 정책](https://support.google.com/googleplay/android-developer/answer/9893335#!?zippy_activeEl=families-policy%23families-policy) 에 필수로 준수해야 함)
-    - 값을 전달하지 않을 경우, 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
+- Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
+  - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize)
 <br/>
 
@@ -233,6 +257,7 @@ rewardedVideoAd.Load(UNIT_ID);
 - 광고가 Show되는 동안 다음 광고를 load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 - Show의 callback 인 `OnClosed`에서 다시 Load를 하는 것을 권장 
   - Abusing 방지를 위해 Rewarded Video Ad를 연속으로 보여주는 것을 제한하여 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 Show를 할 수 있도로록 Admin page에서 서비스 설정 가능
+- Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
 
 #### D. IsLoaded
 ```csharp
@@ -330,6 +355,7 @@ interstitialAd.Load(UNIT_ID);
 ```
 - 특정 유닛에 속한 ad 네크워크들의 광고를 load
 - `OnInterstitialAdLoaded` callback이 호출되면 load가 완료
+- Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
 
 #### D. IsLoaded
 ```csharp
