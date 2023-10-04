@@ -10,8 +10,6 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
     }
 });
 ```
-
-### Only Android
 ```csharp
 Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
     if (isSuccess) {
@@ -29,15 +27,6 @@ Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
         // Initialize Fail
     }
 }, CALLBACK_TAG);
-```
-```csharp
-Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
-    if (isSuccess) {
-        // Initialize Call Back
-    } else {
-        // Initialize Fail
-    }
-}, CALLBACK_TAG, CHILD_YN);
 ```
 
 <br/>
