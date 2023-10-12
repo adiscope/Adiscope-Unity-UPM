@@ -18,6 +18,7 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
+#### [MAX Ad Review](#max-ad-review)
 #### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
 #### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
 #### [Adiscope Sample App](./docs/sampleapp.md)
@@ -419,6 +420,19 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 ## 웹사이트 필수 등록
 - 관리자에게 전달받은 `app-ads.txt`를 웹사이트에 등록
 > - [app-ads.txt 등록 방법 및 정보](./docs/app-ads.txt.md)
+
+<br/><br/>
+
+## MAX Ad Review
+- 목적: MAX 노출 소재에 대한 지표 확인하여, 수익화 증대
+- 내용: MAX 노출 소재에 대한 imp, 클릭수, eCPM 등의 지표 확인이 필요
+- 기대효과: 소재 별 지표를 다른 네트워크에 공유하여, 더 높은 eCPM으로 해당 소재 광고를 받을 수 있게 하는 것이 기대효과, 아직 한번도 진행해 보지 않아서, 목표 기대효과는 측정하지 못함
+- 개발방법
+    - [AppLovinQualityServiceSetup-ios.rb 파일 다운로드](https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.2.0/AppLovinQualityServiceSetup-ios.rb) 후 받은 파일을 iOS 프로젝트의 xcodeproj 파일이 있는 곳에 옮김
+    - 터미널로 접속해서 다운받은 파일로 이동 후 아래 명령어 실행
+```
+ruby AppLovinQualityServiceSetup-ios.rb
+```
 
 <br/><br/>
 
