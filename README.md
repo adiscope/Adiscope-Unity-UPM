@@ -18,7 +18,7 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
-#### [MAX Ad Review](#max-ad-review)
+#### [MAX Ad Review](#max-ad-review-1)
 #### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
 #### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
 #### [Adiscope Sample App](./docs/sampleapp.md)
