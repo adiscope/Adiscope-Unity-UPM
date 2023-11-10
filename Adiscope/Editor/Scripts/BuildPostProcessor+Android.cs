@@ -242,8 +242,14 @@ namespace Adiscope
         {
             float progress = 0.4f / usingFrameworks.Count;
             float totalProgress = 0.1f + progress;
+            bool isAvailableInmobi = IsAvailableInmobiInMaxAdapter();
             foreach (AdiscopeFrameworkAndroidType type in usingFrameworks)
             {
+                if(type.Equals(AdiscopeFrameworkAndroidType.Inmobi) && !isAvailableInmobi)
+                {
+                    continue;
+                }
+
                 if (!type.GetAdapterEnable())
                 {
                     continue;
@@ -267,6 +273,21 @@ namespace Adiscope
                     EditorUtility.DisplayDialog("Failed to install", "파일 생성 실패", "닫기");
                     return false;
                 }
+            }
+
+            return true;
+        }
+
+        // inmobi 미포함 SDK 버전을 구분짓기 위한 함수
+        private static bool IsAvailableInmobiInMaxAdapter()
+        {
+            string maxFilePath = AdiscopeFrameworkAndroidTypeExtension.GetFilePath(AdiscopeFrameworkAndroidType.MAX);
+            string[] tempFilePathList = maxFilePath.Split("/");
+            string version = tempFilePathList[tempFilePathList.Length-2];
+
+
+            if(version.Equals("3.1.0.1")){
+                return false;
             }
 
             return true;
@@ -332,7 +353,7 @@ namespace Adiscope
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.1.0/";
         private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.1.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.1.0.1/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.0.0/";
         private const string INMOBI_FILE_PATH       = ADISCOPE_FILE_PATH + "3.1.0/";
