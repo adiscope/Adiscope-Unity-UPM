@@ -282,7 +282,7 @@ namespace Adiscope
         private static bool IsAvailableInmobiInMaxAdapter()
         {
             string maxFilePath = AdiscopeFrameworkAndroidTypeExtension.GetFilePath(AdiscopeFrameworkAndroidType.MAX);
-            string[] tempFilePathList = maxFilePath.Split("/");
+            string[] tempFilePathList = maxFilePath.Split('/');
             string version = tempFilePathList[tempFilePathList.Length-2];
 
 
