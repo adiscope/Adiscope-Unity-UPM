@@ -17,7 +17,6 @@ public class AdiscopeExample : MonoBehaviour
     private string OFFERWALL_DETAIL_ID;
     private string OFFERWALL_DETAIL_URL;
     private string OFFERWALL_DEEPLINK_URL;
-    private string OFFERWALL_APPLINK_URL;
     private string Find_UNIT_ID;
     private string CALLBACK_TAG;
     private string CHILD_YN;
@@ -391,24 +390,6 @@ public class AdiscopeExample : MonoBehaviour
             
         });
 
-        this.AddTextField("Applink URL", TextFieldType.OfferwallApplinkUrl);
-        this.AddButton("Show Detail from Applink", () => {
-            string url = OFFERWALL_APPLINK_URL;
-            if (url == null)
-            {
-                this.AddOutputMessage("Empty URL");
-                return;
-            }
-
-            if (!url.StartsWith("https"))
-            {
-                this.AddOutputMessage("https 스킴의 링크 형식만 지원합니다.");
-                return;
-            }
-
-            Application.OpenURL(url);
-        });
-
         // Rewarded Video
         this.AddSpacer();
         this.AddLabel("Rewared Video");
@@ -536,7 +517,6 @@ public class AdiscopeExample : MonoBehaviour
                     case TextFieldType.OfferwallDetailId: OFFERWALL_DETAIL_ID = GUI.TextField(rect, OFFERWALL_DETAIL_ID, style); break;
                     case TextFieldType.OfferwallDetailUrl: OFFERWALL_DETAIL_URL = GUI.TextField(rect, OFFERWALL_DETAIL_URL, style); break;
                     case TextFieldType.OfferwallDeeplinkUrl: OFFERWALL_DEEPLINK_URL = GUI.TextField(rect, OFFERWALL_DEEPLINK_URL, style); break;
-                    case TextFieldType.OfferwallApplinkUrl: OFFERWALL_APPLINK_URL = GUI.TextField(rect, OFFERWALL_APPLINK_URL, style); break;
                     case TextFieldType.FindUnitID: Find_UNIT_ID = GUI.TextField(rect, Find_UNIT_ID, style); break;
                     case TextFieldType.RewardedUnit: RV_ID = GUI.TextField(rect, RV_ID, style).ToUpper(); break;
                     case TextFieldType.InterstitialUnit: IT_ID = GUI.TextField(rect, IT_ID, style).ToUpper(); break;
@@ -591,7 +571,7 @@ public class AdiscopeExample : MonoBehaviour
 }
 
 public enum ContentViewType { Button, TextField, Label, Spacer }
-public enum TextFieldType { MediaID, UserID, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId, OfferwallDetailUrl, OfferwallDeeplinkUrl, OfferwallApplinkUrl, CallbackTag, ChildYN }
+public enum TextFieldType { MediaID, UserID, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId, OfferwallDetailUrl, OfferwallDeeplinkUrl, CallbackTag, ChildYN }
 
 class ContentView
 {

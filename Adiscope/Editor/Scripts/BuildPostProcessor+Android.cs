@@ -124,12 +124,6 @@ namespace Adiscope
                             "<category android:name=\"android.intent.category.BROWSABLE\"/>" +
                             "<data android:host=\"*.adiscope.com\" android:pathPrefix=\"/" + GetMediaId_AOS() + "\" android:scheme=\"adiscope" + GetSubDomain() + "\"/>" +
                         "</intent-filter>" +
-                        "<intent-filter android:autoVerify=\"true\">" +
-                            "<action android:name=\"android.intent.action.VIEW\"/>" +
-                            "<category android:name=\"android.intent.category.DEFAULT\"/>" +
-                            "<category android:name=\"android.intent.category.BROWSABLE\"/>" +
-                            "<data android:host=\"" + GetSubDomain() + ".adiscope.com\" android:scheme=\"https\" />" +
-                        "</intent-filter>" +
                     "</activity>"
             );
 
