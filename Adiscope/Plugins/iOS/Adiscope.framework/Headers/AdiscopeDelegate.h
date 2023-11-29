@@ -19,6 +19,7 @@
 - (void)onInitializedCallback:(BOOL)isSuccess;
 
 - (void)onGetUnitStatusCallback:(int)code description:(const char *)description live:(BOOL)live active:(BOOL)active;
+- (void)onRewardedInterstitialGetUnitStatusCallback:(const char *)description live:(BOOL)live active:(BOOL)active;
 
 - (void)onOfferwallAdOpenedCallback:(const char *)unitId;
 - (void)onOfferwallAdClosedCallback:(const char *)unitId;
@@ -36,6 +37,12 @@
 - (void)onInterstitialAdOpenedCallback:(const char *)unitId;
 - (void)onInterstitialAdClosedCallback:(const char *)unitId;
 - (void)onInterstitialAdFailedToShowCallback:(const char *)unitId code:(int)code description:(const char *)description xb3TraceID:(const char *)xb3TraceID;
+
+- (void)onRewardedInterstitialAdSkipCallback:(const char *)unitId;
+- (void)onRewardedInterstitialAdOpenedCallback:(const char *)unitId;
+- (void)onRewardedInterstitialAdClosedCallback:(const char *)unitId;
+- (void)onRewardedInterstitialRewardedCallback:(const char *)unitId type:(const char *)type amount:(unsigned long long)amount;
+- (void)onRewardedInterstitialAdFailedToShowCallback:(const char *)unitId code:(int)code description:(const char *)description xb3TraceID:(const char *)xb3TraceID;
 @end
 
 // MARK: - AdiscopeDelegate
@@ -44,6 +51,7 @@
 
 - (void)onInitialized:(BOOL)isSuccess;
 - (void)onResponsedUnitStatus:(AdiscopeUnitStatus *)status;
+- (void)onRewardedInterstitialResponsedUnitStatus:(AdiscopeUnitStatus *)status;
 
 - (void)onOfferwallAdOpened:(NSString *)unitID;
 - (void)onOfferwallAdClosed:(NSString *)unitID;
@@ -61,6 +69,12 @@
 - (void)onInterstitialAdOpened:(NSString *)unitID;
 - (void)onInterstitialAdClosed:(NSString *)unitID;
 - (void)onInterstitialAdFailedToShow:(NSString *)unitID Error:(AdiscopeError *)error;
+
+- (void)onRewardedInterstitialAdSkip:(NSString *)unitID;
+- (void)onRewardedInterstitialAdOpened:(NSString *)unitID;
+- (void)onRewardedInterstitialAdClosed:(NSString *)unitID;
+- (void)onRewardedInterstitialRewarded:(NSString *)unitID Item:(AdiscopeRewardItem *)item;
+- (void)onRewardedInterstitialAdFailedToShow:(NSString *)unitID Error:(AdiscopeError *)error;
 @end
 
 #endif /* AdiscopeDelegate_h */

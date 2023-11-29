@@ -50,9 +50,6 @@ namespace Adiscope
         int _fanAdapter;
 
         [SerializeField]
-        int _inmobiAdapter;
-
-        [SerializeField]
         int _ironsourceAdapter;
 
         [SerializeField]
@@ -60,12 +57,6 @@ namespace Adiscope
 
         [SerializeField]
         int _pangleAdapter;
-
-        [SerializeField]
-        int _smaatoAdapter;
-
-        [SerializeField]
-        int _tapjoyAdapter;
 
         [SerializeField]
         int _unityadsAdapter;

@@ -12,8 +12,12 @@ namespace Adiscope.Internal.Platform.Android
         // adiscope
         public const string PKG_ADISCOPE = "com.nps.adiscope.core.Adiscope";
         public const string PKG_REWARDED_VIDEO_AD_LISTENER = "com.nps.adiscope.reward.RewardedVideoAdListener";
+        public const string PKG_REWARDED_INTERSTITIAL_AD_LISTENER = "com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAdShowListener";
         public const string PKG_OFFERWALL_AD_LISTENER = "com.nps.adiscope.offerwall.OfferwallAdListener";
         public const string PKG_INTERSTITIAL_AD_LISTENER = "com.nps.adiscope.interstitial.InterstitialAdListener";
+
+        public const string PKG_MAX_ADAPTER = "com.nps.adiscope.adapter.max.MaxAdapter";
+        public const string PKG_IUNIT_STATUS = "com.nps.adiscope.model.IUnitStatus";
 
         public const string PKG_ADISCOPE_CROSS = "com.nps.adiscope.cp.Cross";
         public const string PKG_CROSS_PROMOTION_LISTENER = "com.nps.adiscope.cp.CrossPromotionListener";
@@ -49,6 +53,12 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_SET_USE_CLOUD_FRONT_PROXY = "setUseCloudFrontProxy";
         public const string MTD_SET_CHILD_YN = "setChildYN";
 
+        // Rewarded Interstitial
+        public const string MTD_GET_REWARDED_INTERSTITIAL_AD_INSTANCE = "getRewardedInterstitialAdInstance";
+        public const string MTD_SET_REWARDED_INTERSTITIAL_AD_LISTENER = "setRewardedInterstitialAdListener";
+        public const string MTD_REWARDED_INTERSTITIAL_LOAD = "preloadUnit";
+        public const string MTD_REWARDED_INTERSTITIAL_LOAD_ALL = "preloadAll";
+
         // cross
         public const string MTD_CROSS_INITIALIZE = "initialize";
         public const string MTD_CROSS_SET_TRACKING_INFO = "setTrackingInfo";
@@ -56,6 +66,7 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_CROSS_SHOW_FULL_SCREEN_POPUP = "showFullScreenPopup";
         public const string MTD_CROSS_SHOW_ENDING_POPUP = "showEndingPopup";
 
+        public const string MTD_SHOW_DEBUG = "showDebug";
 
         // unity
         public const string PKG_UNITY_PLAYER = "com.unity3d.player.UnityPlayer";

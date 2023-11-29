@@ -1,7 +1,7 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.2.4-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.1.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - Unity Editor : 2021.3.8f1, 2022.3.4f1, 2022.3.5f1
 - Android Target API Level : 31+
@@ -14,9 +14,11 @@
 #### [Update the Adiscope package to Your Project](./docs/update.md)
 #### [Adiscope Overview](#adiscope-overview-1)
 - [Initialize](#2-initialize)
+- [사용자 정보 설정](#3-사용자-정보-설정)
 - [Offerwall](#4-offerwall)
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
+- [RewardedInterstitial](#7-rewardedinterstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
 #### [MAX Ad Review](#max-ad-review-1)
 #### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
@@ -176,6 +178,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 private string USER_ID = "";        // set unique user id to identify the user in reward information
 Adiscope.Sdk.GetCoreInstance().SetUserId(USER_ID);
 ```
+- `Offerwall`, `RewardedVideo`, `RewardedInterstitial`를 사용하기 위해 ${\color{red}필수}$ 설정
 - 64자까지 설정 가능
 <br/>
 
@@ -249,7 +252,7 @@ private string UNIT_ID = "";      // 관리자를 통해 발급
 // load a rewarded video ad which belongs to a specific unit
 rewardedVideoAd.Load(UNIT_ID);
 ```
-- 특정 유닛에 속한 ad 네크워크들의 광고를 load
+- 해당 유닛에 속한 ad 네크워크들의 광고를 load
 - `OnRewardedVideoAdLoaded` callback이 호출되면 load가 완료
 - `Load`가 실행되면 `OnLoaded` 와 `OnFailedToLoad` 중 하나의 callback은 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
@@ -354,7 +357,7 @@ private string UNIT_ID = "";      // 관리자를 통해 발급
 // load a interstitial ad which belongs to a specific unit
 interstitialAd.Load(UNIT_ID);
 ```
-- 특정 유닛에 속한 ad 네크워크들의 광고를 load
+- 해당 유닛에 속한 ad 네크워크들의 광고를 load
 - `OnInterstitialAdLoaded` callback이 호출되면 load가 완료
 - Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
 
@@ -410,6 +413,94 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 - `Load` 성공 시 `OnLoaded`, 실패 시 `OnFailedToLoad`가 호출
 - `Show` 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
 - Callback은 Unity의 main thread에서 호출
+<br/>
+
+### 7. RewardedInterstitial
+#### A. RewardedInterstitial Ad Instance 생성
+```csharp
+// get singleton instance of rewardedinterstitial ad
+Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd = Adiscope.Sdk.GetRewardedInterstitialAdInstance();
+```
+- RewardedInterstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
+- RewardedInterstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+
+#### B. Callback 등록
+```csharp
+rewaredInterstitialAd.OnGetUnitStatus += OnRewardedInterstitialGetUnitStatusCallback;
+rewaredInterstitialAd.OnSkip += OnRewardedInterstitialAdSkipCallback;
+rewaredInterstitialAd.OnOpened += OnRewardedInterstitialAdOpenedCallback;
+rewaredInterstitialAd.OnClosed += OnRewardedInterstitialAdClosedCallback;
+rewaredInterstitialAd.OnFailedToShow += OnRewardedInterstitialAdFailedToShowCallback;
+rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
+```
+
+#### C. PreLoadAll
+```csharp
+rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
+```
+- Initialize Call Back 후 1회 설정 권장
+- 관리자가 설정된 활성화된 모든 유닛들을 Load 진행
+
+#### D. Unit 지정 PreLoad
+```csharp
+rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_ID2, ... });
+```
+- Initialize Call Back 후 1회 설정 권장
+- 입력된 유닛들을 Load 진행
+
+#### E. Show
+```csharp
+rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
+```
+- 해당 유닛이 Load되어 있으면 안내 팝업을 보여 준 뒤 해당 광고를 사용자에게 보여줌
+- ShowRewardedInterstitial method는 중복하여 호출 할 수 없음
+- `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+- `OnClosed`와 `OnFailedToShow`가 호출 되면 내부에서 해당 유닛을 자동 Load 시킴
+
+#### F. Unit Status Info
+```csharp
+rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(UNIT_ID);
+```
+- 해당 유닛의 수익화 여부, 활성화 여부를 알 수 있음
+
+#### G. Callback Reward
+```csharp
+private void OnRewardedInterstitialRewardedCallback(object sender, Adiscope.Model.RewardItem args) {
+    // RewardItem.UnitId - 해당 rewarded video ad의 unitId (ShowRewardedInterstitial 시 입력한 값)
+    // RewardItem.Type - 보상 type
+    // RewardItem.Amount - 보상의 양
+}
+```
+- 보상이 주어져야 할 경우 `OnRewarded`가 호출되며 그 parameter로 관련 정보가 전달
+- 이 보상 정보를 바탕으로 게임 내에서 보상을 지급
+- `OnRewarded`는 보통 `OnOpened` 와 `OnClosed` 사이에 호출되는 경우가 많으나 광고 System의 상황에 따라 달라 질 수 있음
+- `OnRewarded`가 호출되지 않는 경우도 존재할 수 있음(Reward 설정을 Server-to-server로 하였다면, Video 시청 후에는 `OnRewarded`가 호출되지 않음)
+- Reward 정보는 abusing 방지를 위해서 Server-to-server 방식으로 전달 받는 것을 권장
+- Server-to-server 방식을 선택하더라도 보상이 전달 될 시에는 `OnRewarded`가 호출
+  - 이때는 Server를 통해 전달받은 정보를 기준으로 처리하고, `OnRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
+
+#### H. Callback Others
+```csharp
+private void OnRewardedInterstitialGetUnitStatusCallback(object sender, Adiscope.Model.UnitStatus args) {
+    // args.isLive()    수익화 여부
+    // args.isActive()  활성화 여부
+}
+private void OnRewardedInterstitialAdSkipCallback(object sender, Adiscope.Model.ShowResult args) {
+    // RewardedInterstitial Skip for 안내 팝업
+}
+private void OnRewardedInterstitialAdOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // Rewarded Video 열림
+}
+private void OnRewardedInterstitialAdClosedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // Rewarded Video 닫힘
+}
+private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
+    // Rewarded Video Show Fail
+}
+```
+- `GetUnitStatusRewardedInterstitial` 조회 시 `OnGetUnitStatus`가 호출
+- `ShowRewardedInterstitial` Skip 시 `OnSkip`, 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
+- Callback은 Unity의 main thread에서 호출
 <br/><br/>
 
 ### 7. Other API
@@ -428,11 +519,14 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 - 내용: MAX 노출 소재에 대한 imp, 클릭수, eCPM 등의 지표 확인이 필요
 - 기대효과: 소재 별 지표를 다른 네트워크에 공유하여, 더 높은 eCPM으로 해당 소재 광고를 받을 수 있게 하는 것이 기대효과, 아직 한번도 진행해 보지 않아서, 목표 기대효과는 측정하지 못함
 - 개발방법
-    - [AppLovinQualityServiceSetup-ios.rb 파일 다운로드](https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.2.0/AppLovinQualityServiceSetup-ios.rb) 후 받은 파일을 iOS 프로젝트의 xcodeproj 파일이 있는 곳에 옮김
-    - 터미널로 접속해서 다운받은 파일로 이동 후 아래 명령어 실행
-```
-ruby AppLovinQualityServiceSetup-ios.rb
-```
+    - Android
+        - [적용 방법 확인](./docs/android_max_ad_review.md)
+    - iOS
+        - [AppLovinQualityServiceSetup-ios.rb 파일 다운로드](https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.2.0/AppLovinQualityServiceSetup-ios.rb) 후 받은 파일을 iOS 프로젝트의 xcodeproj 파일이 있는 곳에 옮김
+        - 터미널로 접속해서 다운받은 파일로 이동 후 아래 명령어 실행
+    ```
+    ruby AppLovinQualityServiceSetup-ios.rb
+    ```
 
 <br/><br/>
 

@@ -79,6 +79,23 @@ namespace Adiscope.Internal.Platform
         }
 
         /// <summary>
+        /// build rewarded video ad client based on the runtime env.
+        /// </summary>
+        /// <returns>rewarded video ad client based on current runtime platform</returns>
+        public static IRewardedInterstitialAdClient BuildRewardedInterstitialAdClient()
+        {
+#if UNITY_EDITOR
+            return new MockPlatform.RewardedInterstitialAdClient();
+#elif UNITY_ANDROID
+            return new Android.RewardedInterstitialAdClient();
+#elif UNITY_IOS
+            return new IOS.RewardedInterstitialAdClient();
+#else
+            return new MockPlatform.RewardedInterstitialAdClient();
+#endif
+        }
+
+        /// <summary>
         /// build cross promotion client based on the runtime env.
         /// </summary>
         /// <returns>cross promotion client based on current runtime platform</returns>

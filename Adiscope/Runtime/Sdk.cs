@@ -61,6 +61,15 @@ namespace Adiscope
         }
 
         /// <summary>
+        /// get rewarded video ad singleton instance
+        /// </summary>
+        /// <returns>singleton instance of RewardedVidoAd</returns>
+        public static RewardedInterstitialAd GetRewardedInterstitialAdInstance()
+        {
+            return RewardedInterstitialAd.Instance;
+        }
+
+        /// <summary>
         /// get cross promotion singleton instance
         /// </summary>
         /// <returns>singleton instance of CrossPromotion</returns>

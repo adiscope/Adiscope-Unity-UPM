@@ -78,3 +78,4 @@ Adiscope.Sdk.GetCoreInstance().GetUnitStatus(UNIT_ID, (error, unitStatus) => {
     }
 });
 ```
+- RewardedVideo, Offerwall의 유닛 확인 용

@@ -9,7 +9,7 @@ namespace Adiscope.Internal.Platform.Android
     {
         Action<AdiscopeError, UnitStatus> callback;
 
-        public IUnitStatus(Action<AdiscopeError, UnitStatus> callback) : base("com.nps.adiscope.model.IUnitStatus")
+        public IUnitStatus(Action<AdiscopeError, UnitStatus> callback) : base(Values.PKG_IUNIT_STATUS)
         {
             this.callback = callback;
         }

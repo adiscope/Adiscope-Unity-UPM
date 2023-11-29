@@ -13,10 +13,17 @@ public class AdiscopeExample : MonoBehaviour
     private string USER_ID;
     private string RV_ID;
     private string IT_ID;
+    private string RI_ID;
+    private string RI_ID1;
+    private string RI_ID2;
+    private string RI_ID3;
+    private string RI_ID4;
+    private string RI_ID5;
     private string OFFERWALL_ID;
     private string OFFERWALL_DETAIL_ID;
     private string OFFERWALL_DETAIL_URL;
     private string OFFERWALL_DEEPLINK_URL;
+    private string OFFERWALL_APPLINK_URL;
     private string Find_UNIT_ID;
     private string CALLBACK_TAG;
     private string CHILD_YN;
@@ -29,6 +36,12 @@ public class AdiscopeExample : MonoBehaviour
             USER_ID = "";
             RV_ID = "";
             IT_ID = "";
+            RI_ID = "";
+            RI_ID1 = "";
+            RI_ID2 = "";
+            RI_ID3 = "";
+            RI_ID4 = "";
+            RI_ID5 = "";
             OFFERWALL_ID = "";
             Find_UNIT_ID = "";
             CALLBACK_TAG = "";
@@ -40,6 +53,12 @@ public class AdiscopeExample : MonoBehaviour
             USER_ID = "";
             RV_ID = "";
             IT_ID = "";
+            RI_ID = "";
+            RI_ID1 = "";
+            RI_ID2 = "";
+            RI_ID3 = "";
+            RI_ID4 = "";
+            RI_ID5 = "";
             OFFERWALL_ID = "";
             Find_UNIT_ID = "";
             CALLBACK_TAG = "";
@@ -52,6 +71,7 @@ public class AdiscopeExample : MonoBehaviour
     private Adiscope.Feature.OfferwallAd offerwallAd;
     private Adiscope.Feature.RewardedVideoAd rewardedVideoAd;
     private Adiscope.Feature.InterstitialAd interstitialAd;
+    private Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd;
 
     // Properties
     private string outputMessage;
@@ -93,6 +113,13 @@ public class AdiscopeExample : MonoBehaviour
         this.interstitialAd.OnOpened -= OnInterstitialAdOpenedCallback;
         this.interstitialAd.OnClosed -= OnInterstitialAdClosedCallback;
         this.interstitialAd.OnFailedToShow -= OnInterstitialAdFailedToShowCallback;
+
+        this.rewaredInterstitialAd.OnGetUnitStatus -= OnRewardedInterstitialGetUnitStatusCallback;
+        this.rewaredInterstitialAd.OnSkip -= OnRewardedInterstitialAdSkipCallback;
+        this.rewaredInterstitialAd.OnOpened -= OnRewardedInterstitialAdOpenedCallback;
+        this.rewaredInterstitialAd.OnClosed -= OnRewardedInterstitialAdClosedCallback;
+        this.rewaredInterstitialAd.OnFailedToShow -= OnRewardedInterstitialAdFailedToShowCallback;
+        this.rewaredInterstitialAd.OnRewarded -= OnRewardedInterstitialRewardedCallback;
     }
 
     private void RegisterAdiscopeCallback()
@@ -143,6 +170,24 @@ public class AdiscopeExample : MonoBehaviour
 
         }
 
+        if (this.rewaredInterstitialAd == null)
+        {
+            this.rewaredInterstitialAd = Adiscope.Sdk.GetRewardedInterstitialAdInstance();
+
+            this.rewaredInterstitialAd.OnGetUnitStatus += OnRewardedInterstitialGetUnitStatusCallback;
+
+            this.rewaredInterstitialAd.OnSkip += OnRewardedInterstitialAdSkipCallback;
+
+            this.rewaredInterstitialAd.OnOpened += OnRewardedInterstitialAdOpenedCallback;
+
+            this.rewaredInterstitialAd.OnClosed += OnRewardedInterstitialAdClosedCallback;
+
+            this.rewaredInterstitialAd.OnFailedToShow += OnRewardedInterstitialAdFailedToShowCallback;
+
+            this.rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
+
+        }
+
     }
 
     private void OnInitializedCallback(object sender, Adiscope.Model.InitResult args) { this.AddOutputMessage("initialize - args: " + args); }
@@ -171,6 +216,17 @@ public class AdiscopeExample : MonoBehaviour
     private void OnInterstitialAdClosedCallback(object sender, EventArgs args) { this.AddOutputMessage("  <= interstitialAd.OnClosed - args: " + args); }
     private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) { this.AddOutputMessage("  <= interstitialAd.OnFailedToShow - args: " + args); }
 
+
+    private void OnRewardedInterstitialGetUnitStatusCallback(object sender, Adiscope.Model.UnitStatus args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnGetUnitStatus - args: " + args); }
+    private void OnRewardedInterstitialAdSkipCallback(object sender, Adiscope.Model.ShowResult args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnSkip - args: " + args); }
+    private void OnRewardedInterstitialAdOpenedCallback(object sender, Adiscope.Model.ShowResult args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnOpened - args: " + args); }
+    private void OnRewardedInterstitialAdClosedCallback(object sender, Adiscope.Model.ShowResult args)
+    {
+        this.AddOutputMessage("  <= rewaredInterstitialAd.OnClosed - args: " + args);
+    }
+    private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnFailedToShow - args: " + args); }
+    private void OnRewardedInterstitialRewardedCallback(object sender, Adiscope.Model.RewardItem args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnRewarded - args: " + args); }
+
     #region GUI
     private void AddContentViews()
     {
@@ -181,6 +237,10 @@ public class AdiscopeExample : MonoBehaviour
         this.AddLabel("Core");
         this.AddTextField("Media ID", TextFieldType.MediaID);
         this.AddTextField("User ID", TextFieldType.UserID);
+        this.AddButton("Set User ID", () => {
+            this.core.SetUserId(USER_ID);
+            this.AddOutputMessage("Set User ID: " + USER_ID);
+        });
 
         this.AddTextField("Callback Tag", TextFieldType.CallbackTag);
         this.AddTextField("Child YN", TextFieldType.ChildYN);
@@ -390,6 +450,24 @@ public class AdiscopeExample : MonoBehaviour
             
         });
 
+        this.AddTextField("Applink URL", TextFieldType.OfferwallApplinkUrl);
+        this.AddButton("Show Detail from Applink", () => {
+            string url = OFFERWALL_APPLINK_URL;
+            if (url == null)
+            {
+                this.AddOutputMessage("Empty URL");
+                return;
+            }
+
+            if (!url.StartsWith("https"))
+            {
+                this.AddOutputMessage("https 스킴의 링크 형식만 지원합니다.");
+                return;
+            }
+
+            Application.OpenURL(url);
+        });
+
         // Rewarded Video
         this.AddSpacer();
         this.AddLabel("Rewared Video");
@@ -418,6 +496,28 @@ public class AdiscopeExample : MonoBehaviour
         });
         this.AddButton("Interstitial - Show", () => {
             this.interstitialAd.Show();
+        });
+
+        // RewardedInterstitial
+        this.AddSpacer();
+        this.AddLabel("RewaredInterstitial");
+        this.AddButton("RewaredInterstitial - PreLoadAll", () => {
+            this.rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
+        });
+        this.AddTextField("PreLoad Unit1", TextFieldType.RewardedInterstitialUnit1);
+        this.AddTextField("PreLoad Unit2", TextFieldType.RewardedInterstitialUnit2);
+        this.AddTextField("PreLoad Unit3", TextFieldType.RewardedInterstitialUnit3);
+        this.AddTextField("PreLoad Unit4", TextFieldType.RewardedInterstitialUnit4);
+        this.AddTextField("PreLoad Unit5", TextFieldType.RewardedInterstitialUnit5);
+        this.AddButton("RewaredInterstitial - PreLoad", () => {
+            this.rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { RI_ID1, RI_ID2, RI_ID3, RI_ID4, RI_ID5 });
+        });
+        this.AddTextField("Show Unit", TextFieldType.RewardedInterstitialUnit);
+        this.AddButton("RewaredInterstitial - Show", () => {
+            this.rewaredInterstitialAd.ShowRewardedInterstitial(RI_ID);
+        });
+        this.AddButton("RewaredInterstitial - Print Status", () => {
+            this.rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(RI_ID);
         });
     }
 
@@ -517,8 +617,15 @@ public class AdiscopeExample : MonoBehaviour
                     case TextFieldType.OfferwallDetailId: OFFERWALL_DETAIL_ID = GUI.TextField(rect, OFFERWALL_DETAIL_ID, style); break;
                     case TextFieldType.OfferwallDetailUrl: OFFERWALL_DETAIL_URL = GUI.TextField(rect, OFFERWALL_DETAIL_URL, style); break;
                     case TextFieldType.OfferwallDeeplinkUrl: OFFERWALL_DEEPLINK_URL = GUI.TextField(rect, OFFERWALL_DEEPLINK_URL, style); break;
+                    case TextFieldType.OfferwallApplinkUrl: OFFERWALL_APPLINK_URL = GUI.TextField(rect, OFFERWALL_APPLINK_URL, style); break;
                     case TextFieldType.FindUnitID: Find_UNIT_ID = GUI.TextField(rect, Find_UNIT_ID, style); break;
                     case TextFieldType.RewardedUnit: RV_ID = GUI.TextField(rect, RV_ID, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit: RI_ID = GUI.TextField(rect, RI_ID, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit1: RI_ID1 = GUI.TextField(rect, RI_ID1, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit2: RI_ID2 = GUI.TextField(rect, RI_ID2, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit3: RI_ID3 = GUI.TextField(rect, RI_ID3, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit4: RI_ID4 = GUI.TextField(rect, RI_ID4, style).ToUpper(); break;
+                    case TextFieldType.RewardedInterstitialUnit5: RI_ID5 = GUI.TextField(rect, RI_ID5, style).ToUpper(); break;
                     case TextFieldType.InterstitialUnit: IT_ID = GUI.TextField(rect, IT_ID, style).ToUpper(); break;
                     case TextFieldType.CallbackTag: CALLBACK_TAG = GUI.TextField(rect, CALLBACK_TAG, style).ToUpper(); break;
                     case TextFieldType.ChildYN: CHILD_YN = GUI.TextField(rect, CHILD_YN, style).ToUpper(); break;
@@ -571,7 +678,7 @@ public class AdiscopeExample : MonoBehaviour
 }
 
 public enum ContentViewType { Button, TextField, Label, Spacer }
-public enum TextFieldType { MediaID, UserID, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId, OfferwallDetailUrl, OfferwallDeeplinkUrl, CallbackTag, ChildYN }
+public enum TextFieldType { MediaID, UserID, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId, OfferwallDetailUrl, OfferwallDeeplinkUrl, OfferwallApplinkUrl, CallbackTag, ChildYN, RewardedInterstitialUnit, RewardedInterstitialUnit1, RewardedInterstitialUnit2, RewardedInterstitialUnit3, RewardedInterstitialUnit4, RewardedInterstitialUnit5 }
 
 class ContentView
 {

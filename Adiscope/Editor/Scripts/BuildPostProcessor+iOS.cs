@@ -100,6 +100,7 @@ namespace Adiscope.PostProcessor
 
             // Add `-ObjC` to "Other Linker Flags".
             project.AddBuildProperty(defaultTarget, "OTHER_LDFLAGS", "-ObjC");
+            project.AddBuildProperty(defaultTarget, "LD_RUNPATH_SEARCH_PATHS", "/usr/lib/swift");
             // Update 'NO' to "ENABLE_BITCODE"
             project.UpdateBuildProperty(defaultTarget, "ENABLE_BITCODE", new  string [] { "NO" }, new  string [] { "YES" });
             project.UpdateBuildProperty(buildFrameworkTarget, "ENABLE_BITCODE", new  string [] { "NO" }, new  string [] { "YES" });

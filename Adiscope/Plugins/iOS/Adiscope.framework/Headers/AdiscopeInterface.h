@@ -66,6 +66,10 @@
 /// @param unitId 가져올 Status의 UnitID, Offerwall과 RewardedVideo를 상관하지 않습니다.
 - (void)getUnitStatus:(NSString *)unitId;
 
+/// RewardedInterstitial에서 Unit의 Status를 가져옵니다.
+/// @param unitId 가져올 Status의 UnitID
+- (void)getRewardedInterstitialUnitStatus:(NSString *)unitId;
+
 - (void)setUseCloudFrontProxy:(BOOL)useCloudFrontProxy;
 
 /// Adiscope SDK의 버전정보입니다. 
@@ -98,6 +102,7 @@
 - (void)initialize4Unity:(NSString *)callBackTag Delegate:(id<AdiscopeBridge4UnityDelegate>)delegate;
 
 - (void)getUnitStatus:(NSString *)unitId callback:(id<AdiscopeBridge4UnityDelegate>)delegate;
+- (void)getRewardedInterstitialUnitStatus:(NSString *)unitId callback:(id<AdiscopeBridge4UnityDelegate>)delegate;
 
 /// Offerwall의 탭 타입입니다.
 extern NSString* const OFFERWALL_TYPE_CPS;

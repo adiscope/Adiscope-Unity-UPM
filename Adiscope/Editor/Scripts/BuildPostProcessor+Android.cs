@@ -32,11 +32,8 @@ namespace Adiscope
                     AdiscopeFrameworkAndroidType.MAX,
                     AdiscopeFrameworkAndroidType.AppLovin,
                     AdiscopeFrameworkAndroidType.FAN,
-                    AdiscopeFrameworkAndroidType.Inmobi,
                     AdiscopeFrameworkAndroidType.MobVista,
                     AdiscopeFrameworkAndroidType.Pangle,
-                    AdiscopeFrameworkAndroidType.Smaato,
-                    AdiscopeFrameworkAndroidType.Tapjoy,
                     AdiscopeFrameworkAndroidType.Vungle
                 }
             , isProgress);
@@ -236,14 +233,8 @@ namespace Adiscope
         {
             float progress = 0.4f / usingFrameworks.Count;
             float totalProgress = 0.1f + progress;
-            bool isAvailableInmobi = IsAvailableInmobiInMaxAdapter();
             foreach (AdiscopeFrameworkAndroidType type in usingFrameworks)
             {
-                if(type.Equals(AdiscopeFrameworkAndroidType.Inmobi) && !isAvailableInmobi)
-                {
-                    continue;
-                }
-
                 if (!type.GetAdapterEnable())
                 {
                     continue;
@@ -267,21 +258,6 @@ namespace Adiscope
                     EditorUtility.DisplayDialog("Failed to install", "파일 생성 실패", "닫기");
                     return false;
                 }
-            }
-
-            return true;
-        }
-
-        // inmobi 미포함 SDK 버전을 구분짓기 위한 함수
-        private static bool IsAvailableInmobiInMaxAdapter()
-        {
-            string maxFilePath = AdiscopeFrameworkAndroidTypeExtension.GetFilePath(AdiscopeFrameworkAndroidType.MAX);
-            string[] tempFilePathList = maxFilePath.Split('/');
-            string version = tempFilePathList[tempFilePathList.Length-2];
-
-
-            if(version.Equals("3.1.0.1")){
-                return false;
             }
 
             return true;
@@ -318,11 +294,8 @@ namespace Adiscope
         MAX,
         AppLovin,
         FAN,
-        Inmobi,
         MobVista,
         Pangle,
-        Smaato,
-        Tapjoy,
         Vungle
     }
 
@@ -335,27 +308,21 @@ namespace Adiscope
         private const string MAX_FILE_NAME          = "MaxDependencies.xml";
         private const string APPLOVIN_FILE_NAME     = "ApplovinDependencies.xml";
         private const string FAN_FILE_NAME          = "FanDependencies.xml";
-        private const string INMOBI_FILE_NAME       = "InmobiDependencies.xml";
         private const string MOBVISTA_FILE_NAME     = "MobvistaDependencies.xml";
         private const string PANGLE_FILE_NAME       = "PangleDependencies.xml";
-        private const string SMAATO_FILE_NAME       = "SmaatoDependencies.xml";
-        private const string TAPJOY_FILE_NAME       = "TapjoyDependencies.xml";
         private const string VUNGLE_FILE_NAME       = "VungleDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.1.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.1.0/";
-        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.1.0.1/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string INMOBI_FILE_PATH       = ADISCOPE_FILE_PATH + "3.1.0/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.1.0/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string SMAATO_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string TAPJOY_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.0.0/";
+        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
 
         public static string GetFileName(this AdiscopeFrameworkAndroidType type)
         {
@@ -368,11 +335,8 @@ namespace Adiscope
                 case AdiscopeFrameworkAndroidType.MAX:          return MAX_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.AppLovin:     return APPLOVIN_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.FAN:          return FAN_FILE_NAME;
-                case AdiscopeFrameworkAndroidType.Inmobi:       return INMOBI_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.MobVista:     return MOBVISTA_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.Pangle:       return PANGLE_FILE_NAME;
-                case AdiscopeFrameworkAndroidType.Smaato:       return SMAATO_FILE_NAME;
-                case AdiscopeFrameworkAndroidType.Tapjoy:       return TAPJOY_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.Vungle:       return VUNGLE_FILE_NAME;
                 default:                                        return null;
             }
@@ -389,11 +353,8 @@ namespace Adiscope
                 case AdiscopeFrameworkAndroidType.MAX:          return MAX_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.AppLovin:     return APPLOVIN_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.FAN:          return FAN_FILE_PATH;
-                case AdiscopeFrameworkAndroidType.Inmobi:       return INMOBI_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.MobVista:     return MOBVISTA_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.Pangle:       return PANGLE_FILE_PATH;
-                case AdiscopeFrameworkAndroidType.Smaato:       return SMAATO_FILE_PATH;
-                case AdiscopeFrameworkAndroidType.Tapjoy:       return TAPJOY_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.Vungle:       return VUNGLE_FILE_PATH;
                 default:                                        return null;
             }
@@ -413,11 +374,8 @@ namespace Adiscope
                 case AdiscopeFrameworkAndroidType.MAX:          return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.AppLovin:     return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.FAN:          return (serialized.FindProperty("_fanAdapter").intValue == 1 || serialized.FindProperty("_fanAdapter").intValue == 2);
-                case AdiscopeFrameworkAndroidType.Inmobi:       return (serialized.FindProperty("_inmobiAdapter").intValue == 1 || serialized.FindProperty("_inmobiAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.MobVista:     return (serialized.FindProperty("_mobvistaAdapter").intValue == 1 || serialized.FindProperty("_mobvistaAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.Pangle:       return (serialized.FindProperty("_pangleAdapter").intValue == 1 || serialized.FindProperty("_pangleAdapter").intValue == 2);
-                case AdiscopeFrameworkAndroidType.Smaato:       return (serialized.FindProperty("_smaatoAdapter").intValue == 1 || serialized.FindProperty("_smaatoAdapter").intValue == 2);
-                case AdiscopeFrameworkAndroidType.Tapjoy:       return (serialized.FindProperty("_tapjoyAdapter").intValue == 1 || serialized.FindProperty("_tapjoyAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.Vungle:       return (serialized.FindProperty("_vungleAdapter").intValue == 1 || serialized.FindProperty("_vungleAdapter").intValue == 2);
                 default:                                        return false;
             }

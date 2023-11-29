@@ -45,7 +45,6 @@ namespace Adiscope.Internal.Platform.Android
         private AndroidJavaObject GetInterstitialAdInstance()
         {
             AndroidJavaObject activity = null;
-            Debug.Log("nmj nmj GetInterstitialAdInstance");
             using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
             {
                 if (unityPlayer == null)

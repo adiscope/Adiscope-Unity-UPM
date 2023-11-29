@@ -20,5 +20,6 @@ FOUNDATION_EXPORT const unsigned char AdiscopeVersionString[];
 #import "AdiscopeInterface+Offerwall.h"
 #import "AdiscopeInterface+RewardedVideo.h"
 #import "AdiscopeInterface+Interstitial.h"
+#import "AdiscopeInterface+RewardedInterstitial.h"
 #import "AdiscopeCPInterface.h"
 #import "AdiscopeDelegate.h"

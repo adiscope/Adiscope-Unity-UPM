@@ -135,43 +135,28 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
-                    int inmobiAdapter = serialized.FindProperty("_inmobiAdapter").intValue;
-                    inmobiAdapter = EditorGUILayout.Popup("Inmobi Adapter", inmobiAdapter, AOS_Type);
-                    serialized.FindProperty("_inmobiAdapter").intValue = inmobiAdapter;
-
                     int ironsourceAdapter = serialized.FindProperty("_ironsourceAdapter").intValue;
                     ironsourceAdapter = EditorGUILayout.Popup("Ironsource Adapter", ironsourceAdapter, OS_Type);
                     serialized.FindProperty("_ironsourceAdapter").intValue = ironsourceAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
 
-                    GUILayout.BeginHorizontal();
                     int mobvistaAdapter = serialized.FindProperty("_mobvistaAdapter").intValue;
                     mobvistaAdapter = EditorGUILayout.Popup("Mobvista Adapter", mobvistaAdapter, OS_Type);
                     serialized.FindProperty("_mobvistaAdapter").intValue = mobvistaAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
 
+                    GUILayout.BeginHorizontal();
                     int pangleAdapter = serialized.FindProperty("_pangleAdapter").intValue;
                     pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, OS_Type);
                     serialized.FindProperty("_pangleAdapter").intValue = pangleAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
 
-                    GUILayout.BeginHorizontal();
-                    int smaatoAdapter = serialized.FindProperty("_smaatoAdapter").intValue;
-                    smaatoAdapter = EditorGUILayout.Popup("Smaato Adapter", smaatoAdapter, AOS_Type);
-                    serialized.FindProperty("_smaatoAdapter").intValue = smaatoAdapter;
-
-                    int tapjoyAdapter = serialized.FindProperty("_tapjoyAdapter").intValue;
-                    tapjoyAdapter = EditorGUILayout.Popup("Tapjoy Adapter", tapjoyAdapter, AOS_Type);
-                    serialized.FindProperty("_tapjoyAdapter").intValue = tapjoyAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
-
-                    GUILayout.BeginHorizontal();
                     int unityadsAdapter = serialized.FindProperty("_unityadsAdapter").intValue;
                     unityadsAdapter = EditorGUILayout.Popup("Unityads Adapter", unityadsAdapter, OS_Type);
                     serialized.FindProperty("_unityadsAdapter").intValue = unityadsAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
 
+                    GUILayout.BeginHorizontal();
                     int vungleAdapter = serialized.FindProperty("_vungleAdapter").intValue;
                     vungleAdapter = EditorGUILayout.Popup("Vungle Adapter", vungleAdapter, OS_Type);
                     serialized.FindProperty("_vungleAdapter").intValue = vungleAdapter;
@@ -359,12 +344,9 @@ namespace Adiscope
         public const string APPLOVIN   = "applovin";
         private const string CHARTBOOST = "chartboost";
         private const string FAN        = "fan";
-        private const string INMOBI     = "inmobi";
         private const string IRONSOURCE = "ironsource";
         private const string MOBVISTA   = "mobvista";
         private const string PANGLE     = "pangle";
-        private const string SMAATO     = "smaato";
-        private const string TAPJOY     = "tapjoy";
         private const string UNITYADS   = "unityads";
         private const string VUNGLE     = "vungle";
 
@@ -378,11 +360,8 @@ namespace Adiscope
                     case MAX:
                     case APPLOVIN:
                     case FAN:
-                    case INMOBI:
                     case MOBVISTA:
                     case PANGLE:
-                    case SMAATO:
-                    case TAPJOY:
                     case VUNGLE:
                     return true;
                     default: return false;
@@ -395,7 +374,6 @@ namespace Adiscope
                     case CHARTBOOST:
                     case FAN:
                     case MOBVISTA:
-                    // case TAPJOY:
                     case IRONSOURCE:
                     case UNITYADS:
                     case APPLOVIN:

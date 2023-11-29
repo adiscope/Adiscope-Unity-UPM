@@ -94,7 +94,29 @@ namespace Adiscope.Internal.Platform.Android
 
 		public void ShowMaxMediationDebugger() 
         {
-            // Not Support this Platform
+            AndroidJavaObject activity;
+        
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
+            {
+                if (unityPlayer == null)
+                {
+                    Debug.LogError("Android.CoreClient<Constructor> UnityPlayer: null");
+                    return;
+                }
+
+                activity = unityPlayer.GetStatic<AndroidJavaObject>(Values.MTD_CURRENT_ACTIVITY);
+            }
+
+            using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_MAX_ADAPTER))
+            {
+                if (jc == null)
+                {
+                    Debug.LogError("Android.MaxAdapter<showDebug> " + Values.PKG_MAX_ADAPTER + ": null");
+                    return;
+                }
+
+                jc.CallStatic(Values.MTD_SHOW_DEBUG, activity);
+            }
         }
 
 #endregion
