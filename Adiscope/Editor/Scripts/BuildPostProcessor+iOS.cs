@@ -62,7 +62,6 @@ namespace Adiscope.PostProcessor
                 );
                 
                 project.AddFileToBuildSection(buildTargetGUID, embedSectionID, fileID);
-                PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, fileID);
             }
 
             File.WriteAllText(projectPath, project.WriteToString());

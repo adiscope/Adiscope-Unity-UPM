@@ -1,4 +1,4 @@
-# 2022.3.4f1 & 2022.3.5f1
+# Unity Editor 2022.3.+
 ## Project Settings - Player
 ![playerAndroidBuild22-3-4](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/b39e6a93-f0da-42a8-b0a1-656685c5fb9a)   
 - `Build > Custom Main Manifest` 체크를 설정

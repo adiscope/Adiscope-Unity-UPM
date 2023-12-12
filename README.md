@@ -1,9 +1,10 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.3.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
-- Unity Editor : 2021.3.8f1, 2022.3.4f1, 2022.3.5f1
+- **Unity Editor 2022.3.4f1 ~ 2022.3.9f1에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
+- Unity Editor : 2020.3.39f1, 2021.3.8f1, 2021.3.19f1, 2021.3.23f1, 2022.3.10f1 ~ 2022.3.14f1
 - Android Target API Level : 31+
 - Android Minimum API Level : 16
 - iOS Minimum Version : 12.0
@@ -21,6 +22,7 @@
 - [RewardedInterstitial](#7-rewardedinterstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
 #### [MAX Ad Review](#max-ad-review-1)
+#### [Unity Editor 22.3.14f1~ 에서 iOS 중복 Framework 해결 방법](./docs/ios_build_error_22_3_14f1.md)
 #### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
 #### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
 #### [Adiscope Sample App](./docs/sampleapp.md)
@@ -78,7 +80,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Build > Custom Main Manifest` 체크를 설정
 - `Build > Custom Main Gradle Template` 체크를 설정
 - `Build > Custom Gradle Properties Template` 체크를 설정
-> - [2022.3.4f1, 2022.3.5f1 변경 설정 확인](./docs/other_unity_version.md)
+> - [2022.3.+ 변경 설정 확인](./docs/other_unity_version.md)
 > - [결과 확인](./docs/upm_result.md#3-project-settings---player)
 <br/>
 
@@ -527,6 +529,11 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
     ```
     ruby AppLovinQualityServiceSetup-ios.rb
     ```
+
+<br/><br/>
+
+## Unity Editor 22.3.14f1~ 에서 iOS 중복 Framework
+> - [해결 방법](./docs/ios_build_error_22_3_14f1.md)
 
 <br/><br/>
 
