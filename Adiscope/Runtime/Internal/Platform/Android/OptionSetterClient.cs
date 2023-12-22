@@ -118,6 +118,16 @@ namespace Adiscope.Internal.Platform.Android
                 jc.CallStatic(Values.MTD_SHOW_DEBUG, activity);
             }
         }
+ 
+        public void SetVolumeOff(bool isVolume)
+        {
+            if (optionSetter == null)
+            {
+                Debug.LogError("Android.OptionSetterClient<SetChildYN> OptionSetter: null");
+            }
+
+            optionSetter.Call(Values.MTD_SET_VOLUME_OFF, isVolume);
+        }
 
 #endregion
 

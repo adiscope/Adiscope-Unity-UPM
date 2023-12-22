@@ -64,6 +64,11 @@ namespace Adiscope.Internal.Platform.IOS
 			showMaxMediationDebugger();
 		}
 
+        public void SetVolumeOff(bool isVolume) 
+        {
+			// nothing	
+        }
+
 		#endregion
 	}
 }

@@ -171,7 +171,7 @@ namespace Adiscope
 
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
-                    if (GUILayout.Button("Create Adiscope Android Files", GUILayout.Height(30)))
+                    if (GUILayout.Button("Create Adiscope Android & iOS Files", GUILayout.Height(30)))
                     {
                         if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)       // Manifest 파일 생성
                             && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(true)) {

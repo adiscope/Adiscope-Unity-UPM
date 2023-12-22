@@ -79,3 +79,9 @@ Adiscope.Sdk.GetCoreInstance().GetUnitStatus(UNIT_ID, (error, unitStatus) => {
 });
 ```
 - RewardedVideo, Offerwall의 유닛 확인 용
+
+### Admob Volume (only Android)
+```csharp
+Adiscope.Sdk.GetOptionSetter().SetVolumeOff(false);    // 광고 소리 킴(Default)
+Adiscope.Sdk.GetOptionSetter().SetVolumeOff(true);     // 광고 소리 끔
+```

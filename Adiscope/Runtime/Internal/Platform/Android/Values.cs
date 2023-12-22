@@ -38,6 +38,7 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_ISINITIALIZE = "isInitialized";
         public const string MTD_SET_USER_ID = "setUserId";
         public const string MTD_GET_UNIT_STATUS = "getUnitStatus";
+        public const string MTD_SET_VOLUME_OFF = "setVolumeOff";
         public const string MTD_LOAD_ALL = "loadAll";
         public const string MTD_LOAD = "load";
         public const string MTD_IS_LOADED = "isLoaded";

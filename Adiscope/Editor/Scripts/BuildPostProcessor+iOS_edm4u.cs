@@ -41,7 +41,7 @@ namespace Adiscope
                 foreach (string filename in Directory.GetFiles(path, "*.xml"))
                 {
                     foreach (AdiscopeFrameworkType type in usingFrameworks) {
-                        if (!type.GetAdapterEnable() && filename.Contains(type.GetFileName())) {
+                        if (filename.Contains(type.GetFileName())) {
                             try
                             {
                                 File.Delete(filename);
@@ -131,6 +131,7 @@ namespace Adiscope
         /*** edm4u를 설정 하기 위해 adapter 파일 생성 end ***/
     }
 
+    // Adapter 제거 시 Dependencies 제를 위해 유지 해야 함
     public enum AdiscopeFrameworkType {
         Admanager,
         Admob,

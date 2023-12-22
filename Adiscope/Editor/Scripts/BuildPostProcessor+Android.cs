@@ -34,7 +34,10 @@ namespace Adiscope
                     AdiscopeFrameworkAndroidType.FAN,
                     AdiscopeFrameworkAndroidType.MobVista,
                     AdiscopeFrameworkAndroidType.Pangle,
-                    AdiscopeFrameworkAndroidType.Vungle
+                    AdiscopeFrameworkAndroidType.Vungle,
+                    AdiscopeFrameworkAndroidType.Inmobi,
+                    AdiscopeFrameworkAndroidType.Smaato,
+                    AdiscopeFrameworkAndroidType.Tapjoy
                 }
             , isProgress);
             bool isUpdateManifest = UpdateAndroidManifest(isProgress);
@@ -186,7 +189,7 @@ namespace Adiscope
                 foreach (string filename in Directory.GetFiles(path, "*.xml"))
                 {
                     foreach (AdiscopeFrameworkAndroidType type in usingFrameworks) {
-                        if (!type.GetAdapterEnable() && filename.Contains(type.GetFileName())) {
+                        if (filename.Contains(type.GetFileName())) {
                             try
                             {
                                 File.Delete(filename);
@@ -235,6 +238,7 @@ namespace Adiscope
             float totalProgress = 0.1f + progress;
             foreach (AdiscopeFrameworkAndroidType type in usingFrameworks)
             {
+                Debug.Log("Create : " + type.GetFileName() + " / enable : " + type.GetAdapterEnable());
                 if (!type.GetAdapterEnable())
                 {
                     continue;
@@ -269,6 +273,7 @@ namespace Adiscope
             uriString += file_name;
             try
             {
+                Debug.Log("DownloadAdapterFile : " + uriString);
                 (new WebClient()).DownloadFile(
                     new Uri(uriString),
                     Path.Combine(Application.dataPath + PATH_ADISCOPE_EDITOR, file_name)
@@ -285,6 +290,7 @@ namespace Adiscope
         /*** edm4u를 설정 하기 위해 adapter 파일 생성 end ***/
     }
 
+    // Adapter 제거 시 Dependencies 제를 위해 유지 해야 함
     public enum AdiscopeFrameworkAndroidType
     {
         Admob,
@@ -296,7 +302,10 @@ namespace Adiscope
         FAN,
         MobVista,
         Pangle,
-        Vungle
+        Vungle,
+        Inmobi,
+        Smaato,
+        Tapjoy
     }
 
     static class AdiscopeFrameworkAndroidTypeExtension
@@ -311,18 +320,22 @@ namespace Adiscope
         private const string MOBVISTA_FILE_NAME     = "MobvistaDependencies.xml";
         private const string PANGLE_FILE_NAME       = "PangleDependencies.xml";
         private const string VUNGLE_FILE_NAME       = "VungleDependencies.xml";
+        private const string INMOBI_FILE_NAME       = "InmobiDependencies.xml";
+        private const string SMAATO_FILE_NAME       = "SmaatoDependencies.xml";
+        private const string TAPJOY_FILE_NAME       = "TapjoyDependencies.xml";
+
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.0.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.2/";
 
         public static string GetFileName(this AdiscopeFrameworkAndroidType type)
         {
@@ -338,6 +351,9 @@ namespace Adiscope
                 case AdiscopeFrameworkAndroidType.MobVista:     return MOBVISTA_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.Pangle:       return PANGLE_FILE_NAME;
                 case AdiscopeFrameworkAndroidType.Vungle:       return VUNGLE_FILE_NAME;
+                case AdiscopeFrameworkAndroidType.Inmobi:       return INMOBI_FILE_NAME;
+                case AdiscopeFrameworkAndroidType.Smaato:       return SMAATO_FILE_NAME;
+                case AdiscopeFrameworkAndroidType.Tapjoy:       return TAPJOY_FILE_NAME;
                 default:                                        return null;
             }
         }

@@ -1,7 +1,7 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.2-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.3.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.2-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - **Unity Editor 2022.3.4f1 ~ 2022.3.9f1에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2020.3.39f1, 2021.3.8f1, 2021.3.19f1, 2021.3.23f1, 2022.3.10f1 ~ 2022.3.14f1
@@ -86,18 +86,19 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 
 ### 4. AdiscopeSDK Settings
 #### 가. Project Settings - AdiscopeSDK
-![adiscopeJson](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/c45205bb-7533-4087-976a-ff228688f6eb)  
+![adiscopeJson1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/e6dfa19e-7f23-4cc9-9cab-4b24088c2b15)  
 - Unity project를 열어서 navigate에서 `Edit -> Project Settings`로 Project Settings 창을 열어 `AdiscopeSDK`를 선택   
 - `Settings Android from json file`를 선택하여 전달받은 Android.json 파일을 선택   
 - `Settings iOS from json file`를 선택하여 전달받은 iOS.json 파일을 선택   
 - Dashboard의 값은 Adiscope 설정 값들로 자동 세팅
-- Dashboard의 값을 직접 수정 후 `Create Adiscope Android Files`를 선택하면 해당 값으로 앱 설정 됨
+- Dashboard의 값을 직접 수정 후 `Create Adiscope Android & iOS Files`를 선택하면 해당 값으로 앱 설정 됨
 <br/>
 
-![adiscopeMake](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/c000f8f1-5c9c-4730-94d1-86e0778faa5c)
-- `Create Adiscope Android Files`를 선택
+![adiscopeMake1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/7fdb4786-bf1b-4067-9b49-300abfa5884a)
+- `Create Adiscope Android & iOS Files`를 선택
 - 인터넷이 연결되어 있어야 함
-> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
+> - [Android 결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
+> - [iOS 결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
 <br/>
 
 #### 나. Import to Stript

@@ -79,5 +79,9 @@ namespace Adiscope.Feature
         { 
             client.ShowMaxMediationDebugger(); 
         }
+
+        public void SetVolumeOff(bool isVolume) { 
+            client.SetVolumeOff(isVolume); 
+        }
     }
 }
