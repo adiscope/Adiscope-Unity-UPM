@@ -164,13 +164,13 @@ namespace Adiscope
         private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.4.0/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.4.0/";
         private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.4.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.4.0/";
         private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.0/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {

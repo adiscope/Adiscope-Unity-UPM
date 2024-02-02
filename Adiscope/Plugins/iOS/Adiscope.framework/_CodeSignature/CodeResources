@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		sqzRPp4m+DpoHMhCNGzBIGeyIo0=
+		YWII4+zbGduv8BPVbd+BqdMYYxo=
 		</data>
 		<key>CompletedAdTableViewCell.nib</key>
 		<data>
@@ -290,7 +290,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		xo39yA5eH2dP61nDXHSx5uOb8dQ=
+		uvVOQKSpkSL2Mmu5mH+BsEOH42w=
 		</data>
 		<key>InfomationTableViewCell.nib</key>
 		<data>
@@ -335,6 +335,10 @@
 		<key>PopupInquireViewController.nib</key>
 		<data>
 		KIA0oCw8S0TDWuwE/s2yHJLjSsU=
+		</data>
+		<key>PrivacyInfo.xcprivacy</key>
+		<data>
+		bzdmEuy3GI0S1Kqmm2VuPnEQ/cM=
 		</data>
 		<key>RecommendationViewController.nib</key>
 		<data>
@@ -388,7 +392,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mlnfNM8yL+tAX5kKZMp7pe4P7VCnsTSmhq1oAHGQxWY=
+			3pQcatEzvu84gFqXKzj+XQMQfD5uasjVK8YLjtO2Cgs=
 			</data>
 		</dict>
 		<key>CompletedAdTableViewCell.nib</key>
@@ -935,6 +939,13 @@
 			<key>hash2</key>
 			<data>
 			WscP1D+caORNQ0MORDdT2vhw1zwrP7vACoPslSnHCK4=
+			</data>
+		</dict>
+		<key>PrivacyInfo.xcprivacy</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BKtbZAs3junQMZUgdJhCeCoxVilofUFrFnTY6igff8A=
 			</data>
 		</dict>
 		<key>RecommendationViewController.nib</key>

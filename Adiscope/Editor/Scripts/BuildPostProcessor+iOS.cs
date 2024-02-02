@@ -15,7 +15,7 @@ using Adiscope.Extension;
 namespace Adiscope.PostProcessor
 {
     class BuildPostProcessorForIos {
-        private static string prefixURI = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.2.0/";
+        private static string prefixURI = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.4.0/";
         private static string adiscopeFrameworkPath = "../Packages/com.tnk.adiscope/Plugins/iOS";
         private static string adiscopeUnityPath = "com.tnk.adiscope/Plugins/iOS";
 
@@ -62,6 +62,7 @@ namespace Adiscope.PostProcessor
                 );
                 
                 project.AddFileToBuildSection(buildTargetGUID, embedSectionID, fileID);
+                PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, fileID);
             }
 
             File.WriteAllText(projectPath, project.WriteToString());

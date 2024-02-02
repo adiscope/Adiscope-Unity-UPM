@@ -1,10 +1,10 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.3.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.3.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.3.3-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.4.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
-- **Unity Editor 2022.3.4f1 ~ 2022.3.9f1에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
-- Unity Editor : 2020.3.39f1, 2021.3.8f1, 2021.3.19f1, 2021.3.23f1, 2022.3.10f1 ~ 2022.3.14f1
+- **Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
+- Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 16
 - iOS Minimum Version : 12.0
@@ -14,7 +14,7 @@
 
 ## Contents
 #### [Add the Adiscope package to Your Project](#add-the-adiscope-package-to-your-project-1)
-#### [Update the Adiscope package to Your Project](./docs/update.md)
+- [Update the Adiscope package to Your Project](./docs/update.md)
 #### [Adiscope Overview](#adiscope-overview-1)
 - [Initialize](#2-initialize)
 - [사용자 정보 설정](#3-사용자-정보-설정)
@@ -24,13 +24,16 @@
 - [RewardedInterstitial](#7-rewardedinterstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
 #### [MAX Ad Review](#max-ad-review-1)
-#### [Unity Editor 22.3.14f1~ 에서 iOS 중복 Framework 해결 방법](./docs/ios_build_error_22_3_14f1.md)
-#### [Xcode Archive Error 해결 방법](./docs/apple_store_error.md)
+#### [Xcode에서의 Error 정리](#xcode에서의-error-정리-1)
+- [Unity Editor 21.3.33f1, 21.3.34f1, 22.3.14f1, 22.3.15f1 Error 해결 방법](./docs/xcode_error.md#unity-editor-특정-버전에서-build-error)
+- [Xcode Archive Error 해결 방법](./docs/xcode_error.md#xcode-archive-error)
+- [Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 Error 내용](./docs/xcode_error.md#unity-editor-202239f1-이하에서-ios-xcode15-빌드-시-error)
 #### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
-#### [Adiscope Sample App](./docs/sampleapp.md)
 #### [Adiscope Error Information](./docs/error_info.md)
-#### [Releases](../../releases)
-#### [LICENSE](./LICENSE)
+#### [etc](.)
+- [Adiscope Sample App](./docs/sampleapp.md)
+- [Releases](../../releases)
+- [LICENSE](./LICENSE)
 <br/>
 
 
@@ -535,13 +538,20 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 
 <br/><br/>
 
-## Unity Editor 22.3.14f1~ 에서 iOS 중복 Framework
-> - [해결 방법](./docs/ios_build_error_22_3_14f1.md)
+## Xcode에서의 Error 정리
+### Unity Editor 21.3.33f1, 21.3.34f1, 22.3.14f1, 22.3.15f1에서의 Error
+- 'Unexpected duplicate tasks' Error
+> - [해결 방법](./docs/xcode_error.md#unity-editor-특정-버전에서-build-error)
 
 <br/><br/>
 
-## Xcode Archive Error
-> - [해결 방법](./docs/apple_store_error.md)
+### Xcode Archive Error
+> - [해결 방법](./docs/xcode_error.md#xcode-archive-error)
+
+<br/><br/>
+
+### Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 Error
+> - [오류 내용](./docs/xcode_error.md#unity-editor-202239f1-이하에서-ios-xcode15-빌드-시-error)
 
 <br/><br/>
 
@@ -550,13 +560,13 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 
 <br/><br/>
 
-## Adiscope Sample App
-> - [적용 방법 확인](./docs/sampleapp.md)
+## Adiscope Error Information
+> - [Error 정보](./docs/error_info.md)
 
 <br/><br/>
 
-## Adiscope Error Information
-> - [Error 정보](./docs/error_info.md)
+## Adiscope Sample App
+> - [적용 방법 확인](./docs/sampleapp.md)
 
 <br/><br/>
 
