@@ -1,7 +1,7 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.4.1-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-3.4.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.4.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - **Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
