@@ -174,6 +174,7 @@ namespace Adiscope.PostProcessor
             string json = File.ReadAllText(filePath);
             ParsingPackageJson.PackageJson pj = JsonUtility.FromJson<ParsingPackageJson.PackageJson>(json);
             InsertInfoPlist(root.root, "AdiscopeUnitySDKVersion", pj.version);
+            InsertInfoPlist(root.root, "UnityRuntimeVersion", Application.unityVersion);
 
             root.WriteToFile(plistPath);
         }

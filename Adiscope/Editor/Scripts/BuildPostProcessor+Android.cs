@@ -113,6 +113,9 @@ namespace Adiscope
             handler.AddMetaData(
                 "<meta-data android:name=\"adiscope_unity_sdk_version\" android:value=\"" + GetUnityVersion() + "\" />"
             );
+            handler.AddMetaData(
+                "<meta-data android:name=\"unity_runtime_version\" android:value=\"" + Application.unityVersion + "\" />"
+            );
 
             // 상세 이동을 위해서 추가
             handler.AddActivity(
@@ -330,7 +333,7 @@ namespace Adiscope
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.4.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.5.0/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";

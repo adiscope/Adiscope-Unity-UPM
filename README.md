@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.4.1-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.4.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.4.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.5.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.5.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
-- **Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
+- **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 16
@@ -22,7 +22,8 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 - [RewardedInterstitial](#7-rewardedinterstitial)
-#### [웹사이트 필수 등록](#웹사이트-필수-등록-1)
+#### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
+#### [Privacy Manifest 정책 적용](#privacy-manifest-정책-적용-ios-전용)
 #### [MAX Ad Review](#max-ad-review-1)
 #### [Xcode에서의 Error 정리](#xcode에서의-error-정리-1)
 - [Unity Editor 21.3.33f1, 21.3.34f1, 22.3.14f1, 22.3.15f1 Error 해결 방법](./docs/xcode_error.md#unity-editor-특정-버전에서-build-error)
@@ -516,9 +517,15 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 
 <br/><br/>
 
-## 웹사이트 필수 등록
+## 웹사이트 필수 등록 (Android 전용)
 - 관리자에게 전달받은 `app-ads.txt`를 웹사이트에 등록
 > - [app-ads.txt 등록 방법 및 정보](./docs/app-ads.txt.md)
+
+<br/><br/>
+
+## Privacy Manifest 정책 적용 (iOS 전용)
+- 2024년 5월 1일부터 출시/업데이트 되는 앱에 대해 3rd Party Framework의 개인정보를 추가해야 합니다.
+> - [참고](https://developer.apple.com/videos/play/wwdc2023/10060)
 
 <br/><br/>
 
