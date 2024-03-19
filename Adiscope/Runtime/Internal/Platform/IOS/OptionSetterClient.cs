@@ -64,9 +64,11 @@ namespace Adiscope.Internal.Platform.IOS
 			showMaxMediationDebugger();
 		}
 
+        [DllImport("__Internal")]
+        private static extern void setVolumeOff(bool isVolume);
         public void SetVolumeOff(bool isVolume) 
         {
-			// nothing	
+            setVolumeOff(isVolume);
         }
 
 		#endregion

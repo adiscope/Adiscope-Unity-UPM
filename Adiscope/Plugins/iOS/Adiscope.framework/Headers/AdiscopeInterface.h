@@ -78,6 +78,12 @@
 /// Adiscope Unity SDK의 버전정보입니다.(Unity가 아닐 시 Adiscope SDK의 버전정보)
 - (NSString *)getUnitySDKVersion;
 
+/// Adiscope 광고음 Off 기능입니다.
+- (void)setVolumeOff;
+
+/// Adiscope 광고음 On 기능입니다.
+- (void)setVolumeOn;
+
 /// 프로젝트에서 Orientation의 Portrait가 없을 시 AppDelegate에서 조건으로 추가 해야합니다.(iOS 16+)
 - (BOOL)isOfferwallViewPortrait;
 

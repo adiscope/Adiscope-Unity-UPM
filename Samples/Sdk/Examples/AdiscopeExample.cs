@@ -388,6 +388,23 @@ public class AdiscopeExample : MonoBehaviour
         });
 #endif
 
+#if UNITY_ANDROID
+        this.AddLabel("미디에이션 디버거 - 앱 구동 후 첫 진입 시 10초간 대기 후 화면 터치 가능");
+        this.AddButton("MAX Mediation Debugger", () => {
+             Adiscope.Sdk.GetOptionSetter().ShowMaxMediationDebugger();
+        });
+#endif
+
+        this.AddButton("Ad Sound On", () => {
+            Adiscope.Sdk.GetOptionSetter().SetVolumeOff(false);
+            this.AddOutputMessage("Ad Sound On");
+        });
+
+        this.AddButton("Ad Sound Off", () => {
+            Adiscope.Sdk.GetOptionSetter().SetVolumeOff(true);
+            this.AddOutputMessage("Ad Sound Off");
+        });
+
         // Offerwall
         this.AddSpacer();
         this.AddTextField("Offerwall", TextFieldType.OfferwallUnit);

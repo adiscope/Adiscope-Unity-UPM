@@ -1,15 +1,14 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.5.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.5.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.5.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.5.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.5.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 16
 - iOS Minimum Version : 12.0
-- Xcode Minimum Version : Xcode 14.3
-    - Ironsource 제외하면 Xcode 14.1
+- Xcode Minimum Version : Xcode 15.3
 <br/>
 
 ## Contents
@@ -524,7 +523,7 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 <br/><br/>
 
 ## Privacy Manifest 정책 적용 (iOS 전용)
-- 2024년 5월 1일부터 출시/업데이트 되는 앱에 대해 3rd Party Framework의 개인정보를 추가해야 합니다.
+- 2024년 5월 1일부터 출시/업데이트 되는 앱에 대해 3rd Party Framework의 개인정보 추가
 > - [참고](https://developer.apple.com/videos/play/wwdc2023/10060)
 
 <br/><br/>
