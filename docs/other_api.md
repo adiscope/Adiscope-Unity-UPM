@@ -85,4 +85,4 @@ Adiscope.Sdk.GetCoreInstance().GetUnitStatus(UNIT_ID, (error, unitStatus) => {
 Adiscope.Sdk.GetOptionSetter().SetVolumeOff(false);    // 광고 소리 킴(Default)
 Adiscope.Sdk.GetOptionSetter().SetVolumeOff(true);     // 광고 소리 끔
 ```
-- `Admob`, `AppLovin`, `Mintegral` 만 적용 가능
+- `Admob`, `AppLovin`, `Mintegral`, `Verve` 만 적용 가능
