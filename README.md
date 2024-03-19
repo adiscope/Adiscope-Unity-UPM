@@ -8,7 +8,7 @@
 - Android Target API Level : 31+
 - Android Minimum API Level : 16
 - iOS Minimum Version : 12.0
-- Xcode Minimum Version : Xcode 15.3
+- Xcode Minimum Version : Xcode 15.1
 <br/>
 
 ## Contents
