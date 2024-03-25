@@ -77,5 +77,11 @@
 			</array>
 		</dict>
 	</array>
+    <key>NSPrivacyTrackingDomains</key>
+    <array>
+        <string>edge.adiscope.com</string>
+    </array>
+    <key>NSPrivacyTracking</key>
+    <true/>
 </dict>
 </plist>
