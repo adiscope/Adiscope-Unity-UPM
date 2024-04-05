@@ -1,4 +1,5 @@
-﻿using Adiscope.Internal.Interface;
+﻿using Adiscope.Internal;
+using Adiscope.Internal.Interface;
 using Adiscope.Internal.Platform;
 using System;
 
@@ -78,6 +79,11 @@ namespace Adiscope.Feature
         public void ShowMaxMediationDebugger() 
         { 
             client.ShowMaxMediationDebugger(); 
+        }
+
+        public void ShowAdmobMediationDebugger() 
+        { 
+            client.ShowAdmobMediationDebugger();
         }
 
         public void SetVolumeOff(bool isVolume) { 

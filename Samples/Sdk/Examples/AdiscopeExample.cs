@@ -389,9 +389,14 @@ public class AdiscopeExample : MonoBehaviour
 #endif
 
 #if UNITY_ANDROID
-        this.AddLabel("미디에이션 디버거 - 앱 구동 후 첫 진입 시 10초간 대기 후 화면 터치 가능");
+        this.AddLabel("미디에이션 디버거 - 앱 구동 후 첫 진입 시 5초간 대기 후 화면 터치 가능");
         this.AddButton("MAX Mediation Debugger", () => {
              Adiscope.Sdk.GetOptionSetter().ShowMaxMediationDebugger();
+        });
+
+        this.AddLabel("애드몹 Ad Inspector - 미동작 시 애드몹 물량 로드 후 진입 가능 (이니셜라이즈 필요)");
+        this.AddButton("Admob Mediation Debugger", () => {
+             Adiscope.Sdk.GetOptionSetter().ShowAdmobMediationDebugger();
         });
 #endif
 

@@ -16,6 +16,7 @@ namespace Adiscope.Internal.Platform.Android
         public const string PKG_OFFERWALL_AD_LISTENER = "com.nps.adiscope.offerwall.OfferwallAdListener";
         public const string PKG_INTERSTITIAL_AD_LISTENER = "com.nps.adiscope.interstitial.InterstitialAdListener";
 
+        public const string PKG_ADMOB_ADAPTER = "com.nps.adiscope.adapter.admob.AdMobAdapter";
         public const string PKG_MAX_ADAPTER = "com.nps.adiscope.adapter.max.MaxAdapter";
         public const string PKG_IUNIT_STATUS = "com.nps.adiscope.model.IUnitStatus";
 

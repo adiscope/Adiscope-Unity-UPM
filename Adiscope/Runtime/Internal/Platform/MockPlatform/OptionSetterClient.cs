@@ -45,6 +45,11 @@ namespace Adiscope.Internal.Platform.MockPlatform
         public void SetVolumeOff(bool isVolume)
         {
         }
+
+        public void ShowAdmobMediationDebugger()
+        {
+            
+        }
         #endregion
     }
 }

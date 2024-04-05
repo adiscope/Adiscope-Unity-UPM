@@ -18,6 +18,7 @@ namespace Adiscope.Internal.Interface
         void SetUseAppTrackingTransparencyPopup(bool useAppTrackingTransparencyPopup);
         void SetEnabledForcedOpenApplicationSetting(bool enabledForcedOpenApplicationSetting);
         void ShowMaxMediationDebugger();
+        void ShowAdmobMediationDebugger();
         void SetVolumeOff(bool isVolume);
     }
 }

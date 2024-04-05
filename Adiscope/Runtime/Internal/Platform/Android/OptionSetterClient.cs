@@ -137,6 +137,31 @@ namespace Adiscope.Internal.Platform.Android
         {
             return "Adiscope.Internal.Platform.Android.OptionSetterClient";
         }
+
+        public void ShowAdmobMediationDebugger()
+        {
+            AndroidJavaObject activity;
+
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
+            {
+                if (unityPlayer == null)
+                {
+                    Debug.LogError("Android.CoreClient<Constructor> UnityPlayer: null");
+                    return;
+                }
+                activity = unityPlayer.GetStatic<AndroidJavaObject>(Values.MTD_CURRENT_ACTIVITY);
+            }
+
+            using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADMOB_ADAPTER))
+            {
+                if (jc == null)
+                {
+                    Debug.LogError("Android.AdMobAdapter<showDebug> " + Values.PKG_ADMOB_ADAPTER + ": null");
+                    return;
+                }
+                jc.CallStatic(Values.MTD_SHOW_DEBUG, activity);
+            }
+        }
     }
 }
 #endif
