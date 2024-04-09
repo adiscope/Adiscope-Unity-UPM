@@ -21,7 +21,9 @@ namespace Adiscope.PostProcessor
 
         public static void OnPostProcessBuild(string path) {
             CopyAdiscopeFrameworks(path, new List<AdiscopeFrameworkType>() {
-                AdiscopeFrameworkType.Core
+                AdiscopeFrameworkType.Core,
+                AdiscopeFrameworkType.AppLovin,
+                AdiscopeFrameworkType.Max,
             });
             UpdateBuildSetting(path);
             UpdateInfoPlist(path);
@@ -52,6 +54,7 @@ namespace Adiscope.PostProcessor
             project.AddBuildProperty(buildTargetGUID, "FRAMEWORK_SEARCH_PATHS", "$(inherited)");
             project.AddBuildProperty(buildTargetGUID, "FRAMEWORK_SEARCH_PATHS", "$(PROJECT_DIR)/Frameworks/" + adiscopeUnityPath);
             
+            bool isAddAppLovinSDK = false;
             foreach (AdiscopeFrameworkType type in usingFrameworks) {
                 if (!type.GetAdapterEnable()) {
                     continue;
@@ -61,6 +64,26 @@ namespace Adiscope.PostProcessor
                     "Frameworks/" + adiscopeUnityPath + "/" + type.GetFileName()
                 );
                 
+                if (false == type.IsEmbedFramework()) {
+                    List<string> childFiles = type.GetChildFrameworkName();
+                    if (childFiles == null) { continue; }
+
+                    foreach (string childFileName in childFiles) {
+                        string childFileID = project.AddFile(
+                            "Frameworks/" + adiscopeUnityPath + "/" + childFileName,
+                            "Frameworks/" + adiscopeUnityPath + "/" + childFileName
+                        );
+
+                        // Only used when AppLovinSDK are Dynamic Frameworks
+                        if (!isAddAppLovinSDK && childFileName == "AppLovinSDK.framework") {
+                            isAddAppLovinSDK = true;
+                            project.AddFileToBuildSection(buildTargetGUID, embedSectionID, childFileID);
+                            PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, childFileID);
+                        }
+                    }
+                    continue;
+                }
+
                 project.AddFileToBuildSection(buildTargetGUID, embedSectionID, fileID);
                 PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, fileID);
             }
@@ -223,7 +246,9 @@ namespace Adiscope.PostProcessor
     }
 
     public enum AdiscopeFrameworkType {
-        Core
+        Core,
+        AppLovin,
+        Max
     }
 
     static class AdiscopeFrameworkTypeExtension {
@@ -234,7 +259,9 @@ namespace Adiscope.PostProcessor
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
-                case AdiscopeFrameworkType.Core:       return "Adiscope.framework";
+                case AdiscopeFrameworkType.Core:        return "Adiscope.framework";
+                case AdiscopeFrameworkType.AppLovin:    return "AdiscopeMediaAppLovin.framework";
+                case AdiscopeFrameworkType.Max:         return "AdiscopeMediaMax.framework";
                 default: return null;
             }
         }
@@ -243,14 +270,27 @@ namespace Adiscope.PostProcessor
             switch (type) {
                 case AdiscopeFrameworkType.Core:
                     return null;
+                case AdiscopeFrameworkType.AppLovin:
+                    return new List<string>() {
+                        "AppLovinSDK.framework"
+                    };
+                case AdiscopeFrameworkType.Max:
+                    return new List<string>() {
+                        "AppLovinSDK.framework"
+                    };
                 default:
                     return null;
             }
         }
 
         public static bool GetAdapterEnable(this AdiscopeFrameworkType type) {
+            var settings = FrameworkSettingsRegister.Load();
+            var serialized = new SerializedObject(settings);
+
             switch (type) {
-                case AdiscopeFrameworkType.Core:       return true;
+                case AdiscopeFrameworkType.Core:        return true;
+                case AdiscopeFrameworkType.AppLovin:    return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 3);
+                case AdiscopeFrameworkType.Max:         return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 3);
                 default: return false;
             }
         }

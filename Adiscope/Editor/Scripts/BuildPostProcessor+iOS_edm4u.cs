@@ -160,18 +160,30 @@ namespace Adiscope
         private const string MAX_FILE_NAME          = "MaxIosDependencies.xml";
         private const string PANGLE_FILE_NAME       = "PangleIosDependencies.xml";
 
-        private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.6.0/";
+        private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Developer/releases/download/";
+        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        // private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "2.0.2.2/";
+        // private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
+        // private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.0/";
+        // private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.6.1/";
+        // private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.1/";
+        // private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.6.0/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
@@ -201,7 +213,7 @@ namespace Adiscope
                 case AdiscopeFrameworkType.MobVista:        return MOBVISTA_FILE_PATH;
                 case AdiscopeFrameworkType.Ironsource:      return IRONSOURCE_FILE_PATH;
                 case AdiscopeFrameworkType.UnityAds:        return UNITYADS_FILE_PATH;
-                case AdiscopeFrameworkType.AppLovin:        return APPLOVIN_FILE_PATH;
+                // case AdiscopeFrameworkType.AppLovin:        return APPLOVIN_FILE_PATH;
                 case AdiscopeFrameworkType.Max:             return MAX_FILE_PATH;
                 case AdiscopeFrameworkType.Pangle:          return PANGLE_FILE_PATH;
                 default:                                    return null;
@@ -221,7 +233,7 @@ namespace Adiscope
                 case AdiscopeFrameworkType.MobVista:        return (serialized.FindProperty("_mobvistaAdapter").intValue == 1 || serialized.FindProperty("_mobvistaAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Ironsource:      return (serialized.FindProperty("_ironsourceAdapter").intValue == 1 || serialized.FindProperty("_ironsourceAdapter").intValue == 3);
                 case AdiscopeFrameworkType.UnityAds:        return (serialized.FindProperty("_unityadsAdapter").intValue == 1 || serialized.FindProperty("_unityadsAdapter").intValue == 3);
-                case AdiscopeFrameworkType.AppLovin:        return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 3);
+                // case AdiscopeFrameworkType.AppLovin:        return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Max:             return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Pangle:          return (serialized.FindProperty("_pangleAdapter").intValue == 1 || serialized.FindProperty("_pangleAdapter").intValue == 3);
                 default: return false;
