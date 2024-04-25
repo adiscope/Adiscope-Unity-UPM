@@ -667,7 +667,12 @@ public class AdiscopeExample : MonoBehaviour
     private void AddOutputMessage(string message)
     {
         if (this.outputMessage == null || this.outputMessage.Length == 0) { this.outputMessage = message; }
-        else { this.outputMessage = message + "\n" + this.outputMessage; }
+        else { this.outputMessage = GetCurrentDateTime() + message + "\n" + this.outputMessage; }
+    }
+    
+    private string GetCurrentDateTime()
+    {
+        return "["+DateTime.Now.ToString("HH:mm:ss")+"] ";
     }
 
     private void ClearContentViews()

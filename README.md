@@ -1,6 +1,6 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.6.2-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.6.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.6.3-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.6.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-3.6.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
@@ -101,7 +101,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 
 ![adiscopeMake1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/7fdb4786-bf1b-4067-9b49-300abfa5884a)
 - `Create Adiscope Android & iOS Files`를 선택
-- ${\color{red}버전}$ ${\color{red}변경}$ ${\color{red}시}$마다 `Create Gofferwall Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
+- ${\color{red}버전}$ ${\color{red}변경}$ ${\color{red}시}$마다 `Create Adiscope Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
 - 인터넷이 연결되어 있어야 함
 > - [Android 결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
 > - [iOS 결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
