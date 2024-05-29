@@ -71,9 +71,11 @@ namespace Adiscope.Internal.Platform.IOS
             setVolumeOff(isVolume);
         }
 
+        [DllImport("__Internal")]
+        private static extern void showAdmobMediationDebugger();
 		public void ShowAdmobMediationDebugger()
 		{
-
+            showAdmobMediationDebugger();
 		}
 		
 		#endregion

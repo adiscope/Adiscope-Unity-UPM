@@ -50,9 +50,6 @@ namespace Adiscope
         int _fanAdapter;
 
         [SerializeField]
-        int _ironsourceAdapter;
-
-        [SerializeField]
         int _mobvistaAdapter;
 
         [SerializeField]

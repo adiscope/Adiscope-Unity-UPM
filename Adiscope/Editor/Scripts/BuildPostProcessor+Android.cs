@@ -329,9 +329,8 @@ namespace Adiscope
 
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.6.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.7.0/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
-        private const string IRONSOURCE_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.0/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.5.1/";
@@ -367,7 +366,6 @@ namespace Adiscope
             {
                 case AdiscopeFrameworkAndroidType.Admob:        return ADMOB_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.ChartBoost:   return CHARTBOOST_FILE_PATH;
-                case AdiscopeFrameworkAndroidType.Ironsource:   return IRONSOURCE_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.UnityAds:     return UNITYADS_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.MAX:          return MAX_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.AppLovin:     return APPLOVIN_FILE_PATH;
@@ -388,7 +386,6 @@ namespace Adiscope
             {
                 case AdiscopeFrameworkAndroidType.Admob:        return (serialized.FindProperty("_admobAdapter").intValue == 1 || serialized.FindProperty("_admobAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.ChartBoost:   return (serialized.FindProperty("_chartboostAdapter").intValue == 1 || serialized.FindProperty("_chartboostAdapter").intValue == 2);
-                case AdiscopeFrameworkAndroidType.Ironsource:   return (serialized.FindProperty("_ironsourceAdapter").intValue == 1 || serialized.FindProperty("_ironsourceAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.UnityAds:     return (serialized.FindProperty("_unityadsAdapter").intValue == 1 || serialized.FindProperty("_unityadsAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.MAX:          return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.AppLovin:     return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 2);

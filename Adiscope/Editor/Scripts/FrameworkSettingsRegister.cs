@@ -135,28 +135,21 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
-                    int ironsourceAdapter = serialized.FindProperty("_ironsourceAdapter").intValue;
-                    ironsourceAdapter = EditorGUILayout.Popup("Ironsource Adapter", ironsourceAdapter, OS_Type);
-                    serialized.FindProperty("_ironsourceAdapter").intValue = ironsourceAdapter;
-
                     int mobvistaAdapter = serialized.FindProperty("_mobvistaAdapter").intValue;
                     mobvistaAdapter = EditorGUILayout.Popup("Mobvista Adapter", mobvistaAdapter, OS_Type);
                     serialized.FindProperty("_mobvistaAdapter").intValue = mobvistaAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
 
-                    GUILayout.BeginHorizontal();
                     int pangleAdapter = serialized.FindProperty("_pangleAdapter").intValue;
                     pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, OS_Type);
                     serialized.FindProperty("_pangleAdapter").intValue = pangleAdapter;
-
-                    int unityadsAdapter = serialized.FindProperty("_unityadsAdapter").intValue;
-                    unityadsAdapter = EditorGUILayout.Popup("Unityads Adapter", unityadsAdapter, OS_Type);
-                    serialized.FindProperty("_unityadsAdapter").intValue = unityadsAdapter;
                     GUILayout.EndHorizontal();
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
+                    int unityadsAdapter = serialized.FindProperty("_unityadsAdapter").intValue;
+                    unityadsAdapter = EditorGUILayout.Popup("Unityads Adapter", unityadsAdapter, OS_Type);
+                    serialized.FindProperty("_unityadsAdapter").intValue = unityadsAdapter;
+
                     int vungleAdapter = serialized.FindProperty("_vungleAdapter").intValue;
                     vungleAdapter = EditorGUILayout.Popup("Vungle Adapter", vungleAdapter, OS_Type);
                     serialized.FindProperty("_vungleAdapter").intValue = vungleAdapter;
@@ -248,7 +241,7 @@ namespace Adiscope
                         Dictionary<string, object> networkInfoAds = networkInfo[SERVICE_JSON_KEY_ADS] as Dictionary<string, object>;
                         bool rewardedVideoAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDEDVIDEO].ToString());
                         bool interstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_INTERSTITIAL].ToString());
-                            int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
+                        int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
                         if (rewardedVideoAdEnabled || interstitialAdEnabled) {
                             if (isAndroid) {
                                 if (adapter < 1) {
@@ -355,7 +348,6 @@ namespace Adiscope
                 switch (network) {
                     case ADMOB:
                     case CHARTBOOST:
-                    case IRONSOURCE:
                     case UNITYADS:
                     case MAX:
                     case APPLOVIN:
@@ -374,7 +366,6 @@ namespace Adiscope
                     case CHARTBOOST:
                     case FAN:
                     case MOBVISTA:
-                    case IRONSOURCE:
                     case UNITYADS:
                     case APPLOVIN:
                     case MAX:

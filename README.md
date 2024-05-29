@@ -1,12 +1,15 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.6.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.6.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.6.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.7.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
-- Android Minimum API Level : 16
+- Android Minimum API Level : 15
+  - Admob, Pangle 사용 시 16
+  - Chartboost, Unityads, Vungle, Max 사용 시 21
 - iOS Minimum Version : 12.0
 - Xcode Minimum Version : Xcode 15.1
 <br/>
@@ -23,7 +26,6 @@
 - [RewardedInterstitial](#7-rewardedinterstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
 #### [Privacy Manifest 정책 적용](#privacy-manifest-정책-적용-ios-전용)
-#### [MAX Ad Review](#max-ad-review-1)
 #### [Xcode에서의 Error 정리](#xcode에서의-error-정리-1)
 - [Unity Editor 21.3.33f1, 21.3.34f1, 22.3.14f1, 22.3.15f1 Error 해결 방법](./docs/xcode_error.md#unity-editor-특정-버전에서-build-error)
 - [Xcode Archive Error 해결 방법](./docs/xcode_error.md#xcode-archive-error)
@@ -526,22 +528,6 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 ## Privacy Manifest 정책 적용 (iOS 전용)
 - 2024년 5월 1일부터 출시/업데이트 되는 앱에 대해 3rd Party Framework의 개인정보 추가
 > - [참고](https://developer.apple.com/videos/play/wwdc2023/10060)
-
-<br/><br/>
-
-## MAX Ad Review
-- 목적: MAX 노출 소재에 대한 지표 확인하여, 수익화 증대
-- 내용: MAX 노출 소재에 대한 imp, 클릭수, eCPM 등의 지표 확인이 필요
-- 기대효과: 소재 별 지표를 다른 네트워크에 공유하여, 더 높은 eCPM으로 해당 소재 광고를 받을 수 있게 하는 것이 기대효과, 아직 한번도 진행해 보지 않아서, 목표 기대효과는 측정하지 못함
-- 개발방법
-    - Android
-        - [적용 방법 확인](./docs/android_max_ad_review.md)
-    - iOS
-        - [AppLovinQualityServiceSetup-ios.rb 파일 다운로드](https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.2.0/AppLovinQualityServiceSetup-ios.rb) 후 받은 파일을 iOS 프로젝트의 xcodeproj 파일이 있는 곳에 옮김
-        - 터미널로 접속해서 다운받은 파일로 이동 후 아래 명령어 실행
-    ```
-    ruby AppLovinQualityServiceSetup-ios.rb
-    ```
 
 <br/><br/>
 

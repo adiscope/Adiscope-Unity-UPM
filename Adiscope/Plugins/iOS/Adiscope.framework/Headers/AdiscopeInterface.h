@@ -90,6 +90,9 @@
 /// Max의 Verbose Logging 설정 및 Mediation Debugger 접속할 수 있습니다.
 - (void)showMaxMediationDebugger;
 
+/// Admob의 Ad inspector에 접속할 수 있습니다.
+- (void)showAdmobMediationDebugger;
+
 /// Offerwall의 IDFA경고 팝업을 띄울지 판단하는 Flag입니다.
 /// useOfferwallWarningPopup NO일 경우에 IDFA Warning팝업을 보여주지 않습니다. 기본값은 YES입니다.
 @property (nonatomic) BOOL useOfferwallWarningPopup;

@@ -382,9 +382,14 @@ public class AdiscopeExample : MonoBehaviour
         });
 
 #if UNITY_IOS
-        this.AddButton("Print Show Max Mediation Debugger", () => {
+        this.AddButton("Show Max Mediation Debugger", () => {
             Adiscope.Sdk.GetOptionSetter().ShowMaxMediationDebugger();
             this.AddOutputMessage("Show Max Mediation Debugger");
+        });
+
+        this.AddButton("Show Admob Mediation Debugger", () => {
+             Adiscope.Sdk.GetOptionSetter().ShowAdmobMediationDebugger();
+            this.AddOutputMessage("Show Admob Mediation Debugger");
         });
 #endif
 

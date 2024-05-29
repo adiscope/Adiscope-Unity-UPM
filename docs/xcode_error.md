@@ -1,5 +1,5 @@
 # Unity Editor 특정 버전에서 Build Error
-- 검토한 Unity Editor : 20.3.39, 21.3.8, 21.3.19, 21.3.23, 21.3.30 ~ 37, 22.2.21, 22.3.0 ~ 25
+- 검토한 Unity Editor : 20.3.39, 21.3.8, 21.3.19, 21.3.23, 21.3.30 ~ 38, 22.2.21, 22.3.0 ~ 30
 - 오류 확인한 Unity Editor : 21.3.33 ~ 34, 22.3.14 ~ 15
 - [Issuetracker 확인](https://issuetracker.unity3d.com/issues/ios-embed-frameworks-build-phase-is-duplicated-when-multiple-frameworks-are-present-in-the-project)
 <br/>
@@ -46,3 +46,11 @@
 # Unity Editor 2022.3.9f1 이하에서 iOS xcode15 빌드 시 Error
 - GameAssembly - Command PhaseScriptExecution failed with a nonzero exit code
 - [Issuetracker 확인](https://issuetracker.unity3d.com/issues/ios-application-building-fails-and-the-command-phasescriptexecution-failed-with-a-nonzero-exit-code-error-appears-when-building-with-xcode-15-dot-0)
+<br/><br/><br/>
+
+# AppLovin, Max 제거 후 빌드 시 Error
+## AppLovin 제거
+- TARGETS -> UnityFramework -> General -> Frameworks and Libraries 에서 AdiscopeMediaAppLovin.framework 제거
+
+## Max 제거
+- TARGETS -> UnityFramework -> General -> Frameworks and Libraries 에서 AdiscopeMediaMax.framework 제거
