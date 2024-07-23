@@ -7,8 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLovinSDK/AppLovinSDK.h>
+#import <DTBiOSSDK/DTBiOSSDK.h>
 #import "Adapter.h"
 
-@interface AdiscopeMediaMax : NSObject <Adapter, MARewardedAdDelegate>
+#define AdiscopeAdapterVersion @"3.8.0"
+
+@interface AdiscopeMediaMax : NSObject <Adapter, MARewardedAdDelegate, DTBAdCallback>
 
 @end

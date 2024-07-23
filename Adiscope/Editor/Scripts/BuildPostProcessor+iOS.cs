@@ -15,7 +15,7 @@ using Adiscope.Extension;
 namespace Adiscope.PostProcessor
 {
     class BuildPostProcessorForIos {
-        private static string prefixURI = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.4.0/";
+        private static string prefixURI = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.8.0/";
         private static string adiscopeFrameworkPath = "../Packages/com.tnk.adiscope/Plugins/iOS";
         private static string adiscopeUnityPath = "com.tnk.adiscope/Plugins/iOS";
 
@@ -77,6 +77,9 @@ namespace Adiscope.PostProcessor
                         // Only used when AppLovinSDK are Dynamic Frameworks
                         if (!isAddAppLovinSDK && childFileName == "AppLovinSDK.framework") {
                             isAddAppLovinSDK = true;
+                            project.AddFileToBuildSection(buildTargetGUID, embedSectionID, childFileID);
+                            PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, childFileID);
+                        } else if (childFileName != "AppLovinSDK.framework") {
                             project.AddFileToBuildSection(buildTargetGUID, embedSectionID, childFileID);
                             PBXProjectExtensions.AddFileToEmbedFrameworks(project, buildTargetGUID, childFileID);
                         }
@@ -276,7 +279,11 @@ namespace Adiscope.PostProcessor
                     };
                 case AdiscopeFrameworkType.Max:
                     return new List<string>() {
-                        "AppLovinSDK.framework"
+                        "AppLovinSDK.framework",
+                        "DTBiOSSDK.framework",
+                        "MolocoSDK.framework",
+                        "OMSDK_Appodeal.framework",
+                        "OMSDK_Ogury.framework"
                     };
                 default:
                     return null;

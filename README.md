@@ -1,8 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.7.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.7.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.7.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.7.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.8.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
@@ -59,7 +60,8 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 다. Package Manager의 왼쪽 상단 `플러스(+)` 버튼 > `Add package from tarball` 버튼 클릭<br/>
 라. 다운로드받은 tgz 파일을 선택<br/>
 > - [결과 확인](./docs/upm_result.md#1-b-unity-package-manager-window---tarball)
-<br/>
+
+<br/><br/>
 
 ### 2. Download External Dependency Manager for Unity
 ![googleUnity](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/03a3b956-c7ce-498a-9d3d-12ada97c13f5)   
@@ -69,8 +71,9 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - Unity project를 열어서 navigate에서 `Assets -> Import Package -> Custom Package` 선택
 - `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`
 - Unity version `2022.2+` 에서는 `1.2.176+` 사용    
-> - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity)
-<br/>
+> - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity) 
+
+<br/><br/>
 
 ### 3. Project Settings - Player
 ![playerAndroid](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/59b48ef5-493b-448f-be2a-f0954c109d72)   
@@ -88,8 +91,9 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Build > Custom Main Gradle Template` 체크를 설정
 - `Build > Custom Gradle Properties Template` 체크를 설정
 > - [2022.3.+ 변경 설정 확인](./docs/other_unity_version.md)
-> - [결과 확인](./docs/upm_result.md#3-project-settings---player)
-<br/>
+> - [결과 확인](./docs/upm_result.md#3-project-settings---player) 
+
+<br/><br/>
 
 ### 4. AdiscopeSDK Settings
 #### 가. Project Settings - AdiscopeSDK
@@ -99,7 +103,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Settings iOS from json file`를 선택하여 전달받은 iOS.json 파일을 선택   
 - Dashboard의 값은 Adiscope 설정 값들로 자동 세팅
 - Dashboard의 값을 직접 수정 후 `Create Adiscope Android & iOS Files`를 선택하면 해당 값으로 앱 설정 됨
-<br/>
+<br/><br/>
 
 ![adiscopeMake1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/7fdb4786-bf1b-4067-9b49-300abfa5884a)
 - `Create Adiscope Android & iOS Files`를 선택
@@ -115,33 +119,35 @@ FrameworkSettingsRegister.AdiscopeImportJson(<Android_Json_Path>, <iOS_Json_Path
 ```
 - '/Library/PackageCache/com.tnk.adiscope/Editor/Scripts/FrameworkSettingsRegister.cs' 파일에 있는 함수 호출
 - 관리자에게 전달 받은 Android & iOS의 Json 파일 위치 입력
-> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
-<br/>
+> - [결과 확인](./docs/upm_result.md#4-adiscopesdk-settings) 
+
+<br/><br/>
 
 ### 5. External Dependency Manager 설정 (Android 전용)
 - Unity project를 열어서 navigate에서 `Assets -> External Dependency Manager -> Android Resolver -> Resolver(or Force Resolver)`를 선택   
-> - [결과 확인](./docs/upm_result.md#5-external-dependency-manager-%EC%84%A4%EC%A0%95-android-%EC%A0%84%EC%9A%A9)
-<br/>
+> - [결과 확인](./docs/upm_result.md#5-external-dependency-manager-%EC%84%A4%EC%A0%95-android-%EC%A0%84%EC%9A%A9) 
+
+<br/><br/>
 
 ### 6. CocoaPods 사용 (iOS 전용)
 - Build된 Project에서 Unity-iPhone.xcodeproj가 아닌 `Unity-iPhone.xcworkspace`로 실행
 - CocoaPods가 설치 안 되어 있으면 수동 설치 
 > - [결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
-
-<br/><br/>
+ 
+<br/><br/><br/>
 
 ## Update the Adiscope package to Your Project
 > - [가이드 확인](./docs/update.md)
-
-<br/><br/>
+ 
+<br/><br/><br/>
 
 ## Adiscope Overview
 
 ### 1. Namespace
 ```csharp
 using Adiscope;
-```
-<br/>
+``` 
+<br/><br/><br/>
 
 ### 2. Initialize
 #### 가. Code에서 Media 없이 Initialize 방법
@@ -161,6 +167,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
   - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize)
+
 <br/>
 
 #### 나. Code에서 직접 Media 넣어서 Initialize 방법
@@ -181,8 +188,9 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 - App 실행 시 1회 설정 권장
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
   - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
-> - [Other Initialize API](./docs/other_api.md#initialize)
-<br/>
+> - [Other Initialize API](./docs/other_api.md#initialize) 
+
+<br/><br/>
 
 ### 3. 사용자 정보 설정
 ```csharp
@@ -190,8 +198,8 @@ private string USER_ID = "";        // set unique user id to identify the user i
 Adiscope.Sdk.GetCoreInstance().SetUserId(USER_ID);
 ```
 - `Offerwall`, `RewardedVideo`, `RewardedInterstitial`를 사용하기 위해 ${\color{red}필수}$ 설정
-- 64자까지 설정 가능
-<br/>
+- 64자까지 설정 가능 
+<br/><br/><br/>
 
 ### 4. Offerwall
 #### A. Offerwall Ad Instance 생성
@@ -201,6 +209,7 @@ Adiscope.Feature.OfferwallAd offerwallAd = Adiscope.Sdk.GetOfferwallAdInstance()
 ```
 - Offerwall Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Offerwall Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
 
 #### B. Callback 등록
 ```csharp
@@ -208,6 +217,7 @@ offerwallAd.OnOpened += OnOfferwallAdOpenedCallback;
 offerwallAd.OnClosed += OnOfferwallAdClosedCallback;
 offerwallAd.OnFailedToShow += OnOfferwallFailedToShowCallback;
 ```
+<br/>
 
 #### C. Show
 ```csharp
@@ -221,6 +231,7 @@ if (offerwallAd.Show("unit1", typeList)) {
 }
 ```
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+<br/>
 
 #### D. Callbacks
 ```csharp
@@ -236,7 +247,8 @@ private void OnOfferwallAdFailedToShowCallback(object sender, Adiscope.Model.Sho
 ```
 - Show 성공 시 `OnOpened`, `OnClosed` callback이 순차적으로 호출
 - Callback은 Unity의 main thread에서 호출
-<br/>
+- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+<br/><br/><br/>
 
 ### 5. RewardedVideo
 #### A. RewardedVideo Ad Instance 생성
@@ -246,6 +258,7 @@ Adiscope.Feature.RewardedVideoAd rewardedVideoAd = Adiscope.Sdk.GetRewardedVideo
 ```
 - Rewarded Video Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Rewarded Video Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
 
 #### B. Callback 등록
 ```csharp
@@ -256,6 +269,7 @@ rewardedVideoAd.OnClosed += OnRewardedVideoAdClosedCallback;
 rewardedVideoAd.OnRewarded += OnRewardedCallback;
 rewardedVideoAd.OnFailedToShow += OnRewardedVideoAdFailedToShowCallback;
 ```
+<br/>
 
 #### C. Load
 ```csharp
@@ -263,16 +277,18 @@ private string UNIT_ID = "";      // 관리자를 통해 발급
 // load a rewarded video ad which belongs to a specific unit
 rewardedVideoAd.Load(UNIT_ID);
 ```
-- 해당 유닛에 속한 ad 네크워크들의 광고를 load
-- `OnRewardedVideoAdLoaded` callback이 호출되면 load가 완료
+- 해당 유닛에 속한 ad 네크워크들의 광고를 Load
+- `OnLoaded` callback이 호출되면 Load가 완료
 - `Load`가 실행되면 `OnLoaded` 와 `OnFailedToLoad` 중 하나의 callback은 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
 - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음 번 Show를 준비
 - Load & Show 후 다시 Load를 하려 할 때 Load 는 Show 이후 언제든 호출가능
-- 광고가 Show되는 동안 다음 광고를 load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
+  - 광고가 Show되는 동안 다음 광고를 Load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 - Show의 callback 인 `OnClosed`에서 다시 Load를 하는 것을 권장 
   - Abusing 방지를 위해 Rewarded Video Ad를 연속으로 보여주는 것을 제한하여 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 Show를 할 수 있도로록 Admin page에서 서비스 설정 가능
 - Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
+- (**Optional**) Load의 시간이 필요해 ProgressBar 노출 추천
+<br/>
 
 #### D. IsLoaded
 ```csharp
@@ -282,7 +298,8 @@ if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
     // do something else
 }
 ```
-- 광고가 load 되었는지 상태를 확인
+- 광고가 Load 되었는지 상태를 확인
+<br/>
 
 #### E. Show
 ```csharp
@@ -298,12 +315,13 @@ if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
     // ad is not loaded
 }
 ```
-- 마지막으로 load된 광고를 사용자에게 보여줌
-- Show 호출 후에는 다시 load를 호출
+- 마지막으로 Load된 광고를 사용자에게 보여줌
+- Show 호출 후에는 다시 Load를 호출
 - Show method는 중복하여 호출 할 수 없음
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
     - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음번 Show를 준비
+<br/>
 
 #### F. Callback Reward
 ```csharp
@@ -320,6 +338,7 @@ private void OnRewardedCallback(object sender, Adiscope.Model.RewardItem args) {
 - Reward 정보는 abusing 방지를 위해서 Server-to-server 방식으로 전달 받는 것을 권장
 - Server-to-server 방식을 선택하더라도 보상이 전달 될 시에는 `OnRewarded`가 호출
   - 이때는 Server를 통해 전달받은 정보를 기준으로 처리하고, `OnRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
+<br/>
 
 #### G. Callback Others
 ```csharp
@@ -341,8 +360,9 @@ private void OnRewardedVideoAdFailedToShowCallback(object sender, Adiscope.Model
 ```
 - `Load` 성공 시 `OnLoaded`, 실패 시 `OnFailedToLoad`가 호출
 - `Show` 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
-- Callback은 Unity의 main thread에서 호출
-<br/>
+- `OnFailedToLoad`, `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+- Callback은 Unity의 main thread에서 호출 
+<br/><br/><br/>
 
 ### 6. Interstitial
 #### A. RewardedVideo Ad Instance 생성
@@ -352,6 +372,7 @@ Adiscope.Feature.InterstitialAd interstitialAd = Adiscope.Sdk.GetInterstitialAdI
 ```
 - Interstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Interstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
 
 #### B. Callback 등록
 ```csharp
@@ -361,6 +382,7 @@ interstitialAd.OnOpened += OnInterstitialAdOpenedCallback;
 interstitialAd.OnClosed += OnInterstitialAdClosedCallback;
 interstitialAd.OnFailedToShow += OnInterstitialAdFailedToShowCallback;
 ```
+<br/>
 
 #### C. Load
 ```csharp
@@ -368,9 +390,14 @@ private string UNIT_ID = "";      // 관리자를 통해 발급
 // load a interstitial ad which belongs to a specific unit
 interstitialAd.Load(UNIT_ID);
 ```
-- 해당 유닛에 속한 ad 네크워크들의 광고를 load
-- `OnInterstitialAdLoaded` callback이 호출되면 load가 완료
+- 해당 유닛에 속한 ad 네크워크들의 광고를 Load
+- `OnInterstitialAdLoaded` callback이 호출되면 Load가 완료
+- Interstitial의 `Load`와 `Show`는 pair로 호출
+- Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음 번 Show를 준비
+- 광고가 Show되는 동안 다음 광고를 Load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 - Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
+- (**Optional**) Load의 시간이 필요해 ProgressBar 노출 추천
+<br/>
 
 #### D. IsLoaded
 ```csharp
@@ -380,7 +407,8 @@ if (interstitialAd.IsLoaded(UNIT_ID)) {
     // do something else
 }
 ```
-- 광고가 load 되었는지 상태를 확인
+- 광고가 Load 되었는지 상태를 확인
+<br/>
 
 #### E. Show
 ```csharp
@@ -396,12 +424,13 @@ if (interstitialAd.IsLoaded(UNIT_ID)) {
     // ad is not loaded
 }
 ```
-- 마지막으로 load된 광고를 사용자에게 보여줌
-- Show 호출 후에는 다시 load를 호출
+- 마지막으로 Load된 광고를 사용자에게 보여줌
+- Show 호출 후에는 다시 Load를 호출
 - Show method는 중복하여 호출 할 수 없음
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
     - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음번 Show를 준비
+<br/>
 
 #### F. Callback
 ```csharp
@@ -423,8 +452,9 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 ```
 - `Load` 성공 시 `OnLoaded`, 실패 시 `OnFailedToLoad`가 호출
 - `Show` 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
-- Callback은 Unity의 main thread에서 호출
-<br/>
+- `OnFailedToLoad`, `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+- Callback은 Unity의 main thread에서 호출 
+<br/><br/><br/>
 
 ### 7. RewardedInterstitial
 #### A. RewardedInterstitial Ad Instance 생성
@@ -434,6 +464,7 @@ Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd = Adiscope.Sdk.Get
 ```
 - RewardedInterstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - RewardedInterstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
 
 #### B. Callback 등록
 ```csharp
@@ -444,6 +475,7 @@ rewaredInterstitialAd.OnClosed += OnRewardedInterstitialAdClosedCallback;
 rewaredInterstitialAd.OnFailedToShow += OnRewardedInterstitialAdFailedToShowCallback;
 rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
 ```
+<br/>
 
 #### C. PreLoadAll
 ```csharp
@@ -451,6 +483,7 @@ rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
 ```
 - Initialize Call Back 후 1회 설정 권장
 - 관리자가 설정된 활성화된 모든 유닛들을 Load 진행
+<br/>
 
 #### D. Unit 지정 PreLoad
 ```csharp
@@ -458,6 +491,7 @@ rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_
 ```
 - Initialize Call Back 후 1회 설정 권장
 - 입력된 유닛들을 Load 진행
+<br/>
 
 #### E. Show
 ```csharp
@@ -467,12 +501,14 @@ rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
 - ShowRewardedInterstitial method는 중복하여 호출 할 수 없음
 - `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - `OnClosed`와 `OnFailedToShow`가 호출 되면 내부에서 해당 유닛을 자동 Load 시킴
+<br/>
 
 #### F. Unit Status Info
 ```csharp
 rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(UNIT_ID);
 ```
 - 해당 유닛의 수익화 여부, 활성화 여부를 알 수 있음
+<br/>
 
 #### G. Callback Reward
 ```csharp
@@ -489,6 +525,7 @@ private void OnRewardedInterstitialRewardedCallback(object sender, Adiscope.Mode
 - Reward 정보는 abusing 방지를 위해서 Server-to-server 방식으로 전달 받는 것을 권장
 - Server-to-server 방식을 선택하더라도 보상이 전달 될 시에는 `OnRewarded`가 호출
   - 이때는 Server를 통해 전달받은 정보를 기준으로 처리하고, `OnRewarded`를 통해 전달받은 정보는 검증용으로 사용하거나 무시하도록 함
+<br/>
 
 #### H. Callback Others
 ```csharp
@@ -511,13 +548,14 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 ```
 - `GetUnitStatusRewardedInterstitial` 조회 시 `OnGetUnitStatus`가 호출
 - `ShowRewardedInterstitial` Skip 시 `OnSkip`, 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
-- Callback은 Unity의 main thread에서 호출
-<br/><br/>
+- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+- Callback은 Unity의 main thread에서 호출 
+<br/><br/><br/>
 
 ### 7. Other API
 > - [Other API](./docs/other_api.md#other-api-1)
-
-<br/><br/>
+ 
+<br/><br/><br/>
 
 ## 웹사이트 필수 등록 (Android 전용)
 - 관리자에게 전달받은 `app-ads.txt`를 웹사이트에 등록

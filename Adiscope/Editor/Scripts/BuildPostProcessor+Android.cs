@@ -329,15 +329,15 @@ namespace Adiscope
 
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.7.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.8.0/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.6.0/";
-        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.5.1/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.0/";
+        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.0/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.5.1/";
         private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.2/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.0/";
 
         public static string GetFileName(this AdiscopeFrameworkAndroidType type)
         {
