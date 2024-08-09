@@ -26,6 +26,7 @@
 - [Interstitial](#6-interstitial)
 - [RewardedInterstitial](#7-rewardedinterstitial)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
+#### [Adiscope Server 연동하기](./reward_callback_info.md)
 #### [Privacy Manifest 정책 적용](#privacy-manifest-정책-적용-ios-전용)
 #### [Xcode에서의 Error 정리](#xcode에서의-error-정리-1)
 - [Unity Editor 21.3.33f1, 21.3.34f1, 22.3.14f1, 22.3.15f1 Error 해결 방법](./docs/xcode_error.md#unity-editor-특정-버전에서-build-error)
@@ -560,6 +561,11 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 ## 웹사이트 필수 등록 (Android 전용)
 - 관리자에게 전달받은 `app-ads.txt`를 웹사이트에 등록
 > - [app-ads.txt 등록 방법 및 정보](./docs/app-ads.txt.md)
+
+<br/><br/>
+
+## Adiscope Server 연동하기
+> - [연동하기](./reward_callback_info.md)
 
 <br/><br/>
 
