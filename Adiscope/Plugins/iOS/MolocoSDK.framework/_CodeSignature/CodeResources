@@ -14,11 +14,11 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		3mhk/dMtTIQnUkI/J5xrnZdKmhQ=
+		0vJ7zsKTF0LB0s0jUrgtXZWdCvE=
 		</data>
 		<key>Modules/MolocoSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		Y3p8lF8hiPvU+9fTCbK5JEuCkcM=
+		kJfGNJO7dYnsumYpSl7p21H2tiA=
 		</data>
 		<key>Modules/MolocoSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/MolocoSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		C6iszwzJQXf4ZlC4OWBqftC036M=
+		qXJYykIxuTt3JRmUMrf06SrZAzw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -77,7 +77,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Thr+ezlP+iK8TWBmAjx+79yuGV18as00KW+x51BJbHQ=
+			gOssS3Jsbo5quBbVRtBx8FP2yisjeWmAaQkbS406BGM=
 			</data>
 		</dict>
 		<key>Modules/MolocoSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -105,7 +105,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7WAovLQDoASJsoH0Nh1aOytrN2ElGpzaTR58jLoqpVM=
+			q5YM/UVloxv3rqOQFst7pNkycurUSoLi/Y6tKZrEmOI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
