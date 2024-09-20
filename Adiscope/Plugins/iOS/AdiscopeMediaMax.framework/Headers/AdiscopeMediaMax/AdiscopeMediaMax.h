@@ -10,7 +10,7 @@
 #import <DTBiOSSDK/DTBiOSSDK.h>
 #import "Adapter.h"
 
-#define AdiscopeAdapterVersion @"3.8.2"
+#define AdiscopeAdapterVersion @"3.8.3"
 
 @interface AdiscopeMediaMax : NSObject <Adapter, MARewardedAdDelegate, DTBAdCallback>
 

@@ -162,14 +162,14 @@ namespace Adiscope
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
         private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.8.1/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.8.3/";
         private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.1/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.8.1/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.1/";
         private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.1/";
         private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.2/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.1/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.3/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.3/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
