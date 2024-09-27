@@ -26,6 +26,7 @@ namespace Adiscope
         private static string[] OS_Type     = { "None", "AOS & iOS", "AOS", "iOS" };
         private static string[] AOS_Type    = { "None", "AOS(iOS 기능 추가 시 자동 추가)", "AOS", "None(iOS 기능 추가 시 자동 추가)" };
         private static string[] iOS_Type    = { "None", "iOS(AOS 기능 추가 시 자동 추가)", "None(AOS 기능 추가 시 자동 추가)", "iOS" };
+        private static string[] AOS_fix_Type    = { "AOS", "AOS & iOS" };
 
 
 
@@ -95,6 +96,13 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
+                    int adeventAdapter = serialized.FindProperty("_adeventAdapter").intValue;
+                    adeventAdapter = EditorGUILayout.Popup("AdEvent", adeventAdapter, AOS_fix_Type);
+                    serialized.FindProperty("_adeventAdapter").intValue = adeventAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
                     int admobAdapter = serialized.FindProperty("_admobAdapter").intValue;
                     admobAdapter = EditorGUILayout.Popup("AdMob Adapter", admobAdapter, OS_Type);
                     serialized.FindProperty("_admobAdapter").intValue = admobAdapter;
@@ -146,10 +154,6 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
-                    int unityadsAdapter = serialized.FindProperty("_unityadsAdapter").intValue;
-                    unityadsAdapter = EditorGUILayout.Popup("Unityads Adapter", unityadsAdapter, OS_Type);
-                    serialized.FindProperty("_unityadsAdapter").intValue = unityadsAdapter;
-
                     int vungleAdapter = serialized.FindProperty("_vungleAdapter").intValue;
                     vungleAdapter = EditorGUILayout.Popup("Vungle Adapter", vungleAdapter, OS_Type);
                     serialized.FindProperty("_vungleAdapter").intValue = vungleAdapter;
@@ -331,24 +335,23 @@ namespace Adiscope
     }
 
     static class AdiscopeAdapterSettings {
+        public const string ADEVENT    = "adevent";
         public const string ADMOB      = "admob";
         public const string ADMANAGER  = "admanager";
         public const string MAX        = "max";
         public const string APPLOVIN   = "applovin";
         private const string CHARTBOOST = "chartboost";
         private const string FAN        = "fan";
-        private const string IRONSOURCE = "ironsource";
         private const string MOBVISTA   = "mobvista";
         private const string PANGLE     = "pangle";
-        private const string UNITYADS   = "unityads";
         private const string VUNGLE     = "vungle";
 
         public static bool GetIsSetting(string network, bool isAndroid) {
             if (isAndroid) {
                 switch (network) {
+                    case ADEVENT:
                     case ADMOB:
                     case CHARTBOOST:
-                    case UNITYADS:
                     case MAX:
                     case APPLOVIN:
                     case FAN:
@@ -360,13 +363,13 @@ namespace Adiscope
                 }
             } else {
                 switch (network) {
+                    case ADEVENT:
                     case ADMANAGER:
                     case ADMOB:
                     case VUNGLE:
                     case CHARTBOOST:
                     case FAN:
                     case MOBVISTA:
-                    case UNITYADS:
                     case APPLOVIN:
                     case MAX:
                     case PANGLE:

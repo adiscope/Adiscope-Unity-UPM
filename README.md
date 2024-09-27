@@ -1,16 +1,14 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.3-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.8.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.9.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.9.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.9.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.9.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.9.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
-- Android Minimum API Level : 15
-  - Admob, Pangle 사용 시 16
-  - Chartboost, Unityads, Vungle, Max 사용 시 21
+- Android Minimum API Level : 21
 - iOS Minimum Version : 12.0
 - Xcode Minimum Version : Xcode 15.1
 <br/>
@@ -110,6 +108,11 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Create Adiscope Android & iOS Files`를 선택
 - ${\color{red}버전}$ ${\color{red}변경}$ ${\color{red}시}$마다 `Create Adiscope Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
 - 인터넷이 연결되어 있어야 함
+- Adapter Version이 상이할 경우 Initialize시 Log를 통해 확인 가능
+  - Android<br/>
+![adapter version checker log](https://github.com/user-attachments/assets/286e83f0-8b63-4e3f-bb09-ad86e15df83c)<br/>
+  - iOS<br/>
+![AdapterChecked](https://github.com/user-attachments/assets/c0c4e33f-d535-45fb-8115-115e57c70522)<br/>
 > - [Android 결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
 > - [iOS 결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
 <br/>

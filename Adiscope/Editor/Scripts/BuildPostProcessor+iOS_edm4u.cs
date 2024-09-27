@@ -13,6 +13,7 @@ namespace Adiscope
 
         public static bool CreateAdiscopeIosFiles(bool isProgress) {
             return CopyAdiscopeFrameworks(new List<AdiscopeFrameworkType>() {
+                AdiscopeFrameworkType.AdEvent,
                 AdiscopeFrameworkType.Admanager,
                 AdiscopeFrameworkType.Admob,
                 AdiscopeFrameworkType.Vungle,
@@ -133,6 +134,7 @@ namespace Adiscope
 
     // Adapter 제거 시 Dependencies 제를 위해 유지 해야 함
     public enum AdiscopeFrameworkType {
+        AdEvent,
         Admanager,
         Admob,
         Vungle,
@@ -148,6 +150,7 @@ namespace Adiscope
 
     static class AdiscopeFrameworkTypeExtension {
 
+        private const string ADEVENT_FILE_NAME      = "AdEventIosDependencies.xml";
         private const string ADMANAGER_FILE_NAME    = "AdmanagerIosDependencies.xml";
         private const string ADMOB_FILE_NAME        = "AdmobIosDependencies.xml";
         private const string VUNGLE_FILE_NAME       = "VungleIosDependencies.xml";
@@ -161,18 +164,19 @@ namespace Adiscope
         private const string PANGLE_FILE_NAME       = "PangleIosDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.8.3/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.1/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.3/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.3/";
+        private const string ADEVENT_FILE_PATH      = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.9.0/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
+                case AdiscopeFrameworkType.AdEvent:         return ADEVENT_FILE_NAME;
                 case AdiscopeFrameworkType.Admanager:       return ADMANAGER_FILE_NAME;
                 case AdiscopeFrameworkType.Admob:           return ADMOB_FILE_NAME;
                 case AdiscopeFrameworkType.Vungle:          return VUNGLE_FILE_NAME;
@@ -191,13 +195,13 @@ namespace Adiscope
         public static string GetFilePath(this AdiscopeFrameworkType type) {
             switch (type)
             {
+                case AdiscopeFrameworkType.AdEvent:         return ADEVENT_FILE_PATH;
                 case AdiscopeFrameworkType.Admanager:       return ADMANAGER_FILE_PATH;
                 case AdiscopeFrameworkType.Admob:           return ADMOB_FILE_PATH;
                 case AdiscopeFrameworkType.Vungle:          return VUNGLE_FILE_PATH;
                 case AdiscopeFrameworkType.ChartBoost:      return CHARTBOOST_FILE_PATH;
                 case AdiscopeFrameworkType.FAN:             return FAN_FILE_PATH;
                 case AdiscopeFrameworkType.MobVista:        return MOBVISTA_FILE_PATH;
-                case AdiscopeFrameworkType.UnityAds:        return UNITYADS_FILE_PATH;
                 // case AdiscopeFrameworkType.AppLovin:        return APPLOVIN_FILE_PATH;
                 case AdiscopeFrameworkType.Max:             return MAX_FILE_PATH;
                 case AdiscopeFrameworkType.Pangle:          return PANGLE_FILE_PATH;
@@ -210,13 +214,13 @@ namespace Adiscope
             var serialized = new SerializedObject(settings);
 
             switch (type) {
+                case AdiscopeFrameworkType.AdEvent:         return (serialized.FindProperty("_adeventAdapter").intValue == 1 || serialized.FindProperty("_adeventAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Admanager:       return (serialized.FindProperty("_admanagerAdapter").intValue == 1 || serialized.FindProperty("_admanagerAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Admob:           return (serialized.FindProperty("_admobAdapter").intValue == 1 || serialized.FindProperty("_admobAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Vungle:          return (serialized.FindProperty("_vungleAdapter").intValue == 1 || serialized.FindProperty("_vungleAdapter").intValue == 3);
                 case AdiscopeFrameworkType.ChartBoost:      return (serialized.FindProperty("_chartboostAdapter").intValue == 1 || serialized.FindProperty("_chartboostAdapter").intValue == 3);
                 case AdiscopeFrameworkType.FAN:             return (serialized.FindProperty("_fanAdapter").intValue == 1 || serialized.FindProperty("_fanAdapter").intValue == 3);
                 case AdiscopeFrameworkType.MobVista:        return (serialized.FindProperty("_mobvistaAdapter").intValue == 1 || serialized.FindProperty("_mobvistaAdapter").intValue == 3);
-                case AdiscopeFrameworkType.UnityAds:        return (serialized.FindProperty("_unityadsAdapter").intValue == 1 || serialized.FindProperty("_unityadsAdapter").intValue == 3);
                 // case AdiscopeFrameworkType.AppLovin:        return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Max:             return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Pangle:          return (serialized.FindProperty("_pangleAdapter").intValue == 1 || serialized.FindProperty("_pangleAdapter").intValue == 3);
