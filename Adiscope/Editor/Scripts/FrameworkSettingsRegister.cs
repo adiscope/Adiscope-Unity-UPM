@@ -103,22 +103,6 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
-                    int admobAdapter = serialized.FindProperty("_admobAdapter").intValue;
-                    admobAdapter = EditorGUILayout.Popup("AdMob Adapter", admobAdapter, OS_Type);
-                    serialized.FindProperty("_admobAdapter").intValue = admobAdapter;
-                    int admanagerAdapter = serialized.FindProperty("_admanagerAdapter").intValue;
-                    admanagerAdapter = EditorGUILayout.Popup("Admanager Adapter", admanagerAdapter, iOS_Type);
-                    serialized.FindProperty("_admanagerAdapter").intValue = admanagerAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUI.BeginDisabledGroup(admobAdapter == 0 || admobAdapter == 3);
-                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_aos"), new GUIContent("AdMob App Key(AOS)"));
-                    EditorGUI.EndDisabledGroup();
-                    EditorGUI.BeginDisabledGroup((admobAdapter == 0 || admobAdapter == 2) && (admanagerAdapter == 0 || admanagerAdapter == 2));
-                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_ios"), new GUIContent("AdMob App Key(iOS)"));
-                    EditorGUI.EndDisabledGroup();
-                    EditorGUILayout.Space();
-
-                    GUILayout.BeginHorizontal();
                     int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
                     maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
@@ -129,6 +113,22 @@ namespace Adiscope
                     EditorGUI.BeginDisabledGroup((appLovinAdapter+maxAdapter) < 1);
                     EditorGUILayout.PropertyField(serialized.FindProperty("_applovinKey"), new GUIContent("AppLovin SDK Key"));
                     EditorGUI.EndDisabledGroup ();
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
+                    int admobAdapter = serialized.FindProperty("_admobAdapter").intValue;
+                    admobAdapter = EditorGUILayout.Popup("AdMob Adapter", admobAdapter, OS_Type);
+                    serialized.FindProperty("_admobAdapter").intValue = admobAdapter;
+                    int admanagerAdapter = serialized.FindProperty("_admanagerAdapter").intValue;
+                    admanagerAdapter = EditorGUILayout.Popup("Admanager Adapter", admanagerAdapter, iOS_Type);
+                    serialized.FindProperty("_admanagerAdapter").intValue = admanagerAdapter;
+                    GUILayout.EndHorizontal();
+                    EditorGUI.BeginDisabledGroup((admobAdapter == 0 || admobAdapter == 3) && (maxAdapter == 0 || maxAdapter == 3));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_aos"), new GUIContent("AdMob App Key(AOS)"));
+                    EditorGUI.EndDisabledGroup();
+                    EditorGUI.BeginDisabledGroup((admobAdapter == 0 || admobAdapter == 2) && (admanagerAdapter == 0 || admanagerAdapter == 2) && (maxAdapter == 0 || maxAdapter == 2));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_admobAppKey_ios"), new GUIContent("AdMob App Key(iOS)"));
+                    EditorGUI.EndDisabledGroup();
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
@@ -173,6 +173,7 @@ namespace Adiscope
                         if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)       // Manifest 파일 생성
                             && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(true)) {
                             EditorUtility.ClearProgressBar();
+                            AssetDatabase.SaveAssets();
                             EditorUtility.DisplayDialog("Succeed to install", "파일이 정상적으로 생성되었습니다.", "닫기");
                         } else {
                             EditorUtility.ClearProgressBar();
@@ -213,6 +214,7 @@ namespace Adiscope
             }
 
             var serialized = new SerializedObject(Load());
+            Dictionary<string, object> adiscopeInfoSettings = null;
             // adiscope 값 설정
             if (!settings.ContainsKey(SERVICE_JSON_KEY_ADISCOPE) || settings[SERVICE_JSON_KEY_ADISCOPE] == null) {
                 Debug.LogError("missing json key [" + SERVICE_JSON_KEY_ADISCOPE + "] from service setting");
@@ -221,7 +223,7 @@ namespace Adiscope
                 if (!adiscopeInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) || adiscopeInfo[SERVICE_JSON_KEY_SETTINGS] == null) {
                     Debug.LogError("missing json key [" + SERVICE_JSON_KEY_SETTINGS + "] from service setting");
                 } else {
-                    Dictionary<string, object> adiscopeInfoSettings = adiscopeInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                    adiscopeInfoSettings = adiscopeInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
                     if (isAndroid) {
                         serialized.FindProperty("_mediaID_aos").stringValue = adiscopeInfoSettings["adiscope_media_id"].ToString();
                         serialized.FindProperty("_mediaSecret_aos").stringValue = adiscopeInfoSettings["adiscope_media_secret"].ToString();
@@ -308,13 +310,22 @@ namespace Adiscope
                                 }
                             }
                         }
+                        if (AdiscopeAdapterSettings.MAX == adNetworkName && adiscopeInfoSettings != null && adiscopeInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB)) {
+                            string admobKey = adiscopeInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                            if (admobKey != null && admobKey.Length > 0) {
+                                if (isAndroid) {
+                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
+                                } else {
+                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                                }
+                            }
+                        }
 
                         if (AdiscopeAdapterSettings.APPLOVIN == adNetworkName || AdiscopeAdapterSettings.MAX == adNetworkName) {
-                            string applovinSecret = serialized.FindProperty("_applovinKey").stringValue;
                             if (networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
                                 Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
                                 string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
-                                if (applovinKey != null && applovinKey.Length > 0 && (applovinSecret == null || applovinSecret.Length < 1)) {
+                                if (applovinKey != null && applovinKey.Length > 0) {
                                     serialized.FindProperty("_applovinKey").stringValue = applovinKey;
                                 }
                             }

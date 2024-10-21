@@ -107,9 +107,15 @@ namespace Adiscope
             handler.AddMetaData(
                 "<meta-data android:name=\"adiscope_sub_domain\" android:value=\"" + GetSubDomain() + "\" />"
             );
-            handler.AddMetaData(
-                "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"" + GetGoogleAdsApplicationId() + "\" />"
-            );
+            
+            AdiscopeFrameworkAndroidType admobFramework = AdiscopeFrameworkAndroidType.Admob;
+            AdiscopeFrameworkAndroidType maxFramework = AdiscopeFrameworkAndroidType.MAX;
+            if(admobFramework.GetAdapterEnable() || maxFramework.GetAdapterEnable()){
+                handler.AddMetaData(
+                    "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"" + GetGoogleAdsApplicationId() + "\" />"
+                );
+            }
+            
             handler.AddMetaData(
                 "<meta-data android:name=\"adiscope_unity_sdk_version\" android:value=\"" + GetUnityVersion() + "\" />"
             );
@@ -331,7 +337,7 @@ namespace Adiscope
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
         private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.9.0/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.2/";
         private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.0/";
         private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
         private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.9.0/";
