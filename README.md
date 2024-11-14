@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.9.2-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.9.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.9.1-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.9.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.9.2-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
@@ -23,6 +23,8 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 - [RewardedInterstitial](#7-rewardedinterstitial)
+- [AdEvent](#8-adevent)
+- [Other API](./docs/other_api.md#other-api-1)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
 #### [Adiscope Server 연동하기](./docs/reward_callback_info.md)
 #### [Privacy Manifest 정책 적용](#privacy-manifest-정책-적용-ios-전용)
@@ -556,7 +558,54 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 - Callback은 Unity의 main thread에서 호출 
 <br/><br/><br/>
 
-### 7. Other API
+### 8. AdEvent
+#### A. AdEvent Ad Instance 생성
+```csharp
+// get singleton instance of AdEvent
+Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
+```
+- AdEvent Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
+- AdEvent의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
+
+#### B. Callback 등록
+```csharp
+adEvent.OnOpened += OnAdEventOpenedCallback;
+adEvent.OnClosed += OnAdEventClosedCallback;
+adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
+```
+<br/>
+
+#### C. Show
+```csharp
+// show adEvent
+if (adEvent.Show("unit1")) {
+    // Success
+} else {
+    // This Show request is duplicated
+}
+```
+- `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+<br/>
+
+#### D. Callbacks
+```csharp
+private void OnAdEventOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // AdEvent가 열림
+}
+private void OnAdEventClosedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // AdEvent가 닫힘
+}
+private void OnAdEventFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
+    // AdEvent가 Fail
+}
+```
+- Show 성공 시 `OnOpened`, `OnClosed` callback이 순차적으로 호출
+- Callback은 Unity의 main thread에서 호출
+- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+<br/><br/><br/>
+
+### 9. Other API
 > - [Other API](./docs/other_api.md#other-api-1)
  
 <br/><br/><br/>

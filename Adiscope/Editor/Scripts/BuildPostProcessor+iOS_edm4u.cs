@@ -164,15 +164,13 @@ namespace Adiscope
         private const string PANGLE_FILE_NAME       = "PangleIosDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string ADEVENT_FILE_PATH      = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.9.1/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.1/";
-        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.9.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.9.1/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.9.0/";
+        private const string ADEVENT_FILE_PATH      = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.10.0/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
@@ -200,9 +198,6 @@ namespace Adiscope
                 case AdiscopeFrameworkType.Admob:           return ADMOB_FILE_PATH;
                 case AdiscopeFrameworkType.Vungle:          return VUNGLE_FILE_PATH;
                 case AdiscopeFrameworkType.ChartBoost:      return CHARTBOOST_FILE_PATH;
-                case AdiscopeFrameworkType.FAN:             return FAN_FILE_PATH;
-                case AdiscopeFrameworkType.MobVista:        return MOBVISTA_FILE_PATH;
-                // case AdiscopeFrameworkType.AppLovin:        return APPLOVIN_FILE_PATH;
                 case AdiscopeFrameworkType.Max:             return MAX_FILE_PATH;
                 case AdiscopeFrameworkType.Pangle:          return PANGLE_FILE_PATH;
                 default:                                    return null;
@@ -219,9 +214,6 @@ namespace Adiscope
                 case AdiscopeFrameworkType.Admob:           return (serialized.FindProperty("_admobAdapter").intValue == 1 || serialized.FindProperty("_admobAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Vungle:          return (serialized.FindProperty("_vungleAdapter").intValue == 1 || serialized.FindProperty("_vungleAdapter").intValue == 3);
                 case AdiscopeFrameworkType.ChartBoost:      return (serialized.FindProperty("_chartboostAdapter").intValue == 1 || serialized.FindProperty("_chartboostAdapter").intValue == 3);
-                case AdiscopeFrameworkType.FAN:             return (serialized.FindProperty("_fanAdapter").intValue == 1 || serialized.FindProperty("_fanAdapter").intValue == 3);
-                case AdiscopeFrameworkType.MobVista:        return (serialized.FindProperty("_mobvistaAdapter").intValue == 1 || serialized.FindProperty("_mobvistaAdapter").intValue == 3);
-                // case AdiscopeFrameworkType.AppLovin:        return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Max:             return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Pangle:          return (serialized.FindProperty("_pangleAdapter").intValue == 1 || serialized.FindProperty("_pangleAdapter").intValue == 3);
                 default: return false;

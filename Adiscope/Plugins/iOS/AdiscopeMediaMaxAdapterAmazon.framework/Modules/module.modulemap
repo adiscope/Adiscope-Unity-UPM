@@ -1,0 +1,6 @@
+framework module AdiscopeMediaMaxAdapterAmazon {
+    umbrella header "AdiscopeMediaMaxAdapterAmazon.h"
+
+    export *
+    module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module AdiscopeMediaMaxAdapterOgury {
+    umbrella header "AdiscopeMediaMaxAdapterOgury.h"
+
+    export *
+    module * { export * }
+}

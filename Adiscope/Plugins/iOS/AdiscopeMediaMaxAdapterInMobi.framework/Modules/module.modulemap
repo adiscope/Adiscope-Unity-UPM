@@ -1,0 +1,6 @@
+framework module AdiscopeMediaMaxAdapterInMobi {
+    umbrella header "AdiscopeMediaMaxAdapterInMobi.h"
+
+    export *
+    module * { export * }
+}

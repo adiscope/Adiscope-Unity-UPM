@@ -48,11 +48,14 @@ namespace Adiscope
             }
 
             if (isAndroidPath && isiOSPath) {
+                AssetDatabase.SaveAssets();
                 return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false) 
                         && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(false);
             } else if (isAndroidPath) {
+                AssetDatabase.SaveAssets();
                 return BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(false);
             } else if (isiOSPath) {
+                AssetDatabase.SaveAssets();
                 return BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(false);
             } else {
                 return false;
@@ -106,11 +109,8 @@ namespace Adiscope
                     int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
                     maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
-                    int appLovinAdapter = serialized.FindProperty("_applovinAdapter").intValue;
-                    appLovinAdapter = EditorGUILayout.Popup("AppLovin Adapter", appLovinAdapter, OS_Type);
-                    serialized.FindProperty("_applovinAdapter").intValue = appLovinAdapter;
                     GUILayout.EndHorizontal();
-                    EditorGUI.BeginDisabledGroup((appLovinAdapter+maxAdapter) < 1);
+                    EditorGUI.BeginDisabledGroup(maxAdapter < 1);
                     EditorGUILayout.PropertyField(serialized.FindProperty("_applovinKey"), new GUIContent("AppLovin SDK Key"));
                     EditorGUI.EndDisabledGroup ();
                     EditorGUILayout.Space();
@@ -135,17 +135,6 @@ namespace Adiscope
                     int chartboostAdapter = serialized.FindProperty("_chartboostAdapter").intValue;
                     chartboostAdapter = EditorGUILayout.Popup("Chartboost Adapter", chartboostAdapter, OS_Type);
                     serialized.FindProperty("_chartboostAdapter").intValue = chartboostAdapter;
-
-                    int fanAdapter = serialized.FindProperty("_fanAdapter").intValue;
-                    fanAdapter = EditorGUILayout.Popup("Fan Adapter", fanAdapter, OS_Type);
-                    serialized.FindProperty("_fanAdapter").intValue = fanAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
-
-                    GUILayout.BeginHorizontal();
-                    int mobvistaAdapter = serialized.FindProperty("_mobvistaAdapter").intValue;
-                    mobvistaAdapter = EditorGUILayout.Popup("Mobvista Adapter", mobvistaAdapter, OS_Type);
-                    serialized.FindProperty("_mobvistaAdapter").intValue = mobvistaAdapter;
 
                     int pangleAdapter = serialized.FindProperty("_pangleAdapter").intValue;
                     pangleAdapter = EditorGUILayout.Popup("Pangle Adapter", pangleAdapter, OS_Type);
@@ -321,7 +310,7 @@ namespace Adiscope
                             }
                         }
 
-                        if (AdiscopeAdapterSettings.APPLOVIN == adNetworkName || AdiscopeAdapterSettings.MAX == adNetworkName) {
+                        if (AdiscopeAdapterSettings.MAX == adNetworkName) {
                             if (networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
                                 Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
                                 string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
@@ -350,10 +339,7 @@ namespace Adiscope
         public const string ADMOB      = "admob";
         public const string ADMANAGER  = "admanager";
         public const string MAX        = "max";
-        public const string APPLOVIN   = "applovin";
         private const string CHARTBOOST = "chartboost";
-        private const string FAN        = "fan";
-        private const string MOBVISTA   = "mobvista";
         private const string PANGLE     = "pangle";
         private const string VUNGLE     = "vungle";
 
@@ -364,9 +350,6 @@ namespace Adiscope
                     case ADMOB:
                     case CHARTBOOST:
                     case MAX:
-                    case APPLOVIN:
-                    case FAN:
-                    case MOBVISTA:
                     case PANGLE:
                     case VUNGLE:
                     return true;
@@ -379,9 +362,6 @@ namespace Adiscope
                     case ADMOB:
                     case VUNGLE:
                     case CHARTBOOST:
-                    case FAN:
-                    case MOBVISTA:
-                    case APPLOVIN:
                     case MAX:
                     case PANGLE:
                     return true;
