@@ -1,6 +1,0 @@
-framework module AdiscopeMediaMaxAdapterMoloco {
-    umbrella header "AdiscopeMediaMaxAdapterMoloco.h"
-
-    export *
-    module * { export * }
-}

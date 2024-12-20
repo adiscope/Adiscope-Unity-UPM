@@ -1,6 +1,0 @@
-framework module AdiscopeMediaMaxAdapterBidMachine {
-    umbrella header "AdiscopeMediaMaxAdapterBidMachine.h"
-
-    export *
-    module * { export * }
-}

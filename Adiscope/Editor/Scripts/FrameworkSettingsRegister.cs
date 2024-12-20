@@ -96,6 +96,7 @@ namespace Adiscope
                     EditorGUILayout.PropertyField(serialized.FindProperty("_mediaID_ios"), new GUIContent("Media ID(iOS)"));
                     EditorGUILayout.PropertyField(serialized.FindProperty("_mediaSecret_ios"), new GUIContent("Media Secret(iOS)"));
                     EditorGUILayout.PropertyField(serialized.FindProperty("_subDomain"), new GUIContent("Sub Domain"));
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_trackingDesc"), new GUIContent("Tracking Desc(iOS)"));
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();

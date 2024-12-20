@@ -1,4 +1,0 @@
-framework module MolocoSDK {
-  header "MolocoSDK-Swift.h"
-  requires objc
-}

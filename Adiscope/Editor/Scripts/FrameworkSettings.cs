@@ -23,6 +23,9 @@ namespace Adiscope
         string _subDomain;
 
         [SerializeField]
+        string _trackingDesc;
+
+        [SerializeField]
         int _adeventAdapter;
 
         [SerializeField]

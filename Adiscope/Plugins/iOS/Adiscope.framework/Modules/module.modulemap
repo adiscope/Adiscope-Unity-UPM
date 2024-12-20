@@ -1,6 +1,0 @@
-framework module Adiscope {
-  umbrella header "Adiscope.h"
-  export *
-
-  module * { export * }
-}

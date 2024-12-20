@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.1-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.1-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.3-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.3-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
@@ -73,6 +73,11 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`
 - Unity version `2022.2+` 에서는 `1.2.176+` 사용    
 > - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity) 
+<br/>
+
+#### A. iOS Resolver Settings
+![external-dependency-manager-setting](https://github.com/user-attachments/assets/e4b56ded-48ae-4b4f-bf27-6c2d2018b002)   
+-  Link frameworks statically 해지
 
 <br/><br/>
 
@@ -103,6 +108,8 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Settings Android from json file`를 선택하여 전달받은 Android.json 파일을 선택   
 - `Settings iOS from json file`를 선택하여 전달받은 iOS.json 파일을 선택   
 - Dashboard의 값은 Adiscope 설정 값들로 자동 세팅
+- iOS의 Tracking Desc(NSUserTrackingUsageDescription)값을 추가하면 xcode의 plist에 해당 값으로 추가 됨
+  - iOS의 앱 추적 팝업의 설명에 추가 됨
 - Dashboard의 값을 직접 수정 후 `Create Adiscope Android & iOS Files`를 선택하면 해당 값으로 앱 설정 됨
 <br/><br/>
 
