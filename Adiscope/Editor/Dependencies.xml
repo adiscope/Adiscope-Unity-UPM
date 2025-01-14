@@ -7,6 +7,6 @@
       <repository>https://repository.adiscope.com/repository/adiscope/</repository>
     </repositories>
     <androidPackage spec="com.google.android.gms:play-services-ads:22.3.0" />
-    <androidPackage spec="com.nps.adiscope:adiscopeCore:3.10.3" />
+    <androidPackage spec="com.nps.adiscope:adiscopeCore:3.10.4" />
   </androidPackages>
 </dependencies>
