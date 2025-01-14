@@ -62,10 +62,6 @@
 /// @param userId 보상을 받기 위한 식별자
 - (BOOL)setUserId:(NSString *)userId;
 
-/// Offerwall, RewardedVideo, RewardedInterstitial의 Rewarded Callback시 해당 값을 전달합니다.
-/// @param param Rewarded Callback시 전달 될 값
-- (void)setRewardedCheckParam:(NSString *)param;
-
 /// Unit의 Status를 가져옵니다.
 /// @param unitId 가져올 Status의 UnitID, Offerwall과 RewardedVideo를 상관하지 않습니다.
 - (void)getUnitStatus:(NSString *)unitId;

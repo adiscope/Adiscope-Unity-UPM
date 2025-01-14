@@ -180,22 +180,11 @@ namespace Adiscope.Internal.Platform.Android
             {
                 if (jc == null)
                 {
-                    Debug.LogError("Android.CoreClient<IsInitialized> " + Values.PKG_ADISCOPE + ": null");
+                    Debug.LogError("Android.CoreClient<GetUnitStatus> " + Values.PKG_ADISCOPE + ": null");
                 }
                 return jc.CallStatic<bool>(Values.MTD_ISINITIALIZE);
-            }            
-        }
-
-        public void SetRewardedCheckParam(string param)
-        {
-            using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
-            {
-                if (jc == null)
-                {
-                    Debug.LogError("Android.CoreClient<SetRewardedCheckParam> " + Values.PKG_ADISCOPE + ": null");
-                }
-                jc.CallStatic(Values.MTD_SET_REWARDED_CHECK_PARAM, param);
             }
+            
         }
     }
 }

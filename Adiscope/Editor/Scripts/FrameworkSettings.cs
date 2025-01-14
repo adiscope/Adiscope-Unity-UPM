@@ -23,9 +23,6 @@ namespace Adiscope
         string _subDomain;
 
         [SerializeField]
-        int _adeventAdapter;
-
-        [SerializeField]
         int _admobAdapter;
 
         [SerializeField]
@@ -57,6 +54,9 @@ namespace Adiscope
 
         [SerializeField]
         int _pangleAdapter;
+
+        [SerializeField]
+        int _unityadsAdapter;
 
         [SerializeField]
         int _vungleAdapter;
