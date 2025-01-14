@@ -155,6 +155,11 @@ namespace Adiscope.Internal.Platform.MockPlatform
 
             }, 10)).Start();
         }
+
+        public void SetRewardedCheckParam(string param)
+        {
+            
+        }
     }
 }
 #endif
