@@ -107,15 +107,9 @@ namespace Adiscope
             handler.AddMetaData(
                 "<meta-data android:name=\"adiscope_sub_domain\" android:value=\"" + GetSubDomain() + "\" />"
             );
-            
-            AdiscopeFrameworkAndroidType admobFramework = AdiscopeFrameworkAndroidType.Admob;
-            AdiscopeFrameworkAndroidType maxFramework = AdiscopeFrameworkAndroidType.MAX;
-            if(admobFramework.GetAdapterEnable() || maxFramework.GetAdapterEnable()){
-                handler.AddMetaData(
-                    "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"" + GetGoogleAdsApplicationId() + "\" />"
-                );
-            }
-            
+            handler.AddMetaData(
+                "<meta-data android:name=\"com.google.android.gms.ads.APPLICATION_ID\" android:value=\"" + GetGoogleAdsApplicationId() + "\" />"
+            );
             handler.AddMetaData(
                 "<meta-data android:name=\"adiscope_unity_sdk_version\" android:value=\"" + GetUnityVersion() + "\" />"
             );
@@ -335,11 +329,15 @@ namespace Adiscope
 
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.10.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.10.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.10.4/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.10.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.10.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "3.8.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string UNITYADS_FILE_PATH     = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "3.8.4/";
+        private const string APPLOVIN_FILE_PATH     = ADISCOPE_FILE_PATH + "3.8.0/";
+        private const string FAN_FILE_PATH          = ADISCOPE_FILE_PATH + "3.3.0/";
+        private const string MOBVISTA_FILE_PATH     = ADISCOPE_FILE_PATH + "3.5.1/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.3.2/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "3.8.0/";
 
         public static string GetFileName(this AdiscopeFrameworkAndroidType type)
         {
@@ -368,7 +366,11 @@ namespace Adiscope
             {
                 case AdiscopeFrameworkAndroidType.Admob:        return ADMOB_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.ChartBoost:   return CHARTBOOST_FILE_PATH;
+                case AdiscopeFrameworkAndroidType.UnityAds:     return UNITYADS_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.MAX:          return MAX_FILE_PATH;
+                case AdiscopeFrameworkAndroidType.AppLovin:     return APPLOVIN_FILE_PATH;
+                case AdiscopeFrameworkAndroidType.FAN:          return FAN_FILE_PATH;
+                case AdiscopeFrameworkAndroidType.MobVista:     return MOBVISTA_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.Pangle:       return PANGLE_FILE_PATH;
                 case AdiscopeFrameworkAndroidType.Vungle:       return VUNGLE_FILE_PATH;
                 default:                                        return null;
@@ -384,7 +386,11 @@ namespace Adiscope
             {
                 case AdiscopeFrameworkAndroidType.Admob:        return (serialized.FindProperty("_admobAdapter").intValue == 1 || serialized.FindProperty("_admobAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.ChartBoost:   return (serialized.FindProperty("_chartboostAdapter").intValue == 1 || serialized.FindProperty("_chartboostAdapter").intValue == 2);
+                case AdiscopeFrameworkAndroidType.UnityAds:     return (serialized.FindProperty("_unityadsAdapter").intValue == 1 || serialized.FindProperty("_unityadsAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.MAX:          return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 2);
+                case AdiscopeFrameworkAndroidType.AppLovin:     return (serialized.FindProperty("_applovinAdapter").intValue == 1 || serialized.FindProperty("_applovinAdapter").intValue == 2);
+                case AdiscopeFrameworkAndroidType.FAN:          return (serialized.FindProperty("_fanAdapter").intValue == 1 || serialized.FindProperty("_fanAdapter").intValue == 2);
+                case AdiscopeFrameworkAndroidType.MobVista:     return (serialized.FindProperty("_mobvistaAdapter").intValue == 1 || serialized.FindProperty("_mobvistaAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.Pangle:       return (serialized.FindProperty("_pangleAdapter").intValue == 1 || serialized.FindProperty("_pangleAdapter").intValue == 2);
                 case AdiscopeFrameworkAndroidType.Vungle:       return (serialized.FindProperty("_vungleAdapter").intValue == 1 || serialized.FindProperty("_vungleAdapter").intValue == 2);
                 default:                                        return false;

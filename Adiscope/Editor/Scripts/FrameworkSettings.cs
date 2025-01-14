@@ -23,12 +23,6 @@ namespace Adiscope
         string _subDomain;
 
         [SerializeField]
-        string _trackingDesc;
-
-        [SerializeField]
-        int _adeventAdapter;
-
-        [SerializeField]
         int _admobAdapter;
 
         [SerializeField]
@@ -41,6 +35,9 @@ namespace Adiscope
         int _maxAdapter;
 
         [SerializeField]
+        int _applovinAdapter;
+
+        [SerializeField]
         string _applovinKey;
 
         [SerializeField]
@@ -50,7 +47,16 @@ namespace Adiscope
         int _chartboostAdapter;
 
         [SerializeField]
+        int _fanAdapter;
+
+        [SerializeField]
+        int _mobvistaAdapter;
+
+        [SerializeField]
         int _pangleAdapter;
+
+        [SerializeField]
+        int _unityadsAdapter;
 
         [SerializeField]
         int _vungleAdapter;

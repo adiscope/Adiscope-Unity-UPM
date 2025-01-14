@@ -1,14 +1,16 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.4-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.4-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.3-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-3.8.4-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-3.8.4-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-3.8.2-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.8.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.8.2-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
-- Android Minimum API Level : 21
+- Android Minimum API Level : 15
+  - Admob, Pangle 사용 시 16
+  - Chartboost, Unityads, Vungle, Max 사용 시 21
 - iOS Minimum Version : 12.0
 - Xcode Minimum Version : Xcode 15.1
 <br/>
@@ -23,8 +25,6 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 - [RewardedInterstitial](#7-rewardedinterstitial)
-- [AdEvent](#8-adevent)
-- [Other API](./docs/other_api.md#other-api-1)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
 #### [Adiscope Server 연동하기](./docs/reward_callback_info.md)
 #### [Privacy Manifest 정책 적용](#privacy-manifest-정책-적용-ios-전용)
@@ -73,11 +73,6 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `external-dependency-manager-*.unitypackage` 파일을 선택 후 전체 `Import`
 - Unity version `2022.2+` 에서는 `1.2.176+` 사용    
 > - [결과 확인](./docs/upm_result.md#2-download-external-dependency-manager-for-unity) 
-<br/>
-
-#### A. iOS Resolver Settings
-![external-dependency-manager-setting](https://github.com/user-attachments/assets/e4b56ded-48ae-4b4f-bf27-6c2d2018b002)   
--  Link frameworks statically 해지
 
 <br/><br/>
 
@@ -108,8 +103,6 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Settings Android from json file`를 선택하여 전달받은 Android.json 파일을 선택   
 - `Settings iOS from json file`를 선택하여 전달받은 iOS.json 파일을 선택   
 - Dashboard의 값은 Adiscope 설정 값들로 자동 세팅
-- iOS의 Tracking Desc(NSUserTrackingUsageDescription)값을 추가하면 xcode의 plist에 해당 값으로 추가 됨
-  - iOS의 앱 추적 팝업의 설명에 추가 됨
 - Dashboard의 값을 직접 수정 후 `Create Adiscope Android & iOS Files`를 선택하면 해당 값으로 앱 설정 됨
 <br/><br/>
 
@@ -117,11 +110,6 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 - `Create Adiscope Android & iOS Files`를 선택
 - ${\color{red}버전}$ ${\color{red}변경}$ ${\color{red}시}$마다 `Create Adiscope Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
 - 인터넷이 연결되어 있어야 함
-- Adapter Version이 상이할 경우 Initialize시 Log를 통해 확인 가능
-  - Android<br/>
-![adapter version checker log](https://github.com/user-attachments/assets/286e83f0-8b63-4e3f-bb09-ad86e15df83c)<br/>
-  - iOS<br/>
-![AdapterChecked](https://github.com/user-attachments/assets/c0c4e33f-d535-45fb-8115-115e57c70522)<br/>
 > - [Android 결과 확인](./docs/upm_result.md#4-adiscopesdk-settings)
 > - [iOS 결과 확인](./docs/upm_result.md#6-cocoapods-%EC%82%AC%EC%9A%A9-ios-%EC%A0%84%EC%9A%A9)
 <br/>
@@ -565,54 +553,7 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 - Callback은 Unity의 main thread에서 호출 
 <br/><br/><br/>
 
-### 8. AdEvent
-#### A. AdEvent Ad Instance 생성
-```csharp
-// get singleton instance of AdEvent
-Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
-```
-- AdEvent Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
-- AdEvent의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
-<br/>
-
-#### B. Callback 등록
-```csharp
-adEvent.OnOpened += OnAdEventOpenedCallback;
-adEvent.OnClosed += OnAdEventClosedCallback;
-adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
-```
-<br/>
-
-#### C. Show
-```csharp
-// show adEvent
-if (adEvent.Show("unit1")) {
-    // Success
-} else {
-    // This Show request is duplicated
-}
-```
-- `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
-<br/>
-
-#### D. Callbacks
-```csharp
-private void OnAdEventOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
-    // AdEvent가 열림
-}
-private void OnAdEventClosedCallback(object sender, Adiscope.Model.ShowResult args) {
-    // AdEvent가 닫힘
-}
-private void OnAdEventFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
-    // AdEvent가 Fail
-}
-```
-- Show 성공 시 `OnOpened`, `OnClosed` callback이 순차적으로 호출
-- Callback은 Unity의 main thread에서 호출
-- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
-<br/><br/><br/>
-
-### 9. Other API
+### 7. Other API
 > - [Other API](./docs/other_api.md#other-api-1)
  
 <br/><br/><br/>

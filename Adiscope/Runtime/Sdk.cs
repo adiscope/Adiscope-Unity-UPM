@@ -36,7 +36,7 @@ namespace Adiscope
         /// <summary>
         /// get rewarded video ad singleton instance
         /// </summary>
-        /// <returns>singleton instance of RewardedVideoAd</returns>
+        /// <returns>singleton instance of RewardedVidoAd</returns>
         public static RewardedVideoAd GetRewardedVideoAdInstance()
         {
             return RewardedVideoAd.Instance;
@@ -61,21 +61,12 @@ namespace Adiscope
         }
 
         /// <summary>
-        /// get rewarded interstitial video ad singleton instance
+        /// get rewarded video ad singleton instance
         /// </summary>
-        /// <returns>singleton instance of RewardedInterstitialVideoAd</returns>
+        /// <returns>singleton instance of RewardedVidoAd</returns>
         public static RewardedInterstitialAd GetRewardedInterstitialAdInstance()
         {
             return RewardedInterstitialAd.Instance;
-        }
-
-        /// <summary>
-        /// get ad event singleton instance
-        /// </summary>
-        /// <returns>singleton instance of AdEvent</returns>
-        public static AdEvent GetAdEventInstance()
-        {
-            return AdEvent.Instance;
         }
 
         /// <summary>

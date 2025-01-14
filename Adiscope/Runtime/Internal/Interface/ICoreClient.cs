@@ -21,6 +21,5 @@ namespace Adiscope.Internal.Interface
         bool IsInitialized();
         void SetUserId(string userId);
         void GetUnitStatus(string unitId, Action<AdiscopeError, UnitStatus> callback);
-        void SetRewardedCheckParam(string param);
     }
 }

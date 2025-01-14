@@ -1,0 +1,6 @@
+framework module AdiscopeMediaAppLovin {
+    umbrella header "AdiscopeMediaAppLovin.h"
+
+    export *
+    module * { export * }
+}

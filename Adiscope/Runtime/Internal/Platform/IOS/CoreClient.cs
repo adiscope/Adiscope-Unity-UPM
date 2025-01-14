@@ -163,15 +163,6 @@ namespace Adiscope.Internal.Platform.IOS
             handlerMap.Add(key, callback);
             return key;
         }
-
-        [DllImport ("__Internal")]
-		private static extern bool setRewardedCheckParam(string param);        
-
-        public void SetRewardedCheckParam(string param) 
-        {
-            if (!setRewardedCheckParam(param))
-                throw new System.ArgumentException();
-        }
     }
 }
 
