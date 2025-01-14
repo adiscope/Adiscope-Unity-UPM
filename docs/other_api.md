@@ -67,6 +67,15 @@ Adiscope.FrameworkSettings.MediaID_IOS;
 Adiscope.FrameworkSettings.SubDomain;
 ```
 
+### Set Rewarded Check Param
+```csharp
+Adiscope.Sdk.GetCoreInstance().SetRewardedCheckParam(param);
+```
+- Rewarded callback 시 parameters을 추가
+- 해당 정보는 Rewarded 지급 등에 있어 구분하는데 사용 할 수 있음
+- 내부 설정 후 사용 가능 ( 담당자에게 요청 부탁 )
+- param은 Base64 Encoded(UTF8)를 처리 후 1000자내로 설정
+
 ### Unit Status Info
 ```csharp
 Adiscope.Sdk.GetCoreInstance().GetUnitStatus(UNIT_ID, (error, unitStatus) => {

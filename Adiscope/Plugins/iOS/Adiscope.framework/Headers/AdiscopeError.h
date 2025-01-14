@@ -27,5 +27,6 @@ typedef NS_ENUM(NSInteger, AdiscopeErrorCode) {
 @interface AdiscopeError : NSError
 + (AdiscopeError *)errorCode:(AdiscopeErrorCode)code TraceID:(NSString *)traceID;
 + (AdiscopeError *)errorCode:(AdiscopeErrorCode)code;
++ (AdiscopeError *)errorCodeEvent:(AdiscopeErrorCode)code;
 - (NSString *)getXB3TraceID;
 @end

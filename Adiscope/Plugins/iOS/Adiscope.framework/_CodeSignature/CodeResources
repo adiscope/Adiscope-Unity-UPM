@@ -6,7 +6,7 @@
 	<dict>
 		<key>AgreementTableViewCell.nib</key>
 		<data>
-		bE25f0fjqH7erWUArn5zW70aHIo=
+		HQ5nrGAyLeGM0ETODZ3+eT7ZxA0=
 		</data>
 		<key>AgreementViewController.nib</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>Assets.car</key>
 		<data>
-		KAGl1z1w/NZ7OqyYikX3NPg/f/o=
+		j1ZQMbh1YYIkE2fODw0LCWa+LmQ=
 		</data>
 		<key>CompletedAdTableViewCell.nib</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>ContactTextAreaTableViewCell.nib</key>
 		<data>
-		kJQvaJbSb6+kaSu2n9c4y2unDMY=
+		QMeuccgf9fMTA6CQM1SFRqFRIwE=
 		</data>
 		<key>ContactTextFieldTableViewCell.nib</key>
 		<data>
@@ -238,7 +238,7 @@
 		</data>
 		<key>Headers/Adiscope.h</key>
 		<data>
-		ewfmo9TJ9EJHzLm54If/pza9gSE=
+		EJFNn5xn+s/fwxpp2Zl2f7Yh21Q=
 		</data>
 		<key>Headers/AdiscopeCPInterface.h</key>
 		<data>
@@ -246,11 +246,15 @@
 		</data>
 		<key>Headers/AdiscopeDelegate.h</key>
 		<data>
-		jbHGR36OW4ixUYoMTieeLc5zVfk=
+		EU8tcFAXlcyaoojLj56PDniwAeQ=
 		</data>
 		<key>Headers/AdiscopeError.h</key>
 		<data>
-		6nI4CrGX/7RHQYRRCQBrvLfxncw=
+		mxJ+LnjyhNB2BA5qeSpbf7VHxvU=
+		</data>
+		<key>Headers/AdiscopeInterface+AdEvent.h</key>
+		<data>
+		tk2EsjdJFeRFrxIhY8zGrG8p1mg=
 		</data>
 		<key>Headers/AdiscopeInterface+Interstitial.h</key>
 		<data>
@@ -270,7 +274,7 @@
 		</data>
 		<key>Headers/AdiscopeInterface.h</key>
 		<data>
-		lKxvjL8zMAeirOLITC7Tn1cBza0=
+		CRtEpvXEbaW+Zq3Eg1UHvqcz5Sc=
 		</data>
 		<key>Headers/AdiscopeRewardItem.h</key>
 		<data>
@@ -282,7 +286,7 @@
 		</data>
 		<key>HelpTableViewCell.nib</key>
 		<data>
-		esQ3CAiggbNZ9R7lCwcxtXfkxKE=
+		g8qb44qu4tiEW+W7PNAn42kVEk0=
 		</data>
 		<key>HelpViewController.nib</key>
 		<data>
@@ -290,7 +294,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		yBRIq3xkyKZOay5lMMw7euyWt5o=
+		7YWukZQIaDofEboR29AMgIhqq4Q=
 		</data>
 		<key>InfomationTableViewCell.nib</key>
 		<data>
@@ -298,11 +302,11 @@
 		</data>
 		<key>InputType1TableViewCell.nib</key>
 		<data>
-		AfvAYiek+QSLTZZcnktkhrFvjvs=
+		0udnh9LNXm4NLqJR+G9W0waDcAg=
 		</data>
 		<key>InputType2TableViewCell.nib</key>
 		<data>
-		DSwjP4khhfHtmJTmeYDxrGfTwwg=
+		3Yube0orEE3GMNOcTfiBS7TMbYs=
 		</data>
 		<key>LogoTableViewCell.nib</key>
 		<data>
@@ -338,7 +342,7 @@
 		</data>
 		<key>PrivacyInfo.xcprivacy</key>
 		<data>
-		pJxyeeNE/gDH07kZsU0uXXUop5c=
+		M92kTjO0Ktfq+u3Aj2BEeTVEE2g=
 		</data>
 		<key>RecommendationViewController.nib</key>
 		<data>
@@ -371,7 +375,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xakenyYi5DMVbnyeKtnJFbpEuQ7xulBCTRSD5KngjJQ=
+			2PyWfeM8aD76D/UBt2It61CCdERJP2mp7blLb7HYuqc=
 			</data>
 		</dict>
 		<key>AgreementViewController.nib</key>
@@ -392,7 +396,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/vcCuwijBXI2xxH1LQR3gD2EJ1MMAQhxZk3q5HLZNeY=
+			l/eu2grotXx5uyQ6/5PIyIAAQpcfs4fjh/0sQsXKj4A=
 			</data>
 		</dict>
 		<key>CompletedAdTableViewCell.nib</key>
@@ -434,7 +438,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Qu2qeLdNVKoEohPRfXdSEAn5PLrj32iP1wdFnarrurg=
+			oVFtWA2ACy7E1qBF/BhS7AVElWk6H37M+w/WnziCsis=
 			</data>
 		</dict>
 		<key>ContactTextFieldTableViewCell.nib</key>
@@ -777,7 +781,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wveznJRx/lVqMnGzo7r79EftYxHc1fEVuLMKadcPKaY=
+			x1Jxfb0gfflkuyRmZvG7p/RxHf1wta1ocKnDur+Js04=
 			</data>
 		</dict>
 		<key>Headers/AdiscopeCPInterface.h</key>
@@ -791,14 +795,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xN1SUbushrS6FjfhevKeZlTte62pqw3UATlO2YYlQK8=
+			B23eX6MUVZT2fUI7tVnDOX/EI4XCNNkwGBqGKJaTpFw=
 			</data>
 		</dict>
 		<key>Headers/AdiscopeError.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QMKkCBrDiGpf/u9GkAtiQcDAfSSNQIwZ2As4QxlAVwA=
+			LHiMF4iDTc80fy49ycRlCMBAf08DjVZ1ThLKna6EQXs=
+			</data>
+		</dict>
+		<key>Headers/AdiscopeInterface+AdEvent.h</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mZSnnWWHkozgPL8gVBXnRkqvoHDzIKch4ph22IXCftU=
 			</data>
 		</dict>
 		<key>Headers/AdiscopeInterface+Interstitial.h</key>
@@ -833,7 +844,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bSui/MNC2R61OnDI7DxC/4Ko4ZSznND+6mWe6O4MWLQ=
+			zi1LUtAY0PcSgufVfYUvjOzvYUPlzRUIG+JqvwMD3pw=
 			</data>
 		</dict>
 		<key>Headers/AdiscopeRewardItem.h</key>
@@ -854,7 +865,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Ml47nt09utGh9WxeNvKOa9Seg9Cd+bXhUAIdpjNVr5M=
+			IoBwbQAR4FzJhCay7o3HAtIr3eWZa6OOHRWcjmyAFzM=
 			</data>
 		</dict>
 		<key>HelpViewController.nib</key>
@@ -875,14 +886,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Tb2V7bV+jgRyfyfcIAbiVdFaR5IB9XVQ0G1A7itulI0=
+			F/H+gSx+iQJsBtsRRthq7e7WI8fTRzWKmseNX61eYXM=
 			</data>
 		</dict>
 		<key>InputType2TableViewCell.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eD41gX+Afa6ldhDG7PAv81a95JGOvm1s6yK9QXsg7I4=
+			LeOXjsOepsH2pzqB2bGtEkvq9qIUVMg5wiAZypXkI4I=
 			</data>
 		</dict>
 		<key>LogoTableViewCell.nib</key>
@@ -945,7 +956,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lxROhbHPJJW87N5xQuFYjthc6jx110EiVxUC5AVgHZ8=
+			aQYNyF+ylmjkdblJ41oS/ab7QMMUsoMVjUHY77IY9ow=
 			</data>
 		</dict>
 		<key>RecommendationViewController.nib</key>

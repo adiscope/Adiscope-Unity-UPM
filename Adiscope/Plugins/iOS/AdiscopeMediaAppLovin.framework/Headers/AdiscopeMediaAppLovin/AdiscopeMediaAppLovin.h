@@ -10,7 +10,7 @@
 #import <AppLovinSDK/AppLovinSDK.h>
 #import "Adapter.h"
 
-#define AdiscopeAdapterVersion @"3.8.1"
+#define AdiscopeAdapterVersion @"3.9.0"
 
 @interface AdiscopeMediaAppLovin : NSObject <Adapter, ALAdLoadDelegate, ALAdRewardDelegate, ALAdDisplayDelegate, ALAdVideoPlaybackDelegate>
 @end

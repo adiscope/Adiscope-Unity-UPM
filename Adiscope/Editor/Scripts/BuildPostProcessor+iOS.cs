@@ -281,9 +281,8 @@ namespace Adiscope.PostProcessor
                     return new List<string>() {
                         "AppLovinSDK.framework",
                         "DTBiOSSDK.framework",
-                        "MolocoSDK.framework",
-                        "OMSDK_Appodeal.framework",
-                        "OMSDK_Ogury.framework"
+                        "InMobiSDK.framework",
+                        "MolocoSDK.framework"
                     };
                 default:
                     return null;
