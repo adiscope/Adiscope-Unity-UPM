@@ -1,6 +1,0 @@
-framework module AdiscopeMediaMax {
-    umbrella header "AdiscopeMediaMax.h"
-
-    export *
-    module * { export * }
-}
