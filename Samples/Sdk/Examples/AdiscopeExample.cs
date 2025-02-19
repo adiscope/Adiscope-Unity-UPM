@@ -232,8 +232,8 @@ public class AdiscopeExample : MonoBehaviour
 
     private void OnInterstitialAdLoadedCallback(object sender, Adiscope.Model.LoadResult args) { this.AddOutputMessage("  <= interstitialAd.OnLoaded"); }
     private void OnInterstitialAdFailedToLoadCallback(object sender, Adiscope.Model.LoadFailure args) { this.AddOutputMessage("  <= interstitialAd.OnFailedToLoad - args: " + args); }
-    private void OnInterstitialAdOpenedCallback(object sender, EventArgs args) { this.AddOutputMessage("  <= interstitialAd.OnOpened - args: " + args); }
-    private void OnInterstitialAdClosedCallback(object sender, EventArgs args) { this.AddOutputMessage("  <= interstitialAd.OnClosed - args: " + args); }
+    private void OnInterstitialAdOpenedCallback(object sender, Adiscope.Model.ShowResult args) { this.AddOutputMessage("  <= interstitialAd.OnOpened - args: " + args); }
+    private void OnInterstitialAdClosedCallback(object sender, Adiscope.Model.ShowResult args) { this.AddOutputMessage("  <= interstitialAd.OnClosed - args: " + args); }
     private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) { this.AddOutputMessage("  <= interstitialAd.OnFailedToShow - args: " + args); }
 
 

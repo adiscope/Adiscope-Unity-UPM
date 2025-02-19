@@ -20,10 +20,6 @@ namespace Adiscope.PostProcessor
         private static string adiscopeUnityPath = "com.tnk.adiscope/Plugins/iOS";
 
         public static void OnPostProcessBuild(string path) {
-            CopyAdiscopeFrameworks(path, new List<AdiscopeFrameworkType>() {
-                AdiscopeFrameworkType.Core,
-                AdiscopeFrameworkType.Max,
-            });
             UpdateBuildSetting(path);
             UpdateInfoPlist(path);
         }
@@ -34,46 +30,6 @@ namespace Adiscope.PostProcessor
 
         private static string GetFrameworkTarget(PBXProject project) {
             return project.GetUnityFrameworkTargetGuid();
-        }
-
-        private static void CopyAdiscopeFrameworks(string path, List<AdiscopeFrameworkType> usingFrameworks) {
-            string projectPath = PBXProject.GetPBXProjectPath(path);     
-            string contents = File.ReadAllText(projectPath);
-
-            PBXProject project = new PBXProject();
-            project.ReadFromString(contents); 
-
-            string buildTargetGUID = GetDefaultTarget(project);
-
-            string embedSectionID = project.AddCopyFilesBuildPhase(buildTargetGUID, "Embed Frameworks", "", "10");
-            string linkPhaseGuid = project.GetFrameworksBuildPhaseByTarget(buildTargetGUID);
-            string resourcesGuid = project.GetResourcesBuildPhaseByTarget(buildTargetGUID);
-
-            project.AddBuildProperty(buildTargetGUID, "VALIDATE_WORKSPACE", "YES");
-            project.AddBuildProperty(buildTargetGUID, "FRAMEWORK_SEARCH_PATHS", "$(inherited)");
-            project.AddBuildProperty(buildTargetGUID, "FRAMEWORK_SEARCH_PATHS", "$(PROJECT_DIR)/Frameworks/" + adiscopeUnityPath);
-
-            File.WriteAllText(projectPath, project.WriteToString());
-
-            UpdateDuplicateFrameworkSourceReference(projectPath, adiscopeFrameworkPath);
-        }
-
-        private static void UpdateDuplicateFrameworkSourceReference(string projectPath, string adiscopeUnityPath) {
-            string contents = File.ReadAllText(projectPath);
-
-            string[] contentList = contents.Split(new char[] {'\n'});
-            List<string> result = new List<string>();
-
-            foreach (string line in contentList) {
-                bool isMatch = Regex.IsMatch(line, ".*Frameworks/" + adiscopeUnityPath + "/; sourceTree = SOURCE_ROOT;");
-                if (!isMatch) { result.Add(line); }
-            }
-
-            contents = String.Join("\n", result);
-
-            PBXProject project = new PBXProject();
-            project.ReadFromString(contents);
-            File.WriteAllText(projectPath, project.WriteToString());
         }
 
         private static void UpdateBuildSetting(string path) {
@@ -110,7 +66,7 @@ namespace Adiscope.PostProcessor
                 { "GADIsAdManagerApp", true },
 
                 // Permissions
-                { "NSUserTrackingUsageDescription", trackingUsageDescription },
+                { "NSUserTrackingUsageDescription", CleanInvalidXmlChars(trackingUsageDescription) },
 
                 // Scheme
                 { "LSApplicationQueriesSchemes", new List<string>{
@@ -169,6 +125,12 @@ namespace Adiscope.PostProcessor
             root.WriteToFile(plistPath);
         }
 
+        private static string CleanInvalidXmlChars(string text) {
+            if (string.IsNullOrEmpty(text))
+                return text;
+            return Regex.Replace(text, @"[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]", ""); // 제어 문자 제거
+        }
+
         private static void DownloadSkAdNetworkPlistFile(string path) {
             string fileName = "AdiscopeSkAdNetworks.plist";
             string uriString = prefixURI;
@@ -208,55 +170,6 @@ namespace Adiscope.PostProcessor
                 foreach (KeyValuePair<string, object> valueItem in (Dictionary<string, object>)value) {
                     InsertInfoPlist(targetPlistElementDict, valueItem.Key, valueItem.Value);
                 }
-            }
-        }
-    }
-
-    public enum AdiscopeFrameworkType {
-        Core,
-        Max
-    }
-
-    static class AdiscopeFrameworkTypeExtension {
-
-        public static bool IsEmbedFramework(this AdiscopeFrameworkType type) {
-            return type == AdiscopeFrameworkType.Core;
-        }
-
-        public static string GetFileName(this AdiscopeFrameworkType type) {
-            switch (type) {
-                case AdiscopeFrameworkType.Core:        return "Adiscope.framework";
-                case AdiscopeFrameworkType.Max:         return "AdiscopeMediaMax.framework";
-                default: return null;
-            }
-        }
-
-        public static List<string> GetChildFrameworkName(this AdiscopeFrameworkType type) {
-            switch (type) {
-                case AdiscopeFrameworkType.Core:
-                    return null;
-                case AdiscopeFrameworkType.Max:
-                    return new List<string>() {
-                        "AppLovinSDK.framework",
-                        "DTBiOSSDK.framework",
-                        "OMSDK_Appodeal.framework",
-                        "InMobiSDK.framework",
-                        "MolocoSDK.framework",
-                        "OMSDK_Ogury.framework"
-                    };
-                default:
-                    return null;
-            }
-        }
-
-        public static bool GetAdapterEnable(this AdiscopeFrameworkType type) {
-            var settings = FrameworkSettingsRegister.Load();
-            var serialized = new SerializedObject(settings);
-
-            switch (type) {
-                case AdiscopeFrameworkType.Core:        return true;
-                case AdiscopeFrameworkType.Max:         return (serialized.FindProperty("_maxAdapter").intValue == 1 || serialized.FindProperty("_maxAdapter").intValue == 3);
-                default: return false;
             }
         }
     }

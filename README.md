@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-3.10.5-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-3.10.5-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-3.10.3-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-3.10.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-3.10.5-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.0.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.0.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
@@ -453,10 +453,10 @@ private void OnInterstitialAdLoadedCallback(object sender, Adiscope.Model.LoadRe
 private void OnInterstitialAdFailedToLoadCallback(object sender, Adiscope.Model.LoadFailure args) {
     // Interstitial Load Fail
 }
-private void OnInterstitialAdOpenedCallback(object sender, EventArgs args) {
+private void OnInterstitialAdOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
     // Interstitial 열림
 }
-private void OnInterstitialAdClosedCallback(object sender, EventArgs args) {
+private void OnInterstitialAdClosedCallback(object sender, Adiscope.Model.ShowResult args) {
     // Interstitial 닫힘
 }
 private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
