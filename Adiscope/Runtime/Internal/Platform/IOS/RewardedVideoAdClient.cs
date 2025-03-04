@@ -76,7 +76,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onRewardedVideoAdLoaded(string unitId)
 		{
 			Debug.Log("onRewardedVideoAdLoaded()");
-			Instance.RewardedVideoAdLoadedProc(unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedVideoAdLoadedProc(unitId);
+			}
 		}
 
 		private void RewardedVideoAdLoadedProc(string unitId) 
@@ -100,7 +103,10 @@ namespace Adiscope.Internal.Platform.IOS
 		[MonoPInvokeCallback(typeof(onRewardedVideoAdFailedToLoadCallback))] 
 		public static void onRewardedVideoAdFailedToLoad(string unitId, int code, string description, string xb3TraceID)
 		{
-			Instance.RewardedVideoAdFailedToLoadProc(unitId, code, description, xb3TraceID);
+            if (Instance != null)
+            {
+				Instance.RewardedVideoAdFailedToLoadProc(unitId, code, description, xb3TraceID);
+			}
 		}
 
 		private void RewardedVideoAdFailedToLoadProc(string unitId, int code, string description, string xb3TraceID)
@@ -127,7 +133,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onRewardedVideoAdOpened(string unitId)
 		{
 			Debug.Log("onRewardedVideoAdOpened() unitId = " + unitId);
-			Instance.RewardedVideoAdOpenedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedVideoAdOpenedProc (unitId);
+			}
 		}
 
 		private void RewardedVideoAdOpenedProc(string unitId)
@@ -154,7 +163,10 @@ namespace Adiscope.Internal.Platform.IOS
 			Debug.Log("onRewardedVideoAdClosed() unitId = " + unitId);
 			string nullSafetyUnitID = unitId;
 			if (nullSafetyUnitID == null) { nullSafetyUnitID = ""; }
-			Instance.RewardedVideoAdClosedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedVideoAdClosedProc (unitId);
+			}
 		}
 
 		private void RewardedVideoAdClosedProc(string unitId)
@@ -179,7 +191,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onRewarded(string unitId, string type, long amount)
 		{
 			Debug.Log("onRewarded() unitId = " + unitId + " type = " + type + " amount = " + amount);
-			Instance.RewardedProc (unitId, type, amount);
+            if (Instance != null)
+            {
+				Instance.RewardedProc (unitId, type, amount);
+			}
 		}
 
 		private void RewardedProc(string unitId, string type, long amount)
@@ -203,7 +218,10 @@ namespace Adiscope.Internal.Platform.IOS
 		[MonoPInvokeCallback(typeof(onRewardedVideoAdFailedToShowCallback))]
 		public static void onRewardedVideoAdFailedToShow(string unitId, int code, string description, string xb3TraceID)
 		{
-			Instance.RewardedVideoAdFailedToShowProc (unitId, code, description, xb3TraceID);
+            if (Instance != null)
+            {
+				Instance.RewardedVideoAdFailedToShowProc (unitId, code, description, xb3TraceID);
+			}
 		}
 
 		private void RewardedVideoAdFailedToShowProc(string unitId, int code, string description, string xb3TraceID)

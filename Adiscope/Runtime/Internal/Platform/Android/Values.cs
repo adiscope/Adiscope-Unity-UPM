@@ -21,17 +21,12 @@ namespace Adiscope.Internal.Platform.Android
         public const string PKG_MAX_ADAPTER = "com.nps.adiscope.adapter.max.MaxAdapter";
         public const string PKG_IUNIT_STATUS = "com.nps.adiscope.model.IUnitStatus";
 
-        public const string PKG_ADISCOPE_CROSS = "com.nps.adiscope.cp.Cross";
-        public const string PKG_CROSS_PROMOTION_LISTENER = "com.nps.adiscope.cp.CrossPromotionListener";
-
         public const string MTD_GET_REWARDED_VIDEO_AD_INSTANCE = "getRewardedVideoAdInstance";
         public const string MTD_SET_REWARDED_VIDEO_AD_LISTENER = "setRewardedVideoAdListener";
         public const string MTD_GET_OFFERWALL_AD_INSTANCE = "getOfferwallAdInstance";
         public const string MTD_SET_OFFERWALL_AD_LISTENER = "setOfferwallAdListener";
         public const string MTD_GET_INTERSTITIAL_AD_INSTANCE = "getInterstitialAdInstance";
         public const string MTD_SET_INTERSTITIAL_AD_LISTENER = "setInterstitialAdListener";
-        public const string MTD_GET_CROSS_PROMOTION_INSTANCE = "getCrossPromotionInstance";
-        public const string MTD_SET_CROSS_PROMOTION_LISTENER = "setCrossPromotionListener";
         public const string MTD_GET_OPTION_SETTER_INSTANCE = "getOptionSetterInstance";
         public const string MTD_GET_NETWORK_VERSIONS = "getNetworkVersions";
         public const string MTD_GET_SDK_VERSION = "getSDKVersion";
@@ -66,13 +61,6 @@ namespace Adiscope.Internal.Platform.Android
         // Ad Event
         public const string MTD_GET_AD_EVENT_INSTANCE = "getAdEventInstance";
         public const string MTD_SET_AD_EVENT_LISTENER = "setAdEventListener";
-
-        // cross
-        public const string MTD_CROSS_INITIALIZE = "initialize";
-        public const string MTD_CROSS_SET_TRACKING_INFO = "setTrackingInfo";
-        public const string MTD_CROSS_SHOW_MORE_GAMES = "showMoreGames";
-        public const string MTD_CROSS_SHOW_FULL_SCREEN_POPUP = "showFullScreenPopup";
-        public const string MTD_CROSS_SHOW_ENDING_POPUP = "showEndingPopup";
 
         public const string MTD_SHOW_DEBUG = "showDebug";
 

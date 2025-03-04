@@ -28,11 +28,11 @@ namespace Adiscope.Internal.Platform.IOS
         public event EventHandler<ShowResult> OnClosedBackground;
         public event EventHandler<ShowFailure> OnFailedToShowBackground;
 
-        private static InterstitialAdClient interstitialAd;
+        private static InterstitialAdClient Instance;
 
         public InterstitialAdClient ()
         {
-            interstitialAd = this;
+            Instance = this;
         }
 
 #region AD APIs
@@ -76,7 +76,10 @@ namespace Adiscope.Internal.Platform.IOS
         public static void onInterstitialAdLoaded(string unitId)
         {
             Debug.Log("onInterstitialAdLoaded()");
-            interstitialAd.InterstitialAdLoadedProc(unitId);
+            if (Instance != null)
+            {
+                Instance.InterstitialAdLoadedProc(unitId);
+            }
         }
 
         public void InterstitialAdLoadedProc(string unitId)
@@ -101,7 +104,10 @@ namespace Adiscope.Internal.Platform.IOS
         public static void onInterstitialAdFailedToLoad(string unitId, int code, string description, string xb3TraceID)
         {
             Debug.Log("onInterstitialAdFailedToLoad()");
-            interstitialAd.InterstitialAdFailedToLoadProc(unitId, code, description, xb3TraceID);
+            if (Instance != null)
+            {
+                Instance.InterstitialAdFailedToLoadProc(unitId, code, description, xb3TraceID);
+            }
         }
 
        public void InterstitialAdFailedToLoadProc(string unitId, int code, string description, string xb3TraceID)
@@ -119,7 +125,7 @@ namespace Adiscope.Internal.Platform.IOS
             if (this.OnFailedToLoadBackground != null)
             {
                 this.OnFailedToLoadBackground(
-                    interstitialAd,
+                    Instance,
                     new LoadFailure(unitId, new AdiscopeError(code, description, xb3TraceID)));
             }
         }
@@ -129,22 +135,25 @@ namespace Adiscope.Internal.Platform.IOS
         public static void onInterstitialWillPresentScreen(string unitId)
         {
             Debug.Log("onInterstitialWillPresentScreen()");
-            interstitialAd.InterstitialWillPresentScreen(unitId);
+            if (Instance != null)
+            {
+                Instance.InterstitialWillPresentScreen(unitId);
+            }
         }
 
         public void InterstitialWillPresentScreen(string unitId)
         {
-            if (interstitialAd.OnOpened != null)
+            if (Instance.OnOpened != null)
             {
                 UnityThread.executeInMainThread(() =>
                 {
-                    interstitialAd.OnOpened(interstitialAd, new ShowResult(unitId));
+                    Instance.OnOpened(Instance, new ShowResult(unitId));
                 });
             }
 
-            if (interstitialAd.OnOpenedBackground != null)
+            if (Instance.OnOpenedBackground != null)
             {
-                interstitialAd.OnOpenedBackground(interstitialAd, new ShowResult(unitId));
+                Instance.OnOpenedBackground(Instance, new ShowResult(unitId));
             }
         }
 
@@ -154,22 +163,25 @@ namespace Adiscope.Internal.Platform.IOS
         public static void onInterstitialWillDismissScreen(string unitId)
         {
             Debug.Log("onInterstitialWillDismissScreen()");
-            interstitialAd.InterstitialWillDismissScreen(unitId);
+            if (Instance != null)
+            {
+                Instance.InterstitialWillDismissScreen(unitId);
+            }
         }
 
         public void InterstitialWillDismissScreen(string unitId)
         {
-            if (interstitialAd.OnClosed != null)
+            if (Instance.OnClosed != null)
             {
                 UnityThread.executeInMainThread(() =>
                 {
-                    interstitialAd.OnClosed(interstitialAd, new ShowResult(unitId));
+                    Instance.OnClosed(Instance, new ShowResult(unitId));
                 });
             }
 
-            if (interstitialAd.OnClosedBackground != null)
+            if (Instance.OnClosedBackground != null)
             {
-                interstitialAd.OnClosedBackground(interstitialAd, new ShowResult(unitId));
+                Instance.OnClosedBackground(Instance, new ShowResult(unitId));
             }
         }
 
@@ -179,24 +191,27 @@ namespace Adiscope.Internal.Platform.IOS
         public static void onInterstitialDidFailToPresentScreen(string unitId, int code, string description, string xb3TraceID)
         {
             Debug.Log("onInterstitialDidFailToPresentScreen()");
-            interstitialAd.InterstitialDidFailToPresentScreen(unitId, code, description, xb3TraceID);
+            if (Instance != null)
+            {
+                Instance.InterstitialDidFailToPresentScreen(unitId, code, description, xb3TraceID);
+            }
         }
 
         public void InterstitialDidFailToPresentScreen(string unitId, int code, string description, string xb3TraceID)
         {
-            if (interstitialAd.OnFailedToShow != null)
+            if (Instance.OnFailedToShow != null)
             {
                 UnityThread.executeInMainThread(() =>
                 {
-                    interstitialAd.OnFailedToShow(
-                        interstitialAd, new ShowFailure(unitId, new AdiscopeError(code, description, xb3TraceID)));
+                    Instance.OnFailedToShow(
+                        Instance, new ShowFailure(unitId, new AdiscopeError(code, description, xb3TraceID)));
                 });
             }
 
-            if (interstitialAd.OnFailedToShowBackground != null)
+            if (Instance.OnFailedToShowBackground != null)
             {
-                interstitialAd.OnFailedToShowBackground(
-                    interstitialAd, new ShowFailure(unitId, new AdiscopeError(code, description, xb3TraceID)));
+                Instance.OnFailedToShowBackground(
+                    Instance, new ShowFailure(unitId, new AdiscopeError(code, description, xb3TraceID)));
             }
         }
 

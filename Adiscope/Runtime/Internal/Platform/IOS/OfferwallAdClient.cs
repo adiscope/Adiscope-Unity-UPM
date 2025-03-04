@@ -73,7 +73,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onOfferwallAdOpened(string unitId)
 		{
 			Debug.Log("onOfferwallAdOpened() unitId = " + unitId);
-			Instance.OfferwallAdOpenedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.OfferwallAdOpenedProc (unitId);
+			}
 		}
 
 		private void OfferwallAdOpenedProc(string unitId)
@@ -98,7 +101,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onOfferwallAdClosed(string unitId)
 		{
 			Debug.Log("onOfferwallAdClosed() unitId = " + unitId);
-			Instance.OfferwallAdClosedClosedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.OfferwallAdClosedClosedProc (unitId);
+			}
 		}
 
 		private void OfferwallAdClosedClosedProc(string unitId)
@@ -123,7 +129,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onOfferwallAdFailedToShow(string unitId, int code, string description)
 		{
 			Debug.Log("onOfferwallAdFailedToShow() unitId = " + unitId + " code = " + code + " description = " + description);
-			Instance.OfferwallAdFailedToShowProc (unitId, code, description);
+            if (Instance != null)
+            {
+				Instance.OfferwallAdFailedToShowProc (unitId, code, description);
+			}
 		}
 
 		private void OfferwallAdFailedToShowProc(string unitId, int code, string description)

@@ -2,7 +2,6 @@
  * Created by Hyunchang Kim (martin.kim@neowiz.com)
  */
 using Adiscope.Feature;
-using Adiscope.Cross;
 using Adiscope.Internal;
 using Adiscope.Internal.Interface;
 using Adiscope.Internal.Platform;
@@ -76,15 +75,6 @@ namespace Adiscope
         public static AdEvent GetAdEventInstance()
         {
             return AdEvent.Instance;
-        }
-
-        /// <summary>
-        /// get cross promotion singleton instance
-        /// </summary>
-        /// <returns>singleton instance of CrossPromotion</returns>
-        public static CrossPromotion GetCrossPromotionInstance()
-        {
-            return CrossPromotion.Instance;
         }
 
         /// <summary>

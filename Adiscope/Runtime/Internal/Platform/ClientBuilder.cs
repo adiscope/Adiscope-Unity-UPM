@@ -113,23 +113,6 @@ namespace Adiscope.Internal.Platform
         }
 
         /// <summary>
-        /// build cross promotion client based on the runtime env.
-        /// </summary>
-        /// <returns>cross promotion client based on current runtime platform</returns>
-        public static ICrossPromotionClient BuildCrossPromotionClient()
-        {
-#if UNITY_EDITOR
-            return new MockPlatform.CrossPromotionClient();
-#elif UNITY_ANDROID
-            return new Android.CrossPromotionClient();
-#elif UNITY_IOS
-                return new IOS.CrossPromotionClient();            
-#else
-            return new MockPlatform.CrossPromotionClient();
-#endif
-        }
-
-        /// <summary>
         /// build option setter client based on the runtime env.
         /// </summary>
         /// <returns>option setter client based on current runtime platform</returns>

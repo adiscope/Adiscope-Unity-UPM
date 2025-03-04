@@ -87,7 +87,10 @@ namespace Adiscope.Internal.Platform.IOS
 		[MonoPInvokeCallback(typeof(onRewardedInterstitialGetUnitStatusCallback))] 
 		public static void onRewardedInterstitialGetUnitStatus(string description, bool live, bool active)
 		{
-			Instance.RewardedInterstitialGetUnitStatusProc(description, live, active);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialGetUnitStatusProc(description, live, active);
+			}
 		}
 
 		private void RewardedInterstitialGetUnitStatusProc(string description, bool live, bool active) 
@@ -111,7 +114,10 @@ namespace Adiscope.Internal.Platform.IOS
 		[MonoPInvokeCallback(typeof(onRewardedInterstitialAdSkipCallback))] 
 		public static void onRewardedInterstitialAdSkip(string unitId)
 		{
-			Instance.RewardedInterstitialAdSkipProc(unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialAdSkipProc(unitId);
+			}
 		}
 
 		private void RewardedInterstitialAdSkipProc(string unitId)
@@ -138,7 +144,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onRewardedInterstitialAdOpened(string unitId)
 		{
 			Debug.Log("onRewardedInterstitialAdOpened() unitId = " + unitId);
-			Instance.RewardedInterstitialAdOpenedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialAdOpenedProc (unitId);
+			}
 		}
 
 		private void RewardedInterstitialAdOpenedProc(string unitId)
@@ -165,7 +174,10 @@ namespace Adiscope.Internal.Platform.IOS
 			Debug.Log("onRewardedInterstitialAdClosed() unitId = " + unitId);
 			string nullSafetyUnitID = unitId;
 			if (nullSafetyUnitID == null) { nullSafetyUnitID = ""; }
-			Instance.RewardedInterstitialAdClosedProc (unitId);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialAdClosedProc (unitId);
+			}
 		}
 
 		private void RewardedInterstitialAdClosedProc(string unitId)
@@ -190,7 +202,10 @@ namespace Adiscope.Internal.Platform.IOS
 		public static void onRewardedInterstitialRewarded(string unitId, string type, long amount)
 		{
 			Debug.Log("onRewardedInterstitialRewarded() unitId = " + unitId + " type = " + type + " amount = " + amount);
-			Instance.RewardedInterstitialRewardedProc (unitId, type, amount);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialRewardedProc (unitId, type, amount);
+			}
 		}
 
 		private void RewardedInterstitialRewardedProc(string unitId, string type, long amount)
@@ -214,7 +229,10 @@ namespace Adiscope.Internal.Platform.IOS
 		[MonoPInvokeCallback(typeof(onRewardedInterstitialAdFailedToShowCallback))]
 		public static void onRewardedInterstitialAdFailedToShow(string unitId, int code, string description, string xb3TraceID)
 		{
-			Instance.RewardedInterstitialAdFailedToShowProc (unitId, code, description, xb3TraceID);
+            if (Instance != null)
+            {
+				Instance.RewardedInterstitialAdFailedToShowProc (unitId, code, description, xb3TraceID);
+			}
 		}
 
 		private void RewardedInterstitialAdFailedToShowProc(string unitId, int code, string description, string xb3TraceID)
