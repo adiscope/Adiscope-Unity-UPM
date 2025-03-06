@@ -10,7 +10,7 @@
 ```cpp    
 //***** Adiscope Start *****//
 if (AdiscopeInterface.sharedInstance.isOfferwallViewPortrait) {
-    return UIInterfaceOrientationPortrait;
+    return UIInterfaceOrientationMaskAll;
 }
 //****** Adiscope End ******//
 ```
