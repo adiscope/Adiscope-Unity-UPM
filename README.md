@@ -260,7 +260,23 @@ private void OnOfferwallAdFailedToShowCallback(object sender, Adiscope.Model.Sho
 ```
 - Show 성공 시 `OnOpened`, `OnClosed` callback이 순차적으로 호출
 - Callback은 Unity의 main thread에서 호출
-- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md)
+<br/>
+
+#### E. 상세 이동
+##### 가. URL 전달 방식
+```csharp
+private string URL = "";        // 관리자를 통해 발급
+Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetail(URL); 
+```
+
+##### 나. 값 전달 방식
+```csharp
+private string UNIT_ID = "";        // 관리자를 통해 발급
+private string FILTERS = "";        // 관리자를 통해 확인
+private string ITEM_ID = "";        // 관리자를 통해 발급
+Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetail(UNIT_ID, FILTERS, ITEM_ID);
+```
 <br/><br/><br/>
 
 ### 5. RewardedVideo
