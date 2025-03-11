@@ -267,7 +267,7 @@ private void OnOfferwallAdFailedToShowCallback(object sender, Adiscope.Model.Sho
 ##### 가. URL 전달 방식
 ```csharp
 private string URL = "";        // 관리자를 통해 발급
-Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetail(URL); 
+Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetailFromUrl(URL); 
 ```
 
 ##### 나. 값 전달 방식
