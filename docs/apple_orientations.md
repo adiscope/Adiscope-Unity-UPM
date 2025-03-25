@@ -10,10 +10,11 @@
 ```cpp    
 //***** Adiscope Start *****//
 if (AdiscopeInterface.sharedInstance.isOfferwallViewPortrait) {
-    return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationPortrait;
 }
 //****** Adiscope End ******//
 ```
+- UIInterfaceOrientationPortrait를 적용 시 크래시 발생 시 UIInterfaceOrientationMaskAll로 설정
 
 - 추가 되어야 하는 함수 및 위치   
 ```cpp   
