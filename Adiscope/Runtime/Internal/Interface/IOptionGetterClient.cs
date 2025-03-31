@@ -11,5 +11,6 @@ namespace Adiscope.Internal.Interface
         string GetNetworkVersions();
         string GetUnitySDKVersion();
         string GetSDKVersion();
+        string GetInitializeFailLog();
     }
 }

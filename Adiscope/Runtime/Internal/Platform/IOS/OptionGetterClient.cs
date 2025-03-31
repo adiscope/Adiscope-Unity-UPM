@@ -36,6 +36,11 @@ namespace Adiscope.Internal.Platform.IOS {
 			return getUnitySDKVersion();
 		}
 
+		public string GetInitializeFailLog() {
+			return "no log";
+		}
+		
+
 #endregion
 
 	}

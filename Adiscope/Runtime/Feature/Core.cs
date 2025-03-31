@@ -49,6 +49,17 @@ namespace Adiscope.Feature
             UnityThread.initUnityThread(true);
         }
 
+        public void InitializeTest(string mediaId, string mediaSecret, string callbackTag = "", Action<bool> callback = null)
+        {
+            InitializeTest(mediaId, mediaSecret, callbackTag, "", callback);
+        }
+
+        public void InitializeTest(string mediaId, string mediaSecret, string callbackTag = "", string childYN = "", Action<bool> callback = null)
+        {
+            this.client.InitializeTest(mediaId, mediaSecret, callbackTag, childYN, callback);
+            UnityThread.initUnityThread(true);
+        }
+
         public bool IsInitialized() { return this.client.IsInitialized(); }
 
         public void SetUserId(string userId) { this.client.SetUserId(userId); }

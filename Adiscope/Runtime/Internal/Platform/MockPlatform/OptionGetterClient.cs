@@ -31,6 +31,8 @@ namespace Adiscope.Internal.Platform.MockPlatform
 
 		public string GetNetworkVersions() { return ""; }
 
+		public string GetInitializeFailLog() { return ""; }
+
 		#endregion
 	}
 

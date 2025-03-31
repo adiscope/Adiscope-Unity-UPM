@@ -1,6 +1,6 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.1.4-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.1.4-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.1.5-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.1.5-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-4.1.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.1.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
@@ -217,8 +217,12 @@ Adiscope.Sdk.GetCoreInstance().SetUserId(USER_ID);
 ### 4. Offerwall
 #### A. Offerwall Ad Instance 생성
 ```csharp
-// get singleton instance of offerwall ad
-Adiscope.Feature.OfferwallAd offerwallAd = Adiscope.Sdk.GetOfferwallAdInstance();
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of offerwall ad
+    Adiscope.Feature.OfferwallAd offerwallAd = Adiscope.Sdk.GetOfferwallAdInstance();
+} else {
+    // Reinitialize
+}
 ```
 - Offerwall Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Offerwall Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
@@ -226,9 +230,11 @@ Adiscope.Feature.OfferwallAd offerwallAd = Adiscope.Sdk.GetOfferwallAdInstance()
 
 #### B. Callback 등록
 ```csharp
-offerwallAd.OnOpened += OnOfferwallAdOpenedCallback;
-offerwallAd.OnClosed += OnOfferwallAdClosedCallback;
-offerwallAd.OnFailedToShow += OnOfferwallFailedToShowCallback;
+if (offerwallAd != null) {
+    offerwallAd.OnOpened += OnOfferwallAdOpenedCallback;
+    offerwallAd.OnClosed += OnOfferwallAdClosedCallback;
+    offerwallAd.OnFailedToShow += OnOfferwallFailedToShowCallback;
+}
 ```
 <br/>
 
@@ -237,10 +243,14 @@ offerwallAd.OnFailedToShow += OnOfferwallFailedToShowCallback;
 // show offerwall ad
 OfferwallFilterType[] typeList = new OfferwallFilterType[] {  };
 // new OfferwallFilterType[] { OfferwallFilterType.CPS }
-if (offerwallAd.Show("unit1", typeList)) {
-    // Success
+if (offerwallAd != null) {
+    if (offerwallAd.Show("unit1", typeList)) {
+        // Success
+    } else {
+        // This Show request is duplicated
+    }
 } else {
-    // This Show request is duplicated
+    // Reinitialize
 }
 ```
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
@@ -263,27 +273,39 @@ private void OnOfferwallAdFailedToShowCallback(object sender, Adiscope.Model.Sho
 - `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md)
 <br/>
 
-#### E. 상세 이동
+#### E. 상세 이동
 ##### 가. URL 전달 방식
 ```csharp
-private string URL = "";        // 관리자를 통해 발급
-Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetailFromUrl(URL); 
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    private string URL = "";        // 관리자를 통해 발급
+    Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetailFromUrl(URL);
+} else {
+    // Reinitialize
+}
 ```
 
 ##### 나. 값 전달 방식
 ```csharp
-private string UNIT_ID = "";        // 관리자를 통해 발급
-private string FILTERS = "";        // 관리자를 통해 확인
-private string ITEM_ID = "";        // 관리자를 통해 발급
-Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetail(UNIT_ID, FILTERS, ITEM_ID);
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    private string UNIT_ID = "";        // 관리자를 통해 발급
+    private string FILTERS = "";        // 관리자를 통해 확인
+    private string ITEM_ID = "";        // 관리자를 통해 발급
+    Adiscope.Sdk.GetOfferwallAdInstance().ShowOfferwallDetail(UNIT_ID, FILTERS, ITEM_ID);
+} else {
+    // Reinitialize
+}
 ```
 <br/><br/><br/>
 
 ### 5. RewardedVideo
 #### A. RewardedVideo Ad Instance 생성
 ```csharp
-// get singleton instance of rewardedvideo ad
-Adiscope.Feature.RewardedVideoAd rewardedVideoAd = Adiscope.Sdk.GetRewardedVideoAdInstance();
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of rewardedvideo ad
+    Adiscope.Feature.RewardedVideoAd rewardedVideoAd = Adiscope.Sdk.GetRewardedVideoAdInstance();
+} else {
+    // Reinitialize
+}
 ```
 - Rewarded Video Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Rewarded Video Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
@@ -291,20 +313,28 @@ Adiscope.Feature.RewardedVideoAd rewardedVideoAd = Adiscope.Sdk.GetRewardedVideo
 
 #### B. Callback 등록
 ```csharp
-rewardedVideoAd.OnLoaded += OnRewardedVideoAdLoadedCallback;
-rewardedVideoAd.OnFailedToLoad += OnRewardedVideoAdFailedToLoadCallback;
-rewardedVideoAd.OnOpened += OnRewardedVideoAdOpenedCallback;
-rewardedVideoAd.OnClosed += OnRewardedVideoAdClosedCallback;
-rewardedVideoAd.OnRewarded += OnRewardedCallback;
-rewardedVideoAd.OnFailedToShow += OnRewardedVideoAdFailedToShowCallback;
+if (rewardedVideoAd != null) {
+    rewardedVideoAd.OnLoaded += OnRewardedVideoAdLoadedCallback;
+    rewardedVideoAd.OnFailedToLoad += OnRewardedVideoAdFailedToLoadCallback;
+    rewardedVideoAd.OnOpened += OnRewardedVideoAdOpenedCallback;
+    rewardedVideoAd.OnClosed += OnRewardedVideoAdClosedCallback;
+    rewardedVideoAd.OnRewarded += OnRewardedCallback;
+    rewardedVideoAd.OnFailedToShow += OnRewardedVideoAdFailedToShowCallback;
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### C. Load
 ```csharp
-private string UNIT_ID = "";      // 관리자를 통해 발급
-// load a rewarded video ad which belongs to a specific unit
-rewardedVideoAd.Load(UNIT_ID);
+if (rewardedVideoAd != null) {
+    private string UNIT_ID = "";      // 관리자를 통해 발급
+    // load a rewarded video ad which belongs to a specific unit
+    rewardedVideoAd.Load(UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 - 해당 유닛에 속한 ad 네크워크들의 광고를 Load
 - `OnLoaded` callback이 호출되면 Load가 완료
@@ -321,10 +351,14 @@ rewardedVideoAd.Load(UNIT_ID);
 
 #### D. IsLoaded
 ```csharp
-if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
-    // show ad here
+if (rewardedVideoAd != null) {
+    if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
+        // show ad here
+    } else {
+        // do something else
+    }
 } else {
-    // do something else
+    // Reinitialize
 }
 ```
 - 광고가 Load 되었는지 상태를 확인
@@ -332,16 +366,20 @@ if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
 
 #### E. Show
 ```csharp
-if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
-    // only one "Show" can not be requested at a time
-    // if Show() returns false, show is in progress somewhere else
-    if (rewardedVideoAd.Show()) {
-        // Success
+if (rewardedVideoAd != null) {
+    if (rewardedVideoAd.IsLoaded(UNIT_ID)) {
+        // only one "Show" can not be requested at a time
+        // if Show() returns false, show is in progress somewhere else
+        if (rewardedVideoAd.Show()) {
+            // Success
+        } else {
+            // This Show request is duplicated
+        }
     } else {
-        // This Show request is duplicated
+        // ad is not loaded
     }
 } else {
-    // ad is not loaded
+    // Reinitialize
 }
 ```
 - 마지막으로 Load된 광고를 사용자에게 보여줌
@@ -396,8 +434,12 @@ private void OnRewardedVideoAdFailedToShowCallback(object sender, Adiscope.Model
 ### 6. Interstitial
 #### A. RewardedVideo Ad Instance 생성
 ```csharp
-// get singleton instance of interstitial ad
-Adiscope.Feature.InterstitialAd interstitialAd = Adiscope.Sdk.GetInterstitialAdInstance();
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of interstitial ad
+    Adiscope.Feature.InterstitialAd interstitialAd = Adiscope.Sdk.GetInterstitialAdInstance();
+} else {
+    // Reinitialize
+}
 ```
 - Interstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Interstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
@@ -405,19 +447,27 @@ Adiscope.Feature.InterstitialAd interstitialAd = Adiscope.Sdk.GetInterstitialAdI
 
 #### B. Callback 등록
 ```csharp
-interstitialAd.OnLoaded += OnInterstitialAdLoadedCallback;
-interstitialAd.OnFailedToLoad += OnInterstitialAdFailedToLoadCallback;
-interstitialAd.OnOpened += OnInterstitialAdOpenedCallback;
-interstitialAd.OnClosed += OnInterstitialAdClosedCallback;
-interstitialAd.OnFailedToShow += OnInterstitialAdFailedToShowCallback;
+if (interstitialAd != null) {
+    interstitialAd.OnLoaded += OnInterstitialAdLoadedCallback;
+    interstitialAd.OnFailedToLoad += OnInterstitialAdFailedToLoadCallback;
+    interstitialAd.OnOpened += OnInterstitialAdOpenedCallback;
+    interstitialAd.OnClosed += OnInterstitialAdClosedCallback;
+    interstitialAd.OnFailedToShow += OnInterstitialAdFailedToShowCallback;
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### C. Load
 ```csharp
-private string UNIT_ID = "";      // 관리자를 통해 발급
-// load a interstitial ad which belongs to a specific unit
-interstitialAd.Load(UNIT_ID);
+if (interstitialAd != null) {
+    private string UNIT_ID = "";      // 관리자를 통해 발급
+    // load a interstitial ad which belongs to a specific unit
+    interstitialAd.Load(UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 - 해당 유닛에 속한 ad 네크워크들의 광고를 Load
 - `OnInterstitialAdLoaded` callback이 호출되면 Load가 완료
@@ -430,10 +480,14 @@ interstitialAd.Load(UNIT_ID);
 
 #### D. IsLoaded
 ```csharp
-if (interstitialAd.IsLoaded(UNIT_ID)) {
-    // show ad here
+if (interstitialAd != null) {
+    if (interstitialAd.IsLoaded(UNIT_ID)) {
+        // show ad here
+    } else {
+        // do something else
+    }
 } else {
-    // do something else
+    // Reinitialize
 }
 ```
 - 광고가 Load 되었는지 상태를 확인
@@ -441,16 +495,20 @@ if (interstitialAd.IsLoaded(UNIT_ID)) {
 
 #### E. Show
 ```csharp
-if (interstitialAd.IsLoaded(UNIT_ID)) {
-    // only one "Show" can not be requested at a time
-    // if Show() returns false, show is in progress somewhere else
-    if (interstitialAd.Show()) {
-        // Success
+if (interstitialAd != null) {
+    if (interstitialAd.IsLoaded(UNIT_ID)) {
+        // only one "Show" can not be requested at a time
+        // if Show() returns false, show is in progress somewhere else
+        if (interstitialAd.Show()) {
+            // Success
+        } else {
+            // This Show request is duplicated
+        }
     } else {
-        // This Show request is duplicated
+        // ad is not loaded
     }
 } else {
-    // ad is not loaded
+    // Reinitialize
 }
 ```
 - 마지막으로 Load된 광고를 사용자에게 보여줌
@@ -488,8 +546,12 @@ private void OnInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.
 ### 7. RewardedInterstitial
 #### A. RewardedInterstitial Ad Instance 생성
 ```csharp
-// get singleton instance of rewardedinterstitial ad
-Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd = Adiscope.Sdk.GetRewardedInterstitialAdInstance();
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of rewardedinterstitial ad
+    Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd = Adiscope.Sdk.GetRewardedInterstitialAdInstance();
+} else {
+    // Reinitialize
+}
 ```
 - RewardedInterstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - RewardedInterstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
@@ -497,18 +559,26 @@ Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd = Adiscope.Sdk.Get
 
 #### B. Callback 등록
 ```csharp
-rewaredInterstitialAd.OnGetUnitStatus += OnRewardedInterstitialGetUnitStatusCallback;
-rewaredInterstitialAd.OnSkip += OnRewardedInterstitialAdSkipCallback;
-rewaredInterstitialAd.OnOpened += OnRewardedInterstitialAdOpenedCallback;
-rewaredInterstitialAd.OnClosed += OnRewardedInterstitialAdClosedCallback;
-rewaredInterstitialAd.OnFailedToShow += OnRewardedInterstitialAdFailedToShowCallback;
-rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.OnGetUnitStatus += OnRewardedInterstitialGetUnitStatusCallback;
+    rewaredInterstitialAd.OnSkip += OnRewardedInterstitialAdSkipCallback;
+    rewaredInterstitialAd.OnOpened += OnRewardedInterstitialAdOpenedCallback;
+    rewaredInterstitialAd.OnClosed += OnRewardedInterstitialAdClosedCallback;
+    rewaredInterstitialAd.OnFailedToShow += OnRewardedInterstitialAdFailedToShowCallback;
+    rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### C. PreLoadAll
 ```csharp
-rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
+} else {
+    // Reinitialize
+}
 ```
 - Initialize Call Back 후 1회 설정 권장
 - 관리자가 설정된 활성화된 모든 유닛들을 Load 진행
@@ -516,7 +586,11 @@ rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
 
 #### D. Unit 지정 PreLoad
 ```csharp
-rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_ID2, ... });
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_ID2, ... });
+} else {
+    // Reinitialize
+}
 ```
 - Initialize Call Back 후 1회 설정 권장
 - 입력된 유닛들을 Load 진행
@@ -524,7 +598,11 @@ rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_
 
 #### E. Show
 ```csharp
-rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 - 해당 유닛이 Load되어 있으면 안내 팝업을 보여 준 뒤 해당 광고를 사용자에게 보여줌
 - ShowRewardedInterstitial method는 중복하여 호출 할 수 없음
@@ -534,7 +612,11 @@ rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
 
 #### F. Unit Status Info
 ```csharp
-rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(UNIT_ID);
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(UNIT_ID);
+} else {
+    // Reinitialize
+}
 ```
 - 해당 유닛의 수익화 여부, 활성화 여부를 알 수 있음
 <br/>
@@ -584,8 +666,12 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 ### 8. AdEvent
 #### A. AdEvent Ad Instance 생성
 ```csharp
-// get singleton instance of AdEvent
-Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of AdEvent
+    Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
+} else {
+    // Reinitialize
+}
 ```
 - AdEvent Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - AdEvent의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
@@ -593,19 +679,27 @@ Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
 
 #### B. Callback 등록
 ```csharp
-adEvent.OnOpened += OnAdEventOpenedCallback;
-adEvent.OnClosed += OnAdEventClosedCallback;
-adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
+if (adEvent != null) {
+    adEvent.OnOpened += OnAdEventOpenedCallback;
+    adEvent.OnClosed += OnAdEventClosedCallback;
+    adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
+} else {
+    // Reinitialize
+}
 ```
 <br/>
 
 #### C. Show
 ```csharp
 // show adEvent
-if (adEvent.Show("unit1")) {
-    // Success
+if (adEvent != null) {
+    if (adEvent.Show("unit1")) {
+        // Success
+    } else {
+        // This Show request is duplicated
+    }
 } else {
-    // This Show request is duplicated
+    // Reinitialize
 }
 ```
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출

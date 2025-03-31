@@ -75,6 +75,27 @@ namespace Adiscope.Internal.Platform.MockPlatform
                }, 10)).Start();
         }
 
+        public void InitializeTest(string mediaId, string mediaSecret, string callbackTag, string childYN, Action<bool> callback)
+        {
+            new Thread(() => DelayedCallback(
+               () => {
+
+                   if (OnInitialized != null)
+                   {
+                       UnityThread.executeInMainThread(() =>
+                       {
+                           OnInitialized(this, new InitResult(true));
+                       });
+                   }
+
+                   if (OnInitializedBackground != null)
+                   {
+                       OnInitializedBackground(this, new InitResult(true));
+                   }
+
+               }, 10)).Start();
+        }
+
         public bool IsInitialized()
         {
             return true;

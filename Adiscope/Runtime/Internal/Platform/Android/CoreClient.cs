@@ -146,6 +146,22 @@ namespace Adiscope.Internal.Platform.Android
             }
         }
 
+        public void InitializeTest(string mediaId, string mediaSecret, string callbackTag, string childYN, Action<bool> callback)
+        {
+            using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
+            {
+                if (jc == null)
+                {
+                    Debug.LogError("Android.CoreClient<Initialize> " +
+                        Values.PKG_ADISCOPE + ": null");
+                    return;
+                }
+
+                AdiscopeInitializeListener listener = new AdiscopeInitializeListener(callback);
+                jc.CallStatic(Values.MTD_INITIALIZE, null, mediaId, mediaSecret, callbackTag, childYN, listener);
+            }
+        }
+
         public void SetUserId(string userId)
         {
             using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))

@@ -68,6 +68,10 @@ namespace Adiscope.Internal.Platform.IOS
             this.Initialize(mediaId, mediaSecret, callbackTag, callback);
         }
 
+        public void InitializeTest(string mediaId, string mediaSecret, string callbackTag, string childYN, Action<bool> callback) {
+            this.Initialize(mediaId, mediaSecret, callbackTag, callback);
+        }
+
 		[DllImport("__Internal")]
 		private static extern void unityInitializePlist(string callbackTag, onInitializedCallback callback);
 

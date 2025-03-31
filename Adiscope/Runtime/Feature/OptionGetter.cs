@@ -25,5 +25,7 @@ namespace Adiscope.Feature
         public string GetUnitySDKVersion() { return client.GetUnitySDKVersion(); }
 
         public string GetNetworkVersions() { return client.GetNetworkVersions(); }
+
+        public string GetInitializeFailLog() {return client.GetInitializeFailLog(); }
     }
 }

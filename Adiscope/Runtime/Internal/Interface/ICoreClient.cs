@@ -17,6 +17,7 @@ namespace Adiscope.Internal.Interface
 
         void Initialize(string mediaId, string mediaSecret, string callbackTag, Action<bool> callback);
         void Initialize(string mediaId, string mediaSecret, string callbackTag, string childYN, Action<bool> callback);
+        void InitializeTest(string mediaId, string mediaSecret, string callbackTag, string childYN, Action<bool> callback);
 
         bool IsInitialized();
         void SetUserId(string userId);

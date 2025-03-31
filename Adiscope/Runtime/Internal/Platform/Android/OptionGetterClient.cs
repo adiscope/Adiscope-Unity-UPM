@@ -85,6 +85,20 @@ namespace Adiscope.Internal.Platform.Android
 			}
 		}
 
+		public string GetInitializeFailLog() 
+		{
+			using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
+			{
+				if (jc == null)
+				{
+					Debug.LogError("Android.CoreClient<Initialize> " +
+						Values.PKG_ADISCOPE + ": null");
+					return "";
+				}
+				return jc.CallStatic<string>(Values.MTD_GET_INITIALIZE_FAIL_LOG);
+			}
+		}
+
 		#endregion
 	}
 }
