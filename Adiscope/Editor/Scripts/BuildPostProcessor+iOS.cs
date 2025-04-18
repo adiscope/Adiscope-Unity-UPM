@@ -16,8 +16,6 @@ namespace Adiscope.PostProcessor
 {
     class BuildPostProcessorForIos {
         private static string prefixURI = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/3.8.0/";
-        private static string adiscopeFrameworkPath = "../Packages/com.tnk.adiscope/Plugins/iOS";
-        private static string adiscopeUnityPath = "com.tnk.adiscope/Plugins/iOS";
 
         public static void OnPostProcessBuild(string path) {
             UpdateBuildSetting(path);
@@ -100,14 +98,10 @@ namespace Adiscope.PostProcessor
             }
             
             string googleAppKey = serialized.FindProperty("_admobAppKey_ios").stringValue;
-            string appLovinKey = serialized.FindProperty("_applovinKey").stringValue;
             string mediaID_ios = serialized.FindProperty("_mediaID_ios").stringValue;
             string mediaSecret_ios = serialized.FindProperty("_mediaSecret_ios").stringValue;
             if (googleAppKey != null && googleAppKey.Length > 0) {
                 InsertInfoPlist(root.root, "GADApplicationIdentifier", googleAppKey);
-            }
-            if (appLovinKey != null && appLovinKey.Length > 0) {
-                InsertInfoPlist(root.root, "AppLovinSdkKey", appLovinKey);
             }
             if (mediaID_ios != null && mediaID_ios.Length > 0) {
                 InsertInfoPlist(root.root, "AdiscopeMediaId", mediaID_ios);

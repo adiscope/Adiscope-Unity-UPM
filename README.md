@@ -1,16 +1,41 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.1.5-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.1.5-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-4.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.1.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.1.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.2.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.2.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.2.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.2.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
-- **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode15 빌드 시 ${\color{red}사용 불가}$**
+- **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 21
 - iOS Minimum Version : 12.0
-- Xcode Minimum Version : Xcode 15.1
+- Xcode Minimum Version : Xcode 16.0
+<details>
+<summary>Networks Version</summary>
+<div markdown="1">  
+
+| Ad Network          | Android Version | iOS Version |
+|---------------------|-----------------|-------------|
+| AdMob               | 23.5.0          | 12.2.0      |
+| Amazon              | 9.10.4          | 5.1.0       |
+| AppLovin            | 13.0.1          | 13.1.0      |
+| BidMachine          | 3.0.1           | 3.2.1       |
+| Chartboost          | 9.8.2           | 9.8.1       |
+| DT Exchange         | 8.3.5           | 8.3.5       |
+| InMobi              | 10.7.8          | 10.8.2      |
+| Liftoff(Vungle)     | 7.4.2           | 7.4.4       |
+| Meta(Fan)           | 6.18.0          | 6.17.1      |
+| Mintegral(Mobvista) | 16.8.61         | 7.7.7       |
+| Moloco              | 3.6.1           | 3.7.2       |
+| Ogury               | 5.8.0           | 5.0.2       |
+| Pangle              | 6.3.0.4         | 6.5.0.9     |
+| Smaato              | 22.7.1          | 없음         |
+| Unity Ads           | 4.12.4          | 4.14.0      |
+| Verve               | 3.1.0           | 없음         |
+
+</div>
+</details>
 <br/>
 
 ## Contents

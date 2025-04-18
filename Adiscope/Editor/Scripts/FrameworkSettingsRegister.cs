@@ -113,9 +113,6 @@ namespace Adiscope
                     maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
                     GUILayout.EndHorizontal();
-                    EditorGUI.BeginDisabledGroup(maxAdapter < 1);
-                    EditorGUILayout.PropertyField(serialized.FindProperty("_applovinKey"), new GUIContent("AppLovin SDK Key"));
-                    EditorGUI.EndDisabledGroup ();
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
@@ -309,16 +306,6 @@ namespace Adiscope
                                     serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
                                 } else {
                                     serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
-                                }
-                            }
-                        }
-
-                        if (AdiscopeAdapterSettings.MAX == adNetworkName) {
-                            if (networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
-                                Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
-                                string applovinKey = networkInfoSettings[SERVICE_JSON_KEY_APPLOVIN].ToString();
-                                if (applovinKey != null && applovinKey.Length > 0) {
-                                    serialized.FindProperty("_applovinKey").stringValue = applovinKey;
                                 }
                             }
                         }

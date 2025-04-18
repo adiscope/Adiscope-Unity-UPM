@@ -433,7 +433,7 @@ public class AdiscopeExample : MonoBehaviour
 #endif
 
 #if UNITY_ANDROID
-        this.AddLabel("미디에이션 디버거 - 앱 구동 후 첫 진입 시 5초간 대기 후 화면 터치 가능");
+        this.AddLabel("미디에이션 디버거 - 애디스콥 이니셜라이즈 성공 및 맥스 이니셜라이즈 이력 있을 시 진입 가능");
         this.AddButton("MAX Mediation Debugger", () => {
              Adiscope.Sdk.GetOptionSetter().ShowMaxMediationDebugger();
         });
