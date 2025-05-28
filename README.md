@@ -1,15 +1,15 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.3.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-4.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.2.1-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.2.1-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.2.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.2.1-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 ${\color{red}사용 불가}$**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 21
-- iOS Minimum Version : 13.0
+- iOS Minimum Version : 12.0
 - Xcode Minimum Version : Xcode 16.0
 <details>
 <summary>Networks Version</summary>
@@ -24,7 +24,7 @@
 | Chartboost          | 9.8.2           | 9.8.1       |
 | DT Exchange         | 8.3.5           | 8.3.5       |
 | InMobi              | 10.7.8          | 10.8.2      |
-| Ironsource          | 8.7.0           | 8.8.0.0     |
+| Ironsource          | 8.7.0           | 없음         |
 | Liftoff(Vungle)     | 7.4.2           | 7.4.4       |
 | Meta(Fan)           | 6.18.0          | 6.17.1      |
 | Mintegral(Mobvista) | 16.9.41         | 7.7.7       |
