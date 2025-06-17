@@ -15,7 +15,8 @@ namespace Adiscope
         #region CONST VARIABLES
         private const string PATH_ADISCOPE_FILES        = "/Adiscope/AdiscopeAppSettingsFiles";
         private const string PATH_ADISCOPE_EDITOR       = "/Adiscope/AdiscopeAppSettingsFiles/Editor";
-        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/AdiscopeAppSettingsFiles/Plugins/Adiscope.androidlib";
+        private const string PATH_ADISCOPE_LIB          = "/Adiscope/AdiscopeAppSettingsFiles/Plugins/Adiscope.androidlib";
+        private const string PATH_ADISCOPE_MANIFEST     = "/Adiscope/AdiscopeAppSettingsFiles/Plugins/Adiscope.androidlib/src/main";
         private const string DISPLAY_PROGRESS_DIALOG_TITLE = "Adiscope Install";
         private const string PROJECT_PROPERTIES_CONTENT = "android.library=true";
         #endregion
@@ -42,8 +43,60 @@ namespace Adiscope
             , isProgress);
             bool isUpdateManifest = UpdateAndroidManifest(isProgress);
             bool isUpdateProperties = UpdateProperties(isProgress);
+            bool isUpdateBuildGradle = UpdateBuildGradle(isProgress);
 
-            return (isFrameworks && isUpdateManifest && isUpdateProperties);
+            return (isFrameworks && isUpdateManifest && isUpdateProperties && isUpdateBuildGradle);
+        }
+
+        private static bool UpdateBuildGradle(bool isProgress) {
+            if (isProgress) {
+                if (EditorUtility.DisplayCancelableProgressBar(
+                        DISPLAY_PROGRESS_DIALOG_TITLE,
+                        "Update build.gradle",
+                        0.7f
+                    )){
+                    EditorUtility.ClearProgressBar();
+                    return false;
+                }
+            }
+
+            int targetSdk = (int) PlayerSettings.Android.targetSdkVersion;
+            string jdkVersion = targetSdk >= 35 ? "JavaVersion.VERSION_17" : "JavaVersion.VERSION_11";
+            Debug.Log($"Unity targetSdkVersion: {targetSdk}, jdkVersion: {jdkVersion}");
+
+            string gradleFilePath = Application.dataPath + PATH_ADISCOPE_LIB;
+            gradleFilePath += "/build.gradle";
+
+            string gradleContent = $@"
+plugins {{
+    id 'com.android.library'
+}}
+
+android {{
+    namespace 'com.nps.adiscope'
+    compileSdkVersion {targetSdk}
+
+    defaultConfig {{
+        minSdkVersion 23
+        targetSdkVersion {targetSdk}
+    }}
+
+    compileOptions {{
+        sourceCompatibility {jdkVersion}
+        targetCompatibility {jdkVersion}
+    }}
+}}
+";
+
+            try {
+                File.WriteAllText(gradleFilePath, gradleContent);
+            } catch (Exception e) {
+                Debug.LogError("failed to write file: " + gradleFilePath);
+                Debug.LogError("" + e);
+                return false;
+            }
+
+            return true;
         }
 
         /*** properties 파일 생성 start ***/
@@ -59,7 +112,7 @@ namespace Adiscope
                 }
             }
 
-            string propertiesPath = CreateAdiscopeManifestDirectory();      // 폴더 생성
+            string propertiesPath = Application.dataPath + PATH_ADISCOPE_LIB;
             propertiesPath += "/project.properties";                         // 파일명 지정
 
             try {
@@ -91,6 +144,12 @@ namespace Adiscope
             ManifestHandler manifestHandler = GetManifestHandler();     // Manifest에 필수 항목 추가
             string manifestPath = CreateAdiscopeManifestDirectory();    // 폴더 생성
             manifestPath += "/AndroidManifest.xml";                     // 파일명 지정
+
+            string legacyManifestPath = Application.dataPath + PATH_ADISCOPE_LIB + "/AndroidManifest.xml";
+            if (File.Exists(legacyManifestPath))
+            {
+                File.Delete(legacyManifestPath);
+            }
 
             return manifestHandler.WriteXmlFile(manifestPath);
         }
