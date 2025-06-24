@@ -1,11 +1,11 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.3.2-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.3.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-4.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.3.1-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.3.1-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.4.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.4.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
-- **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 ${\color{red}사용 불가}$**
+- ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+
 - Android Target API Level : 31+
 - Android Minimum API Level : 21
@@ -143,7 +143,7 @@ https://github.com/adiscope/Adiscope-Unity-UPM.git?path=Adiscope
 
 ![adiscopeMake1](https://github.com/adiscope/Adiscope-Unity-UPM/assets/60415962/7fdb4786-bf1b-4067-9b49-300abfa5884a)
 - `Create Adiscope Android & iOS Files`를 선택
-- ${\color{red}버전}$ ${\color{red}변경}$ ${\color{red}시}$마다 `Create Adiscope Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
+- ⚠️ 버전 변경 시 마다 `Create Adiscope Android & iOS Files`를 선택해야 해당 값으로 앱 설정 됨
 - 인터넷이 연결되어 있어야 함
 - Adapter Version이 상이할 경우 Initialize시 Log를 통해 확인 가능
   - Android<br/>
@@ -206,7 +206,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
-  - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
+  - ⚠️ 정책 미준수시 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize)
 
 <br/>
@@ -228,7 +228,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
-  - ${정책\ {\color{red}미준수시}}\ 광고에\ 제한이\ 생김$ (광고 물량 축소 및 오퍼월 진입 불가)
+  - ⚠️ 정책 미준수시 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize) 
 
 <br/><br/>
@@ -238,7 +238,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 private string USER_ID = "";        // set unique user id to identify the user in reward information
 Adiscope.Sdk.GetCoreInstance().SetUserId(USER_ID);
 ```
-- `Offerwall`, `RewardedVideo`, `RewardedInterstitial`를 사용하기 위해 ${\color{red}필수}$ 설정
+- ⚠️ `Offerwall`, `RewardedVideo`, `RewardedInterstitial`를 사용하기 위해 필수 설정
 - 64자까지 설정 가능 
 <br/><br/><br/>
 

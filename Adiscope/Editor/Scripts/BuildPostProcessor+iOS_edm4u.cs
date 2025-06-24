@@ -167,7 +167,7 @@ namespace Adiscope
         private const string PANGLE_FILE_NAME       = "PangleIosDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "4.4.0/";
         private const string ADEVENT_FILE_PATH      = ADISCOPE_FILE_PATH + "4.3.0/";
         private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "4.3.0/";
         private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "4.3.0/";
