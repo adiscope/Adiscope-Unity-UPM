@@ -394,7 +394,7 @@ android {{
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
         private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "4.4.0/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "4.4.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "4.4.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "4.5.0/";
         private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.4.0/";
         private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.4.0/";
 
