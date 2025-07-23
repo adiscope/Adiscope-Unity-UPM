@@ -1,12 +1,12 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.1-blue)](../../releases)
 [![GitHub package.json version](https://img.shields.io/badge/Android-4.5.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/Flutter-4.5.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.5.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
-- Unity Editor : 2021.3.8f1+, 2022.3.10f1+
+- Unity Editor : 2021.3.8f1+, 2022.3.10f1+, 6000.1.3f1, 6000.1.11f1, 6000.1.12f1
 - Android Target API Level : 31+
 - Android Minimum API Level : 21
 - iOS Minimum Version : 13.0
