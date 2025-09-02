@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.2-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-4.5.2-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.3-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.5.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
 [![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.5.2-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.5.2-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.5.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.5.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+, 6000.1.3f1, 6000.1.11f1, 6000.1.12f1
@@ -33,7 +33,6 @@
 | Pangle              | 7.2.0.4         | 6.5.0.9     |
 | Smaato              | 22.7.2          | 없음         |
 | Unity Ads           | 4.15.0          | 4.14.0      |
-| Yandex              | 7.13.0          | 없음         |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob 혹은 max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
 > - gms 22 버전: 애디스콥 `3.3.0`~`4.0.1`
