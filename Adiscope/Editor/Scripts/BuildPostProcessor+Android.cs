@@ -4,9 +4,9 @@ using System.Net;
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 using Adiscope.Editor;
+using System.Linq;
 
 namespace Adiscope
 {
@@ -44,17 +44,132 @@ namespace Adiscope
             bool isUpdateManifest = UpdateAndroidManifest(isProgress);
             bool isUpdateProperties = UpdateProperties(isProgress);
             bool isUpdateBuildGradle = UpdateBuildGradle(isProgress);
+            bool isUpdateLauncherGradle = UpdateLauncherGradle(isProgress);
 
-            return (isFrameworks && isUpdateManifest && isUpdateProperties && isUpdateBuildGradle);
+            return isFrameworks
+                && isUpdateManifest
+                && isUpdateProperties
+                && isUpdateBuildGradle
+                && isUpdateLauncherGradle;
         }
 
-        private static bool UpdateBuildGradle(bool isProgress) {
-            if (isProgress) {
-                if (EditorUtility.DisplayCancelableProgressBar(
+        private static bool UpdateLauncherGradle(bool isProgress)
+        {
+            if (isProgress)
+            {
+                if (
+                    EditorUtility.DisplayCancelableProgressBar(
+                        DISPLAY_PROGRESS_DIALOG_TITLE,
+                        "Update build.gradle",
+                        0.85f
+                    )
+                )
+                {
+                    EditorUtility.ClearProgressBar();
+                    return false;
+                }
+            }
+
+            string launcherTemplatePath = Path.Combine(
+                Application.dataPath,
+                "Plugins/Android/launcherTemplate.gradle"
+            );
+
+            if (!File.Exists(launcherTemplatePath))
+            {
+                // todo launcherTemplate 파일 생성
+                Debug.Log("create launcherTemplate.gradle");
+
+                // 디렉토리가 없으면 생성
+                string directory = Path.GetDirectoryName(launcherTemplatePath);
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                string templateContent = LauncherTemplateProvider.GetDefaultLauncherTemplate();
+                File.WriteAllText(launcherTemplatePath, templateContent);
+                AssetDatabase.Refresh();
+            }
+
+            var content = File.ReadAllText(launcherTemplatePath);
+            bool modified = false;
+
+            int minSdk = (int)PlayerSettings.Android.minSdkVersion;
+
+            if (minSdk >= 26)
+            {
+                var lines = File.ReadAllLines(launcherTemplatePath).ToList();
+                string[] removeKeywords =
+                {
+                    "coreLibraryDesugaring ",
+                    "coreLibraryDesugaringEnabled"
+                };
+
+                int beforeCount = lines.Count;
+
+                lines = lines
+                    .Where(line => !removeKeywords.Any(keyword => line.Contains(keyword)))
+                    .ToList();
+
+                int afterCount = lines.Count;
+
+                if (afterCount != beforeCount)
+                {
+                    File.WriteAllLines(launcherTemplatePath, lines);
+                    modified = true;
+                }
+            }
+            else
+            {
+                if (!content.Contains("coreLibraryDesugaring "))
+                {
+                    content = content.Replace(
+                        "dependencies {",
+                        "dependencies {\n    coreLibraryDesugaring \"com.android.tools:desugar_jdk_libs:2.0.4\""
+                    );
+                    modified = true;
+                }
+
+                if (!content.Contains("coreLibraryDesugaringEnabled"))
+                {
+                    int targetSdk = (int)PlayerSettings.Android.targetSdkVersion;
+                    string jdkVersion =
+                        targetSdk >= 35 ? "JavaVersion.VERSION_17" : "JavaVersion.VERSION_11";
+                    content = content.Replace(
+                        $"targetCompatibility {jdkVersion}",
+                        $"targetCompatibility {jdkVersion}\n        coreLibraryDesugaringEnabled true"
+                    );
+                    modified = true;
+                }
+
+                if (modified)
+                {
+                    File.WriteAllText(launcherTemplatePath, content);
+                }
+            }
+
+            if (modified)
+            {
+                Debug.Log("launcherTemplate.gradle modified");
+                AssetDatabase.Refresh();
+            }
+
+            return true;
+        }
+
+        private static bool UpdateBuildGradle(bool isProgress)
+        {
+            if (isProgress)
+            {
+                if (
+                    EditorUtility.DisplayCancelableProgressBar(
                         DISPLAY_PROGRESS_DIALOG_TITLE,
                         "Update build.gradle",
                         0.7f
-                    )){
+                    )
+                )
+                {
                     EditorUtility.ClearProgressBar();
                     return false;
                 }
@@ -391,12 +506,13 @@ android {{
         private const string TAPJOY_FILE_NAME       = "TapjoyDependencies.xml";
 
 
-        private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "4.4.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "4.4.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "4.5.3/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.4.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.4.0/";
+        private const string ADISCOPE_FILE_PATH = "https://github.com/adiscope/Adiscope-Android-Sample/releases/download/";
+        // private const string ADISCOPE_FILE_PATH = "https://github.com/adiscope/Adiscope-Unity-UPM-Beta/releases/download/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "5.0.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "5.0.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "5.0.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.0.0/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.0.0/";
 
         public static string GetFileName(this AdiscopeFrameworkAndroidType type)
         {

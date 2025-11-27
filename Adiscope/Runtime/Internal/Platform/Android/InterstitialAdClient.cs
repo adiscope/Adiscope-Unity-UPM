@@ -104,6 +104,11 @@ namespace Adiscope.Internal.Platform.Android
 
             return interstitialAd.Call<bool>(Values.MTD_SHOW);
         }
+        
+        public void ShowWithLoad(string unitId)
+        {
+            // Not Support this Platform
+        }
         #endregion
 
         #region Callbacks

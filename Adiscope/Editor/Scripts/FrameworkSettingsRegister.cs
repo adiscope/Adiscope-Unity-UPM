@@ -102,13 +102,6 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
-                    int adeventAdapter = serialized.FindProperty("_adeventAdapter").intValue;
-                    adeventAdapter = EditorGUILayout.Popup("AdEvent", adeventAdapter, AOS_fix_Type);
-                    serialized.FindProperty("_adeventAdapter").intValue = adeventAdapter;
-                    GUILayout.EndHorizontal();
-                    EditorGUILayout.Space();
-
-                    GUILayout.BeginHorizontal();
                     int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
                     maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;

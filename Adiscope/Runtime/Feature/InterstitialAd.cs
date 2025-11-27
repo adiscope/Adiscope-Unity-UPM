@@ -43,11 +43,11 @@ namespace Adiscope.Feature
 
             this.client.OnOpened += (sender, args) => { OnOpened?.Invoke(sender, args); };
             this.client.OnOpenedBackground += (sender, args) => { OnOpenedBackground?.Invoke(sender, args); };
-            
+
             this.client.OnClosed += (sender, args) => { OnClosed?.Invoke(sender, args); };
             this.client.OnClosedBackground += (sender, args) => { OnClosedBackground?.Invoke(sender, args); };
 
-            
+
             this.client.OnFailedToShow += (sender, args) => { OnFailedToShow?.Invoke(sender, args); };
             this.client.OnFailedToShowBackground += (sender, args) => { OnFailedToShowBackground?.Invoke(sender, args); };
         }
@@ -57,5 +57,7 @@ namespace Adiscope.Feature
         public bool IsLoaded(string unitId) { return client.IsLoaded(unitId); }
 
         public bool Show() { return client.Show(); }
+        
+        public void ShowWithLoad(string unitId) { client.ShowWithLoad(unitId); }
     }
 }
