@@ -41,12 +41,6 @@ namespace Adiscope
         int _maxAdapter;
 
         [SerializeField]
-        bool _applovinAdReview;
-
-        [SerializeField]
-        string _applovinAdReviewKey;
-
-        [SerializeField]
         int _admanagerAdapter;
 
         [SerializeField]

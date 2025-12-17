@@ -28,13 +28,15 @@ namespace Adiscope.Feature
 
         public event EventHandler<RewardItem> OnRewarded;
         public event EventHandler<RewardItem> OnRewardedBackground;
-        
+
 
         private IRewardedVideoAdClient client;
 
         private static class ClassWrapper { public static readonly RewardedVideoAd instance = new RewardedVideoAd(); }
 
-        public static RewardedVideoAd Instance { get
+        public static RewardedVideoAd Instance
+        {
+            get
             {
                 RewardedVideoAd abcd = ClassWrapper.instance;
                 return abcd;
@@ -68,6 +70,8 @@ namespace Adiscope.Feature
 
         public bool IsLoaded(string unitId) { return client.IsLoaded(unitId); }
 
-        public bool Show() { return client.Show();}
+        public bool Show() { return client.Show(); }
+        
+        public void ShowWithLoad(string unitId) { client.ShowWithLoad(unitId); }
     }
 }

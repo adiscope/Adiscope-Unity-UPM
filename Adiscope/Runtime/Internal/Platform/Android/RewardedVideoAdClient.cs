@@ -109,6 +109,11 @@ namespace Adiscope.Internal.Platform.Android
             return rewardedVideoAd.Call<bool>(Values.MTD_SHOW);
         }
 
+        public void ShowWithLoad(string unitId)
+        {
+            // Not Support this Platform
+        }
+
         #region Callbacks
         [System.Reflection.Obfuscation(Exclude = true, Feature = "renaming")]
         public void onRewardedVideoAdLoaded(string unitId)

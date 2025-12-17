@@ -42,7 +42,6 @@ namespace Adiscope.Internal.Platform.IOS
             string unitId,
             onInterstitialAdLoadedCallback loadedCallback,
             onInterstitialAdFailedToLoadCallback failLoadedCallback);
-
         public void Load(string unitId)
         {
             loadInterstitial(unitId, onInterstitialAdLoaded, onInterstitialAdFailedToLoad);
@@ -66,6 +65,18 @@ namespace Adiscope.Internal.Platform.IOS
                 onInterstitialWillPresentScreen,
                 onInterstitialWillDismissScreen,
                 onInterstitialDidFailToPresentScreen);
+        }
+
+        [DllImport("__Internal")]
+        private static extern void showWithLoadInterstitial(
+            string unitId,
+            onInterstitialAdLoadedCallback loadedCallback,
+            onInterstitialWillPresentScreenCallback openedCallback,
+            onInterstitialWillDismissScreenCallback closedCallback,
+            onInterstitialDidFailToPresentScreenCallback failedToShowCallback);
+        public void ShowWithLoad(string unitId)
+        {
+            showWithLoadInterstitial(unitId, onInterstitialAdLoaded, onInterstitialWillPresentScreen, onInterstitialWillDismissScreen, onInterstitialDidFailToPresentScreen);
         }
 #endregion
 
