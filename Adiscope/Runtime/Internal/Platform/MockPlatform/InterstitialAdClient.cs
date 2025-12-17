@@ -69,20 +69,6 @@ namespace Adiscope.Internal.Platform.MockPlatform
 #endif
             return true;
         }
-
-        public void ShowWithLoad(string unitId)
-        {
-            this.unitId = unitId;
-
-#if UNITY_EDITOR
-            new Thread(() => DelayedCallback(onInterstitialAdLoaded, 1000)).Start();
-            new Thread(() => DelayedCallback(onInterstitialAdOpened, 2000)).Start();
-            new Thread(() => DelayedCallback(onInterstitialAdClosed, 5000)).Start();
-            this.loaded = false;
-#else
-            new Thread(() => DelayedCallback(onInterstitialAdFailedToShowUnsupported, 5)).Start();
-#endif
-        }
         #endregion
 
         private void DelayedCallback(Action action, int delay)

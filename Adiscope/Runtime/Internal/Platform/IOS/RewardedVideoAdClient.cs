@@ -66,16 +66,6 @@ namespace Adiscope.Internal.Platform.IOS
 			return show (onRewardedVideoAdOpened, onRewardedVideoAdClosed, onRewarded, onRewardedVideoAdFailedToShow);
 		}
 
-		[DllImport ("__Internal")]
-		private static extern void showWithLoad(string unitId, onRewardedVideoAdLoadedCallback loadedCallback,
-			onRewardedVideoAdOpenedCallback openedCallback, onRewardedVideoAdClosedCallback closedCallback, 
-			onRewardedCallback rewardedCallback, onRewardedVideoAdFailedToShowCallback failedToShowCallback);
-
-		public void ShowWithLoad(string unitId)
-		{
-			showWithLoad(unitId, onRewardedVideoAdLoaded, onRewardedVideoAdOpened, onRewardedVideoAdClosed,
-				onRewarded, onRewardedVideoAdFailedToShow);
-		}
 		#endregion
 
 		#region Callbacks

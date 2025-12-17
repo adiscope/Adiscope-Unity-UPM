@@ -23,6 +23,5 @@ namespace Adiscope.Internal.Interface
         void Load(string unitId);
         bool IsLoaded(string unitId);
         bool Show();
-        void ShowWithLoad(string unitId);
     }
 }

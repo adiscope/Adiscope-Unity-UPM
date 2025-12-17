@@ -31,31 +31,6 @@ namespace Adiscope.Feature
 
         }
 
-        public void SetVolumeOff(bool isVolume) { 
-            client.SetVolumeOff(isVolume); 
-        }
-
-        /// <summary>
-        /// Set whether background is color, Only Using for iOS.
-        /// </summary>
-        public void SetShowWithLoad2BackgroundColor(string red, string green, string blue, string alpha) { 
-            client.SetShowWithLoad2BackgroundColor(red, green, blue, alpha); 
-        }
-
-        /// <summary>
-        /// Set whether indicator is style, Only Using for iOS.
-        /// </summary>
-        public void SetShowWithLoad2IndicatorStyleMedium(bool isMedium, bool isHidden) {
-            client.SetShowWithLoad2IndicatorStyleMedium(isMedium, isHidden); 
-        }
-
-        /// <summary>
-        /// Set whether alert is style, Only Using for iOS.
-        /// </summary>
-        public void SetShowWithLoad2ErrorAlertMsg(string msg, bool isHidden) {
-            client.SetShowWithLoad2ErrorAlertMsg(msg, isHidden); 
-        }
-
         /// <summary>
         /// Set whether to use Cloud Front Proxy or not
         /// </summary>
@@ -109,6 +84,10 @@ namespace Adiscope.Feature
         public void ShowAdmobMediationDebugger() 
         { 
             client.ShowAdmobMediationDebugger();
+        }
+
+        public void SetVolumeOff(bool isVolume) { 
+            client.SetVolumeOff(isVolume); 
         }
     }
 }

@@ -1,12 +1,12 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.0.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.0.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.0.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.0.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.0.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-4.5.4-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-4.5.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-4.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-4.5.3-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-4.5.3-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
-- Unity Editor : 2021.3.8f1+, 2022.3.10f1+, 6000.1.3f1+
+- Unity Editor : 2021.3.8f1+, 2022.3.10f1+, 6000.1.3f1, 6000.1.11f1, 6000.1.12f1
 - Android Target API Level : 31+
 - Android Minimum API Level : 21
 - iOS Minimum Version : 13.0
@@ -17,25 +17,22 @@
 
 | Ad Network          | Android Version | iOS Version |
 |---------------------|-----------------|-------------|
-| AdMob               | 24.4.0          | 12.11.0     |
-| Amazon              | 11.0.1          | 5.3.1       |
-| AppLovin            | 13.3.1          | 13.4.0      |
-| BidMachine          | 3.3.0           | 3.4.0       |
-| Bigo                | 5.5.1           | 없음         |
-| Chartboost          | 9.8.3           | 9.9.2       |
-| DT Exchange         | 8.3.7           | 8.3.8       |
-| InMobi              | 10.8.3          | 10.8.6      |
-| Ironsource          | 8.9.1           | 8.10.0.0    |
-| Liftoff(Vungle)     | 7.5.0           | 7.5.2       |
-| Line                | 2.9.20250110    | 없음         |
-| Meta(Fan)           | 6.20.0          | 6.20.1      |
-| Mintegral(Mobvista) | 16.9.71         | 7.7.9       |
-| Moloco              | 3.10.0          | 3.12.1      |
-| Ogury               | 6.0.1           | 5.1.1       |
-| Pangle              | 7.7.0.2         | 7.4.1.1     |
-| Pubmatic            | 4.9.1           | 없음         |
+| AdMob               | 24.4.0          | 12.2.0      |
+| Amazon              | 11.0.1          | 5.1.0       |
+| AppLovin            | 13.3.1          | 13.1.0      |
+| BidMachine          | 3.3.0           | 3.2.1       |
+| Chartboost          | 9.8.3           | 9.8.1       |
+| DT Exchange         | 8.3.7           | 8.3.5       |
+| InMobi              | 10.8.3          | 10.8.2      |
+| Ironsource          | 8.9.1           | 8.8.0.0     |
+| Liftoff(Vungle)     | 7.5.0           | 7.4.4       |
+| Meta(Fan)           | 6.20.0          | 6.17.1      |
+| Mintegral(Mobvista) | 16.9.71         | 7.7.7       |
+| Moloco              | 3.10.0          | 3.7.2       |
+| Ogury               | 6.0.1           | 5.0.2       |
+| Pangle              | 7.2.0.4         | 6.5.0.9     |
 | Smaato              | 22.7.2          | 없음         |
-| Unity Ads           | 4.15.0          | 4.16.1      |
+| Unity Ads           | 4.15.0          | 4.14.0      |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob 혹은 max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
 > - gms 22 버전: 애디스콥 `3.3.0`~`4.0.1`
@@ -56,6 +53,7 @@
 - [RewardedVideo](#5-rewardedvideo)
 - [Interstitial](#6-interstitial)
 - [RewardedInterstitial](#7-rewardedinterstitial)
+- [AdEvent](#8-adevent)
 - [Other API](./docs/other_api.md#other-api-1)
 #### [웹사이트 필수 등록](#웹사이트-필수-등록-android-전용)
 #### [Adiscope Server 연동하기](./docs/reward_callback_info.md)
@@ -67,6 +65,7 @@
 #### [iOS 16+ Offerwall 세로 모드 전환 적용 방법(가로모드 전용일 경우)](./docs/apple_orientations.md)
 #### [Adiscope Error Information](./docs/error_info.md)
 #### [etc](.)
+- [AppLovin Ad Review (Android)](./docs/applovin_ad_review.md)
 - [Adiscope Sample App](./docs/sampleapp.md)
 - [Releases](../../releases)
 - [LICENSE](./LICENSE)
@@ -695,7 +694,66 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 - Callback은 Unity의 main thread에서 호출 
 <br/><br/><br/>
 
-### 8. Other API
+### 8. AdEvent
+#### A. AdEvent Ad Instance 생성
+```csharp
+if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
+    // get singleton instance of AdEvent
+    Adiscope.Feature.AdEvent adEvent = Adiscope.Sdk.GetAdEventInstance();
+} else {
+    // Reinitialize
+}
+```
+- AdEvent Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
+- AdEvent의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+<br/>
+
+#### B. Callback 등록
+```csharp
+if (adEvent != null) {
+    adEvent.OnOpened += OnAdEventOpenedCallback;
+    adEvent.OnClosed += OnAdEventClosedCallback;
+    adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
+} else {
+    // Reinitialize
+}
+```
+<br/>
+
+#### C. Show
+```csharp
+// show adEvent
+if (adEvent != null) {
+    if (adEvent.Show("unit1")) {
+        // Success
+    } else {
+        // This Show request is duplicated
+    }
+} else {
+    // Reinitialize
+}
+```
+- `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+<br/>
+
+#### D. Callbacks
+```csharp
+private void OnAdEventOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // AdEvent가 열림
+}
+private void OnAdEventClosedCallback(object sender, Adiscope.Model.ShowResult args) {
+    // AdEvent가 닫힘
+}
+private void OnAdEventFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
+    // AdEvent가 Fail
+}
+```
+- Show 성공 시 `OnOpened`, `OnClosed` callback이 순차적으로 호출
+- Callback은 Unity의 main thread에서 호출
+- `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
+<br/><br/><br/>
+
+### 9. Other API
 > - [Other API](./docs/other_api.md#other-api-1)
  
 <br/><br/><br/>
@@ -741,6 +799,11 @@ private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscop
 
 ## Adiscope Error Information
 > - [Error 정보](./docs/error_info.md)
+
+<br/><br/>
+
+## AppLovin Ad Review (Android)
+> - [AppLovin Ad Review](./docs/applovin_ad_review.md)
 
 <br/><br/>
 

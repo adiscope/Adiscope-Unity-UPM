@@ -118,19 +118,7 @@ namespace Adiscope.Internal.Platform.Android
                 jc.CallStatic(Values.MTD_SHOW_DEBUG, activity);
             }
         }
-        
-        public void SetShowWithLoad2BackgroundColor(string red, string green, string blue, string alpha) { 
-            // Not Support this Platform
-        }
-
-        public void SetShowWithLoad2IndicatorStyleMedium(bool isMedium, bool isHidden) {
-            // Not Support this Platform
-        }
-
-        public void SetShowWithLoad2ErrorAlertMsg(string msg, bool isHidden) {
-            // Not Support this Platform
-        }
-
+ 
         public void SetVolumeOff(bool isVolume)
         {
             if (optionSetter == null)

@@ -117,16 +117,12 @@ namespace Adiscope
         private static bool DownloadAdapterFile(string file_path, string file_name) {
             string uriString = file_path;
             uriString += file_name;
-            Debug.Log("File URL : " + uriString);
-            try
-            {
+            try {
                 (new WebClient()).DownloadFile(
                     new Uri(uriString),
                     Path.Combine(Application.dataPath + PATH_ADISCOPE_EDITOR_IOS, file_name)
                 );
-            }
-            catch (Exception exception)
-            {
+            } catch (Exception exception) { 
                 Debug.LogError("failed to download adapter file: " + exception.Message);
                 EditorUtility.ClearProgressBar();
                 return false;
@@ -171,13 +167,14 @@ namespace Adiscope
         private const string PANGLE_FILE_NAME       = "PangleIosDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "5.0.0/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.0.0/";
+        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "4.4.0/";
+        private const string ADEVENT_FILE_PATH      = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "4.3.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "4.3.0/";
 
         public static string GetFileName(this AdiscopeFrameworkType type) {
             switch (type) {
@@ -202,6 +199,7 @@ namespace Adiscope
             switch (type)
             {
                 case AdiscopeFrameworkType.Core:            return CORE_FILE_PATH;
+                case AdiscopeFrameworkType.AdEvent:         return ADEVENT_FILE_PATH;
                 case AdiscopeFrameworkType.Admanager:       return ADMANAGER_FILE_PATH;
                 case AdiscopeFrameworkType.Admob:           return ADMOB_FILE_PATH;
                 case AdiscopeFrameworkType.Vungle:          return VUNGLE_FILE_PATH;
@@ -218,6 +216,7 @@ namespace Adiscope
 
             switch (type) {
                 case AdiscopeFrameworkType.Core:            return true;
+                case AdiscopeFrameworkType.AdEvent:         return (serialized.FindProperty("_adeventAdapter").intValue == 1 || serialized.FindProperty("_adeventAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Admanager:       return (serialized.FindProperty("_admanagerAdapter").intValue == 1 || serialized.FindProperty("_admanagerAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Admob:           return (serialized.FindProperty("_admobAdapter").intValue == 1 || serialized.FindProperty("_admobAdapter").intValue == 3);
                 case AdiscopeFrameworkType.Vungle:          return (serialized.FindProperty("_vungleAdapter").intValue == 1 || serialized.FindProperty("_vungleAdapter").intValue == 3);

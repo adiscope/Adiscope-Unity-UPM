@@ -73,28 +73,11 @@ namespace Adiscope.Internal.Platform.IOS
 
         [DllImport("__Internal")]
         private static extern void showAdmobMediationDebugger();
-		public void ShowAdmobMediationDebugger() {
+		public void ShowAdmobMediationDebugger()
+		{
             showAdmobMediationDebugger();
 		}
 		
-		[DllImport("__Internal")]
-		private static extern void setShowWithLoad2BackgroundColor(string red, string green, string blue, string alpha);
-        public void SetShowWithLoad2BackgroundColor(string red, string green, string blue, string alpha) {
-			setShowWithLoad2BackgroundColor(red, green, blue, alpha);
-        }
-
-		[DllImport("__Internal")]
-		private static extern void setShowWithLoad2IndicatorStyleMedium(bool isMedium, bool isHidden);
-        public void SetShowWithLoad2IndicatorStyleMedium(bool isMedium, bool isHidden) {
-            setShowWithLoad2IndicatorStyleMedium(isMedium, isHidden);
-        }
-
-		[DllImport("__Internal")]
-		private static extern void setShowWithLoad2ErrorAlertMsg(string msg, bool isHidden);
-        public void SetShowWithLoad2ErrorAlertMsg(string msg, bool isHidden) {
-            setShowWithLoad2ErrorAlertMsg(msg, isHidden);
-        }
-
 		#endregion
 	}
 }

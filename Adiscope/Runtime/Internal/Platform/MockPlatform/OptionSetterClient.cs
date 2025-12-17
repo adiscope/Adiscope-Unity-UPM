@@ -38,28 +38,17 @@ namespace Adiscope.Internal.Platform.MockPlatform
         {
         }
 
-        public void ShowMaxMediationDebugger()
+        public void ShowMaxMediationDebugger() 
         {
         }
-
+        
         public void SetVolumeOff(bool isVolume)
         {
         }
 
         public void ShowAdmobMediationDebugger()
         {
-        }
-                
-        public void SetShowWithLoad2BackgroundColor(string red, string green, string blue, string alpha)
-        { 
-        }
-
-        public void SetShowWithLoad2IndicatorStyleMedium(bool isMedium, bool isHidden)
-        {
-        }
-
-        public void SetShowWithLoad2ErrorAlertMsg(string msg, bool isHidden)
-        {
+            
         }
         #endregion
     }
