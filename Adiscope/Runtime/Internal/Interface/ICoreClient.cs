@@ -23,5 +23,12 @@ namespace Adiscope.Internal.Interface
         void SetUserId(string userId);
         void GetUnitStatus(string unitId, Action<AdiscopeError, UnitStatus> callback);
         void SetRewardedCheckParam(string param);
+
+        void SetLuckyEventAppId(string eventId, string pid);
+        void SetLuckyEventUseSafeAreaWebView(bool useSafeArea);
+        void SetLuckyEventHashMark(string hashMark);
+        void SetLuckyEventBaseUrl(string baseUrl);
+        void SetLuckyEventExtraParam(string key, string value);
+        void ShowLuckyEvent();
     }
 }

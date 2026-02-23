@@ -26,7 +26,7 @@ namespace Adiscope
         string _trackingDesc;
 
         [SerializeField]
-        int _adeventAdapter;
+        int _luckyeventAdapter;
 
         [SerializeField]
         int _admobAdapter;
@@ -41,6 +41,12 @@ namespace Adiscope
         int _maxAdapter;
 
         [SerializeField]
+        bool _applovinAdReview;
+
+        [SerializeField]
+        string _applovinAdReviewKey;
+
+        [SerializeField]
         int _admanagerAdapter;
 
         [SerializeField]
@@ -51,6 +57,9 @@ namespace Adiscope
 
         [SerializeField]
         int _vungleAdapter;
+
+        [SerializeField]
+        int _tnkpubAdapter;
 
         public static string MediaID_AOS { get { 
             var serialized = new SerializedObject(FrameworkSettingsRegister.Load());

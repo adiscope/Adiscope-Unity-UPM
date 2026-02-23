@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Adiscope
     {
         public const string SERVICE_JSON_KEY_ADMOB         = "com.google.android.gms.ads.APPLICATION_ID";
         public const string SERVICE_JSON_KEY_APPLOVIN      = "applovin.sdk.key";
+        public const string SERVICE_JSON_KEY_AD_REVIEW     = "applovin.ad.review.key";
 
         private const string SERVICE_JSON_KEY_ADISCOPE      = "adiscope";
         private const string SERVICE_JSON_KEY_NETWORK       = "network";
@@ -22,6 +24,7 @@ namespace Adiscope
 
         private const string PATH_ADISCOPE_EDITOR           = "/Adiscope/Editor";
         private static string SettingsPath                  = "Assets/Adiscope/Editor/Adiscope.asset";
+        private const string PATH_LAUNCHER_TEMPLATE         = "Assets/Plugins/Android/launcherTemplate.gradle";
 
         private static string[] OS_Type     = { "None", "AOS & iOS", "AOS", "iOS" };
         private static string[] AOS_Type    = { "None", "AOS(iOS 기능 추가 시 자동 추가)", "AOS", "None(iOS 기능 추가 시 자동 추가)" };
@@ -102,10 +105,29 @@ namespace Adiscope
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
+                    int tnkpubAdapter = serialized.FindProperty("_tnkpubAdapter").intValue;
+                    tnkpubAdapter = EditorGUILayout.Popup("TNKPub Adapter", tnkpubAdapter, OS_Type);
+                    serialized.FindProperty("_tnkpubAdapter").intValue = tnkpubAdapter;
+                    GUILayout.EndHorizontal();
+
+                    EditorGUILayout.Space();
+
+                    GUILayout.BeginHorizontal();
                     int maxAdapter = serialized.FindProperty("_maxAdapter").intValue;
                     maxAdapter = EditorGUILayout.Popup("Max Adapter", maxAdapter, OS_Type);
                     serialized.FindProperty("_maxAdapter").intValue = maxAdapter;
                     GUILayout.EndHorizontal();
+
+                    GUILayout.BeginHorizontal();
+                    bool applovinAdReview = serialized.FindProperty("_applovinAdReview").boolValue;
+                    applovinAdReview = EditorGUILayout.Toggle("Applovin Ad Review", applovinAdReview);
+                    serialized.FindProperty("_applovinAdReview").boolValue = applovinAdReview;
+                    GUILayout.EndHorizontal();
+
+                    EditorGUI.BeginDisabledGroup(!applovinAdReview);
+                    EditorGUILayout.PropertyField(serialized.FindProperty("_applovinAdReviewKey"), new GUIContent("AppLovin Ad Review Key"));
+                    EditorGUI.EndDisabledGroup();
+
                     EditorGUILayout.Space();
 
                     GUILayout.BeginHorizontal();
@@ -139,6 +161,10 @@ namespace Adiscope
                     int vungleAdapter = serialized.FindProperty("_vungleAdapter").intValue;
                     vungleAdapter = EditorGUILayout.Popup("Vungle Adapter", vungleAdapter, OS_Type);
                     serialized.FindProperty("_vungleAdapter").intValue = vungleAdapter;
+
+                    int luckyeventAdapter = serialized.FindProperty("_luckyeventAdapter").intValue;
+                    luckyeventAdapter = EditorGUILayout.Popup("Lucky Event", luckyeventAdapter, OS_Type);
+                    serialized.FindProperty("_luckyeventAdapter").intValue = luckyeventAdapter;
                     GUILayout.EndHorizontal();
                     EditorGUILayout.Space();
 
@@ -152,6 +178,11 @@ namespace Adiscope
                     EditorGUILayout.Space();
                     if (GUILayout.Button("Create Adiscope Android & iOS Files", GUILayout.Height(30)))
                     {
+                        string mediaId     = serialized.FindProperty("_mediaID_aos").stringValue;
+                        string mediaSecret = serialized.FindProperty("_mediaSecret_aos").stringValue;
+                        string subDomain   = serialized.FindProperty("_subDomain").stringValue;
+                        UpdateLauncherGradleManifestPlaceholders(mediaId, mediaSecret, subDomain);
+
                         if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)       // Manifest 파일 생성
                             && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(true)) {
                             EditorUtility.ClearProgressBar();
@@ -227,6 +258,7 @@ namespace Adiscope
                     if (AdiscopeAdapterSettings.GetIsSetting(adNetworkName, isAndroid)) {
                         Dictionary<string, object> networkInfo = adiscopeNetworks[adNetworkName] as Dictionary<string, object>;
                         Dictionary<string, object> networkInfoAds = networkInfo[SERVICE_JSON_KEY_ADS] as Dictionary<string, object>;
+                        Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
                         bool rewardedVideoAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDEDVIDEO].ToString());
                         bool interstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_INTERSTITIAL].ToString());
                         int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
@@ -260,8 +292,7 @@ namespace Adiscope
                             }
                         }
 
-                        if (AdiscopeAdapterSettings.ADMOB == adNetworkName && networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
-                            Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                        if (AdiscopeAdapterSettings.ADMOB == adNetworkName) {
                             if (networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB) && networkInfoSettings[SERVICE_JSON_KEY_ADMOB] != null) {
                                 string admobKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
                                 if (admobKey != null && admobKey.Length > 0) {
@@ -278,8 +309,7 @@ namespace Adiscope
                             if (!isAndroid) {
                                 admobKey = serialized.FindProperty("_admobAppKey_ios").stringValue;
                             }
-                            if ((admobKey == null || admobKey.Length < 1) && networkInfo.ContainsKey(SERVICE_JSON_KEY_SETTINGS) && networkInfo[SERVICE_JSON_KEY_SETTINGS] != null) {
-                                Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
+                            if ((admobKey == null || admobKey.Length < 1) && networkInfoSettings != null) {
                                 if (networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB) && networkInfoSettings[SERVICE_JSON_KEY_ADMOB] != null) {
                                     string admanagerKey = networkInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
                                     if (admanagerKey != null && admanagerKey.Length > 0) {
@@ -292,13 +322,25 @@ namespace Adiscope
                                 }
                             }
                         }
-                        if (AdiscopeAdapterSettings.MAX == adNetworkName && adiscopeInfoSettings != null && adiscopeInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB)) {
-                            string admobKey = adiscopeInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
-                            if (admobKey != null && admobKey.Length > 0) {
-                                if (isAndroid) {
-                                    serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
-                                } else {
-                                    serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                        if (AdiscopeAdapterSettings.MAX == adNetworkName) {
+                            if(adiscopeInfoSettings != null && adiscopeInfoSettings.ContainsKey(SERVICE_JSON_KEY_ADMOB))
+                            {
+                                string admobKey = adiscopeInfoSettings[SERVICE_JSON_KEY_ADMOB].ToString();
+                                if (admobKey != null && admobKey.Length > 0){
+                                    if (isAndroid) {
+                                        serialized.FindProperty("_admobAppKey_aos").stringValue = admobKey;
+                                    } else {
+                                        serialized.FindProperty("_admobAppKey_ios").stringValue = admobKey;
+                                    }
+                                }
+                            }
+                            if(networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_AD_REVIEW) && networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW] != null)
+                            {
+                                string adReviewKey = networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW].ToString();
+                                if (adReviewKey != null && adReviewKey.Length > 0) {
+                                    if (isAndroid) {
+                                        serialized.FindProperty("_applovinAdReviewKey").stringValue = adReviewKey;
+                                    }
                                 }
                             }
                         }
@@ -306,6 +348,43 @@ namespace Adiscope
                 }
                 serialized.ApplyModifiedProperties();
             }
+        }
+
+        private static void UpdateLauncherGradleManifestPlaceholders(string mediaId, string mediaSecret, string subDomain)
+        {
+            string fullPath = Path.GetFullPath(PATH_LAUNCHER_TEMPLATE);
+            if (!File.Exists(fullPath))
+            {
+                Debug.LogWarning("[Adiscope] launcherTemplate.gradle not found: " + fullPath);
+                return;
+            }
+
+            string newBlock =
+                "manifestPlaceholders = [\n" +
+                "            adiscope_media_id    : \"" + mediaId + "\",\n" +
+                "            adiscope_media_secret: \"" + mediaSecret + "\",\n" +
+                "            adiscope_sub_domain  : \"" + subDomain + "\"\n" +
+                "        ]";
+
+            string content = File.ReadAllText(fullPath);
+
+            // 기존 manifestPlaceholders 블록이 있으면 교체, 없으면 defaultConfig 안에 삽입
+            const string pattern = @"manifestPlaceholders\s*=\s*\[[^\]]*\]";
+            if (Regex.IsMatch(content, pattern, RegexOptions.Singleline))
+            {
+                content = Regex.Replace(content, pattern, newBlock, RegexOptions.Singleline);
+            }
+            else
+            {
+                // versionName 행 바로 뒤에 삽입
+                content = Regex.Replace(
+                    content,
+                    @"(versionName\s+'[^']*')",
+                    "$1\n        " + newBlock);
+            }
+
+            File.WriteAllText(fullPath, content);
+            Debug.Log("[Adiscope] launcherTemplate.gradle manifestPlaceholders updated: mediaId=" + mediaId);
         }
 
         private static void CreateAdiscopeFrameworksDirectory()
@@ -319,34 +398,40 @@ namespace Adiscope
 
     static class AdiscopeAdapterSettings {
         public const string ADEVENT    = "adevent";
+        public const string LUCKYEVENT = "luckyevent";
         public const string ADMOB      = "admob";
         public const string ADMANAGER  = "admanager";
         public const string MAX        = "max";
         private const string CHARTBOOST = "chartboost";
         private const string PANGLE     = "pangle";
         private const string VUNGLE     = "vungle";
+        private const string TNKPUB     = "tnkpub";
 
         public static bool GetIsSetting(string network, bool isAndroid) {
             if (isAndroid) {
                 switch (network) {
                     case ADEVENT:
+                    case LUCKYEVENT:
                     case ADMOB:
                     case CHARTBOOST:
                     case MAX:
                     case PANGLE:
                     case VUNGLE:
+                    case TNKPUB:
                     return true;
                     default: return false;
                 }
             } else {
                 switch (network) {
                     case ADEVENT:
+                    case LUCKYEVENT:
                     case ADMANAGER:
                     case ADMOB:
                     case VUNGLE:
                     case CHARTBOOST:
                     case MAX:
                     case PANGLE:
+                    case TNKPUB:
                     return true;
                     default: return false;
                 }

@@ -80,6 +80,7 @@ namespace Adiscope.Internal.Platform.Android
                 return;
             }
 
+            this.interstitialAd.Call(Values.MTD_SET_INTERSTITIAL_AD_LISTENER, this);
             interstitialAd.Call(Values.MTD_LOAD, unitId);
         }
 
@@ -91,18 +92,31 @@ namespace Adiscope.Internal.Platform.Android
                 return false;
             }
 
+            this.interstitialAd.Call(Values.MTD_SET_INTERSTITIAL_AD_LISTENER, this);
             return interstitialAd.Call<bool>(Values.MTD_IS_LOADED, unitId);
         }
 
         public bool Show()
         {
+            AndroidJavaObject activity = null;
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
+            {
+                if (unityPlayer == null)
+                {
+                    Debug.LogError("Android.InterstitialAdClient<Constructor> UnityPlayer: null");
+                    return false;
+                }
+                activity = unityPlayer.GetStatic<AndroidJavaObject>(Values.MTD_CURRENT_ACTIVITY);
+            }
+
             if (interstitialAd == null)
             {
                 Debug.LogError("Android.InterstitialAdClient<Show> InterstitialAd: null");
                 return false;
             }
 
-            return interstitialAd.Call<bool>(Values.MTD_SHOW);
+            this.interstitialAd.Call(Values.MTD_SET_INTERSTITIAL_AD_LISTENER, this);
+            return interstitialAd.Call<bool>(Values.MTD_SHOW, activity);
         }
         
         public void ShowWithLoad(string unitId)

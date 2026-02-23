@@ -66,6 +66,13 @@ namespace Adiscope.Internal.Platform.Android
 
         public const string MTD_SHOW_DEBUG = "showDebug";
 
+        // TNK Lucky Event Builder
+        public const string PKG_TNK_EVENT_BUILDER = "com.adiscope.luckyevent.tnk.TnkEventActivity$TnkEventBuilder";
+        public const string MTD_TNK_SET_USER_NAME = "setUserName";
+        public const string MTD_TNK_SET_CHILD_YN = "setChildYn";
+        public const string MTD_TNK_SET_EVENT_ID_TNK_APP_ID = "setEventIdTnkAppId";
+        public const string MTD_TNK_SHOW = "show";
+
         // unity
         public const string PKG_UNITY_PLAYER = "com.unity3d.player.UnityPlayer";
 

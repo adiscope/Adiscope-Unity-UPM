@@ -176,6 +176,50 @@ namespace Adiscope.Internal.Platform.IOS
             if (!setRewardedCheckParam(param))
                 throw new System.ArgumentException();
         }
+
+        
+        [DllImport ("__Internal")]
+		private static extern void setLuckyEventAppId(string eventId, string pid);
+
+        public void SetLuckyEventAppId(string eventId, string pid) {
+            setLuckyEventAppId(eventId, pid);
+        }
+
+        [DllImport ("__Internal")]
+		private static extern void setLuckyEventUseSafeAreaWebView(bool useSafeArea);
+
+        public void SetLuckyEventUseSafeAreaWebView(bool useSafeArea) {
+            setLuckyEventUseSafeAreaWebView(useSafeArea);
+        }
+
+        [DllImport ("__Internal")]
+		private static extern void setLuckyEventHashMark(string hashMark);
+
+        public void SetLuckyEventHashMark(string hashMark) {
+            setLuckyEventHashMark(hashMark);
+        }
+
+        [DllImport ("__Internal")]
+		private static extern void setLuckyEventBaseUrl(string baseUrl);
+
+        public void SetLuckyEventBaseUrl(string baseUrl) {
+            setLuckyEventBaseUrl(baseUrl);
+        }
+
+        [DllImport ("__Internal")]
+		private static extern void setLuckyEventExtraParam(string key, string value);
+
+        public void SetLuckyEventExtraParam(string key, string value) {
+            setLuckyEventExtraParam(key, value);
+        }
+
+        [DllImport ("__Internal")]
+		private static extern void showLuckyEvent();        
+
+        public void ShowLuckyEvent() {
+            showLuckyEvent();
+        }
+
     }
 }
 

@@ -84,6 +84,7 @@ namespace Adiscope.Internal.Platform.Android
                 return;
             }
             
+            this.rewardedVideoAd.Call(Values.MTD_SET_REWARDED_VIDEO_AD_LISTENER, this);
             rewardedVideoAd.Call(Values.MTD_LOAD, unitId);
         }
 
@@ -95,18 +96,32 @@ namespace Adiscope.Internal.Platform.Android
                 return false;
             }
 
+            this.rewardedVideoAd.Call(Values.MTD_SET_REWARDED_VIDEO_AD_LISTENER, this);
             return rewardedVideoAd.Call<bool>(Values.MTD_IS_LOADED, unitId);
         }
 
         public bool Show()
         {
+            AndroidJavaObject activity = null;
+
+            using (AndroidJavaClass unityPlayer = new AndroidJavaClass(Values.PKG_UNITY_PLAYER))
+            {
+                if (unityPlayer == null)
+                {
+                    Debug.LogError("Android.RewardedVideoAdClient<Constructor> UnityPlayer: null");
+                    return false;
+                }
+                activity = unityPlayer.GetStatic<AndroidJavaObject>(Values.MTD_CURRENT_ACTIVITY);
+            }
+            
             if (rewardedVideoAd == null)
             {
                 Debug.LogError("Android.RewardedVideoAdClient<Show> RewardedVideoAd: null");
                 return false;
             }
 
-            return rewardedVideoAd.Call<bool>(Values.MTD_SHOW);
+            this.rewardedVideoAd.Call(Values.MTD_SET_REWARDED_VIDEO_AD_LISTENER, this);
+            return rewardedVideoAd.Call<bool>(Values.MTD_SHOW, activity);
         }
 
         public void ShowWithLoad(string unitId)
