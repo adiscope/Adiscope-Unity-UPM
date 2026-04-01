@@ -1,7 +1,8 @@
 # Applovin Ad Review (Only Android)
 > 해당 플러그인이 설정된 상태로 빌드 시 빌드 시간이 오래 걸리는 점 참고 바랍니다.
 
-![adiscope_setttings_applovin_ad_review](https://github.com/user-attachments/assets/22453056-aea9-4701-b55b-c109a70bc430)
+<img width="786" height="547" alt="adiscope_setttings_applovin_ad_review" src="https://github.com/user-attachments/assets/3b26635f-b47a-4183-84b7-8d121d57a42e" />
+
 - 4.5.4 버전에서 지원
 - MAX를 사용하는 매체에서 동영상 소재에 따른 효율 파악을 위한 기능
 - 아래 조건이 모두 성립한 상태로 빌드 시 `Assets/Plugins/Android` 경로의 gradle 파일에 ad review 관련 스크립트가 추가되어 동작함
@@ -11,4 +12,4 @@
   - Unity build profiles > `Build App Bundle (Google Play)` 체크박스 ON
   - 조건이 하나라도 성립되지 않을 경우 해당 스크립트는 제거됨
 
-![unity_android_settings_aab](https://github.com/user-attachments/assets/f9745522-31d9-4cc6-9830-df18478008c5)
+<img width="711" height="537" alt="unity_android_settings_aab" src="https://github.com/user-attachments/assets/4ab18f53-0b73-4076-97f7-cd826acebc26" />
