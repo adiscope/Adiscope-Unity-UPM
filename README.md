@@ -1,9 +1,9 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.2.1-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.2.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.2.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.2.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
-[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.2.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.3.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
 - Unity Editor : 2021.3.8f1+, 2022.3.10f1+, 6000.1.3f1, 6000.1.11f1, 6000.1.12f1
@@ -30,13 +30,13 @@
 | Line                | 2.9.20251028    | 2.9.20251119 |
 | Meta(Fan)           | 6.21.0          | 6.20.1       |
 | Mintegral(Mobvista) | 17.0.61         | 8.0.4        |
-| Moloco              | 4.4.0           | 4.2.0        |
+| Moloco              | 4.5.0           | 4.2.0        |
 | Ogury               | 6.2.1           | 5.1.1        |
 | Pangle              | 7.8.5.2         | 7.8.5.5      |
 | Pubmatic            | 4.11.0          | 4.11.0       |
 | Smaato              | 22.7.2          | -            |
 | TNKPub              | 7.25.03         | 1.24         |
-| Unity Ads           | 4.16.5          | 4.16.5       |
+| Unity Ads           | 4.16.6          | 4.16.5       |
 | Verve               | 3.7.1           | -            |
 
 > 기존 gms SDK 사용중인 퍼블리셔는 admob 혹은 max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
@@ -244,10 +244,13 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 ### 3. 사용자 정보 설정
 ```csharp
 private string USER_ID = "";        // set unique user id to identify the user in reward information
-Adiscope.Sdk.GetCoreInstance().SetUserId(USER_ID);
+private int USER_TYPE = 0;          // none: 0, adult: 1, child: 2
+Adiscope.Sdk.GetCoreInstance().SetUserIdChild(USER_ID, USER_TYPE);
 ```
-- ⚠️ `Offerwall`, `RewardedVideo`, `RewardedInterstitial`를 사용하기 위해 필수 설정
-- 64자까지 설정 가능 
+- ⚠️ `Offerwall`, `RewardedVideo`, `Interstitial`, `RewardedInterstitial`를 사용하기 위해 유저 식별값과 유저 타입을 필수 설정
+- SDK 초기화 이전 또는 광고 로드 전에 호출되어야 함
+- userId: 64자까지 설정 가능
+- userType: None(0), Adult(1), Child(2)
 <br/><br/><br/>
 
 ### 4. Offerwall

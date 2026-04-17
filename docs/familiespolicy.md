@@ -32,23 +32,26 @@
 <br>
 
 ### SDK 초기화 시
-  - SDK 초기화 시 CHILD_YN을 포함하여 호출해야합니다.
+  - SDK 초기화 전 유저 정보를 set한 후 초기화를 호출해야합니다.
 ```csharp
-Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
+int userType = 0; // none: 0, adult: 1, child: 2
+String userId = ""; // set unique user id to identify the user in reward information
+Adiscope.Sdk.GetCoreInstance().SetUserIdChild(userId, userType);
+Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, (isSuccess) => {
     if (isSuccess) {
         // Initialize Call Back
     } else {
         // Initialize Fail
     }
-}, CALLBACK_TAG, CHILD_YN);
+});
 ```
-</br>
 
 ### 광고 유닛 호출 전
-- 광고 유닛(Offerwall, Rewarded Video, Interstitial) 호출 전 childYN을 set해야 합니다.
+- 광고 유닛(Offerwall, Rewarded Video, Interstitial) 호출 전 유저 정보를 set합니다.
 ```csharp
-String childYN = “YES” // “YES” or “NO”
-Adiscope.Sdk.GetOptionSetter().SetChildYN(childYN)
+int userType = 0; // none: 0, adult: 1, child: 2
+String userId = ""; // set unique user id to identify the user in reward information
+Adiscope.Sdk.GetCoreInstance().SetUserIdChild(userId, userType);
 ```
 </br>
 

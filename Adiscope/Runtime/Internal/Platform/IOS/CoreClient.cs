@@ -111,6 +111,15 @@ namespace Adiscope.Internal.Platform.IOS
                 throw new System.ArgumentException();
         }
 
+		[DllImport ("__Internal")]
+		private static extern bool setUserIdChild(string user_id, int child);        
+
+        public void SetUserIdChild(string userId, int child)
+        {
+            if (!setUserIdChild(userId, child))
+                throw new System.ArgumentException();
+        }
+
     	[DllImport("__Internal")] 
         private static extern void getUnitStatus(string unitId, onGetUnitStatusCallback callback);
         private delegate void onGetUnitStatusCallback(int code, string description, bool live, bool active);

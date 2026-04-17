@@ -14,6 +14,7 @@ namespace Adiscope
         public const string SERVICE_JSON_KEY_ADMOB         = "com.google.android.gms.ads.APPLICATION_ID";
         public const string SERVICE_JSON_KEY_APPLOVIN      = "applovin.sdk.key";
         public const string SERVICE_JSON_KEY_AD_REVIEW     = "applovin.ad.review.key";
+        public const string SERVICE_JSON_KEY_AD_REVIEW_ENABLE = "applovin.ad.review.enabled";
 
         private const string SERVICE_JSON_KEY_ADISCOPE      = "adiscope";
         private const string SERVICE_JSON_KEY_NETWORK       = "network";
@@ -342,6 +343,11 @@ namespace Adiscope
                                         serialized.FindProperty("_applovinAdReviewKey").stringValue = adReviewKey;
                                     }
                                 }
+                            }
+                            if(networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_AD_REVIEW_ENABLE) && networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW_ENABLE] != null)
+                            {
+                                bool adReviewEnabled = Boolean.Parse(networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW_ENABLE].ToString());
+                                serialized.FindProperty("_applovinAdReview").boolValue = adReviewEnabled;
                             }
                         }
                     }
