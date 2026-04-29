@@ -15,11 +15,11 @@ namespace Adiscope.Internal.Platform.Android
         public const string PKG_REWARDED_INTERSTITIAL_AD_LISTENER = "com.nps.adiscope.rewardedinterstitial.RewardedInterstitialAdShowListener";
         public const string PKG_OFFERWALL_AD_LISTENER = "com.nps.adiscope.offerwall.OfferwallAdListener";
         public const string PKG_INTERSTITIAL_AD_LISTENER = "com.nps.adiscope.interstitial.InterstitialAdListener";
+        public const string PKG_AD_EVENT_LISTENER = "com.nps.adiscope.adevent.AdEventListener";
 
         public const string PKG_ADMOB_ADAPTER = "com.nps.adiscope.adapter.admob.AdMobAdapter";
         public const string PKG_MAX_ADAPTER = "com.nps.adiscope.adapter.max.MaxAdapter";
         public const string PKG_IUNIT_STATUS = "com.nps.adiscope.model.IUnitStatus";
-        public const string PKG_ADISCOPE_USER_TYPE = "com.nps.adiscope.model.AdiscopeUserType";
 
         public const string MTD_GET_REWARDED_VIDEO_AD_INSTANCE = "getRewardedVideoAdInstance";
         public const string MTD_SET_REWARDED_VIDEO_AD_LISTENER = "setRewardedVideoAdListener";
@@ -36,7 +36,6 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_INITIALIZE = "initialize";
         public const string MTD_ISINITIALIZE = "isInitialized";
         public const string MTD_SET_USER_ID = "setUserId";
-        public const string MTD_SET_USER_ID_CHILD = "setUserIdChild";
         public const string MTD_GET_UNIT_STATUS = "getUnitStatus";
         public const string MTD_SET_VOLUME_OFF = "setVolumeOff";
         public const string MTD_SET_REWARDED_CHECK_PARAM = "setRewardedCheckParam";
@@ -54,14 +53,16 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_IS_ACTIVE = "isActive";
         public const string MTD_SET_USE_CLOUD_FRONT_PROXY = "setUseCloudFrontProxy";
         public const string MTD_SET_CHILD_YN = "setChildYN";
-        public const string MTD_GET_CHILD_YN = "getChildYN";
-        public const string MTD_FROM_INT = "fromInt";
 
         // Rewarded Interstitial
         public const string MTD_GET_REWARDED_INTERSTITIAL_AD_INSTANCE = "getRewardedInterstitialAdInstance";
         public const string MTD_SET_REWARDED_INTERSTITIAL_AD_LISTENER = "setRewardedInterstitialAdListener";
         public const string MTD_REWARDED_INTERSTITIAL_LOAD = "preloadUnit";
         public const string MTD_REWARDED_INTERSTITIAL_LOAD_ALL = "preloadAll";
+
+        // Ad Event
+        public const string MTD_GET_AD_EVENT_INSTANCE = "getAdEventInstance";
+        public const string MTD_SET_AD_EVENT_LISTENER = "setAdEventListener";
 
         public const string MTD_SHOW_DEBUG = "showDebug";
 

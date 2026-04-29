@@ -69,6 +69,15 @@ namespace Adiscope
         }
 
         /// <summary>
+        /// get ad event singleton instance
+        /// </summary>
+        /// <returns>singleton instance of AdEvent</returns>
+        public static AdEvent GetAdEventInstance()
+        {
+            return AdEvent.Instance;
+        }
+
+        /// <summary>
         /// get option setter singleton instance
         /// </summary>
         /// <returns>singleton instance of option setter</returns>

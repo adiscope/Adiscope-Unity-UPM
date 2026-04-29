@@ -177,10 +177,10 @@ namespace Adiscope
         private const string TNKPUB_FILE_NAME       = "TnkpubIosDependencies.xml";
 
         private const string ADISCOPE_FILE_PATH     = "https://github.com/adiscope/Adiscope-iOS-Sample/releases/download/";
-        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "5.3.0/";
-        private const string LUCKYEVENT_FILE_PATH   = ADISCOPE_FILE_PATH + "5.3.0/";
+        private const string CORE_FILE_PATH         = ADISCOPE_FILE_PATH + "5.2.6/";
+        private const string LUCKYEVENT_FILE_PATH   = ADISCOPE_FILE_PATH + "5.2.6/";
         private const string ADMANAGER_FILE_PATH    = ADISCOPE_FILE_PATH + "5.2.0/";
-        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "5.3.0/";
+        private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "5.2.6/";
         private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.2.0/";
         private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "5.2.0/";
         private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "5.2.0/";

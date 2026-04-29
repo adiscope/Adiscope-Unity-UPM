@@ -11,7 +11,6 @@ public class AdiscopeExample : MonoBehaviour
 
     private string MEDIA_ID;
     private string USER_ID;
-    private string CHILD_TYPE;
     private string REWARDED_CHECK_PARAM;
     private string RED_COLOR;
     private string GREEN_COLOR;
@@ -29,6 +28,7 @@ public class AdiscopeExample : MonoBehaviour
     private string RI_ID3;
     private string RI_ID4;
     private string RI_ID5;
+    private string ROULETTE_ID;
     private string OFFERWALL_ID;
     private string OFFERWALL_DETAIL_ID;
     private string OFFERWALL_DETAIL_URL;
@@ -96,6 +96,7 @@ public class AdiscopeExample : MonoBehaviour
     private Adiscope.Feature.RewardedVideoAd rewardedVideoAd;
     private Adiscope.Feature.InterstitialAd interstitialAd;
     private Adiscope.Feature.RewardedInterstitialAd rewaredInterstitialAd;
+    private Adiscope.Feature.AdEvent adEvent;
 
     // Properties
     private string outputMessage;
@@ -151,6 +152,9 @@ public class AdiscopeExample : MonoBehaviour
         this.rewaredInterstitialAd.OnFailedToShow -= OnRewardedInterstitialAdFailedToShowCallback;
         this.rewaredInterstitialAd.OnRewarded -= OnRewardedInterstitialRewardedCallback;
 
+        this.adEvent.OnOpened -= OnAdEventOpenedCallback;
+        this.adEvent.OnClosed -= OnAdEventClosedCallback;
+        this.adEvent.OnFailedToShow -= OnAdEventFailedToShowCallback;
     }
 
     private void RegisterAdiscopeCallback()
@@ -218,6 +222,14 @@ public class AdiscopeExample : MonoBehaviour
             this.rewaredInterstitialAd.OnRewarded += OnRewardedInterstitialRewardedCallback;
 
         }
+
+        if(this.adEvent == null)
+        {
+            this.adEvent = Adiscope.Sdk.GetAdEventInstance();
+            this.adEvent.OnOpened += OnAdEventOpenedCallback;
+            this.adEvent.OnClosed += OnAdEventClosedCallback;
+            this.adEvent.OnFailedToShow += OnAdEventFailedToShowCallback;
+        }
     }
 
     private void OnInitializedCallback(object sender, Adiscope.Model.InitResult args) { this.AddOutputMessage("initialize - args: " + args); }
@@ -257,6 +269,20 @@ public class AdiscopeExample : MonoBehaviour
     private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnFailedToShow - args: " + args); }
     private void OnRewardedInterstitialRewardedCallback(object sender, Adiscope.Model.RewardItem args) { this.AddOutputMessage("  <= rewaredInterstitialAd.OnRewarded - args: " + args); }
 
+    private void OnAdEventOpenedCallback(object sender, Adiscope.Model.ShowResult args)
+    {
+        this.AddOutputMessage("  <= adEvent.OnOpened - args: " + args);
+    }
+    private void OnAdEventClosedCallback(object sender, Adiscope.Model.ShowResult args)
+    { 
+        this.AddOutputMessage("  <= adEvent.OnClosed - args: " + args); 
+    }
+    private void OnAdEventFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args)
+    {
+        this.AddOutputMessage("  <= adEvent.OnFailedToShow - args: " + args);
+    }
+
+
     #region GUI
     private void AddContentViews()
     {
@@ -272,12 +298,6 @@ public class AdiscopeExample : MonoBehaviour
         this.AddButton("Set User ID", () => {
             this.core.SetUserId(USER_ID);
             this.AddOutputMessage("Set User ID: " + USER_ID);
-        });
-        this.AddLabel("0:None, 1:Adult, 2:Child");
-        this.AddTextField("Child Type", TextFieldType.ChildType);
-        this.AddButton("Set User ID & Child Type", () => {
-            this.core.SetUserIdChild(USER_ID, int.Parse(CHILD_TYPE));
-            this.AddOutputMessage("Set User ID: " + USER_ID + ", Child Type: " + CHILD_TYPE);
         });
 
         this.AddTextField("Callback Tag", TextFieldType.CallbackTag);
@@ -768,7 +788,6 @@ public class AdiscopeExample : MonoBehaviour
                 {
                     case TextFieldType.MediaID: MEDIA_ID = GUI.TextField(rect, MEDIA_ID, style); break;
                     case TextFieldType.UserID: USER_ID = GUI.TextField(rect, USER_ID, style); break;
-                    case TextFieldType.ChildType: CHILD_TYPE = GUI.TextField(rect, CHILD_TYPE, style); break;
                     case TextFieldType.CustomData: REWARDED_CHECK_PARAM = GUI.TextField(rect, REWARDED_CHECK_PARAM, style); break;
                     case TextFieldType.OfferwallUnit: OFFERWALL_ID = GUI.TextField(rect, OFFERWALL_ID, style); break;
                     case TextFieldType.OfferwallDetailId: OFFERWALL_DETAIL_ID = GUI.TextField(rect, OFFERWALL_DETAIL_ID, style); break;
@@ -786,6 +805,7 @@ public class AdiscopeExample : MonoBehaviour
                     case TextFieldType.RewardedInterstitialUnit4: RI_ID4 = GUI.TextField(rect, RI_ID4, style).ToUpper(); break;
                     case TextFieldType.RewardedInterstitialUnit5: RI_ID5 = GUI.TextField(rect, RI_ID5, style).ToUpper(); break;
                     case TextFieldType.InterstitialUnit: IT_ID = GUI.TextField(rect, IT_ID, style).ToUpper(); break;
+                    case TextFieldType.RouletteUnit: ROULETTE_ID = GUI.TextField(rect, ROULETTE_ID, style).ToUpper(); break;
                     case TextFieldType.CallbackTag: CALLBACK_TAG = GUI.TextField(rect, CALLBACK_TAG, style).ToUpper(); break;
                     case TextFieldType.ChildYN: CHILD_YN = GUI.TextField(rect, CHILD_YN, style).ToUpper(); break;
                     case TextFieldType.Red: RED_COLOR = GUI.TextField(rect, RED_COLOR, style); break;
@@ -848,10 +868,10 @@ public class AdiscopeExample : MonoBehaviour
 public enum ContentViewType { Button, TextField, Label, Spacer }
 public enum TextFieldType
 {
-    MediaID, UserID, ChildType, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId,
+    MediaID, UserID, FindUnitID, RewardedUnit, InterstitialUnit, OfferwallUnit, OfferwallDetailId,
     OfferwallDetailUrl, OfferwallDeeplinkUrl, OfferwallApplinkUrl, CallbackTag, ChildYN, RewardedInterstitialUnit,
     RewardedInterstitialUnit1, RewardedInterstitialUnit2, RewardedInterstitialUnit3, RewardedInterstitialUnit4,
-    RewardedInterstitialUnit5, CustomData, Red, Green, Blue, Alpha, Message, 
+    RewardedInterstitialUnit5, RouletteUnit, CustomData, Red, Green, Blue, Alpha, Message, 
     LuckyAppId, LuckyPubId, LuckyEventDeeplinkUrl
 }
 

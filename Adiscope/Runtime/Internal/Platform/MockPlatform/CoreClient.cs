@@ -105,10 +105,6 @@ namespace Adiscope.Internal.Platform.MockPlatform
         {
         }
 
-        public void SetUserIdChild(string userId, int child)
-        {
-        }
-
         public void GetUnitStatus(string unitId, Action<AdiscopeError, UnitStatus> callback)
         {
             Thread thd = new Thread(() =>

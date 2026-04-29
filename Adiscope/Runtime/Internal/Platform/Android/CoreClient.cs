@@ -194,32 +194,6 @@ namespace Adiscope.Internal.Platform.Android
             }
         }
 
-        public void SetUserIdChild(string userId, int child)
-        {
-            using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
-            {
-                if (jc == null)
-                {
-                    Debug.LogError("Android.CoreClient<SetUserIdChild> " + Values.PKG_ADISCOPE + ": null");
-                    return;
-                }
-
-                using (AndroidJavaClass userTypeClass = new AndroidJavaClass(Values.PKG_ADISCOPE_USER_TYPE))
-                {
-                    if (userTypeClass == null)
-                    {
-                        Debug.LogError("Android.CoreClient<SetUserIdChild> " + Values.PKG_ADISCOPE_USER_TYPE + ": null");
-                        return;
-                    }
-
-                    AndroidJavaObject userType = userTypeClass.CallStatic<AndroidJavaObject>(Values.MTD_FROM_INT, child);
-                    _luckyEventUserId = userId;
-                    _luckyEventChildYn = userType.Call<string>(Values.MTD_GET_CHILD_YN);
-                    jc.CallStatic<bool>(Values.MTD_SET_USER_ID_CHILD, userId, userType);
-                }
-            }
-        }
-
         public void GetUnitStatus(string unitId, Action<AdiscopeError, UnitStatus> callback)
         {
             using (AndroidJavaClass jc = new AndroidJavaClass(Values.PKG_ADISCOPE))
