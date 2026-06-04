@@ -14,6 +14,7 @@ namespace Adiscope
         public const string SERVICE_JSON_KEY_ADMOB         = "com.google.android.gms.ads.APPLICATION_ID";
         public const string SERVICE_JSON_KEY_APPLOVIN      = "applovin.sdk.key";
         public const string SERVICE_JSON_KEY_AD_REVIEW     = "applovin.ad.review.key";
+        public const string SERVICE_JSON_KEY_AD_REVIEW_ENABLE = "applovin.ad.review.enabled";
 
         private const string SERVICE_JSON_KEY_ADISCOPE      = "adiscope";
         private const string SERVICE_JSON_KEY_NETWORK       = "network";
@@ -44,6 +45,7 @@ namespace Adiscope
 
             if (isAndroidPath) {
                 SettingsJson(androidJsonFilePath, true);
+                UpdateLauncherGradleManifestPlaceholders();
             }
 
             if (isiOSPath) {
@@ -178,10 +180,7 @@ namespace Adiscope
                     EditorGUILayout.Space();
                     if (GUILayout.Button("Create Adiscope Android & iOS Files", GUILayout.Height(30)))
                     {
-                        string mediaId     = serialized.FindProperty("_mediaID_aos").stringValue;
-                        string mediaSecret = serialized.FindProperty("_mediaSecret_aos").stringValue;
-                        string subDomain   = serialized.FindProperty("_subDomain").stringValue;
-                        UpdateLauncherGradleManifestPlaceholders(mediaId, mediaSecret, subDomain);
+                        UpdateLauncherGradleManifestPlaceholders();
 
                         if (BuildPostProcessorForAndroid.CreateAdiscopeAndroidFiles(true)       // Manifest 파일 생성
                             && BuildPostProcessorForIosEdm4u.CreateAdiscopeIosFiles(true)) {
@@ -343,11 +342,25 @@ namespace Adiscope
                                     }
                                 }
                             }
+                            if(networkInfoSettings.ContainsKey(SERVICE_JSON_KEY_AD_REVIEW_ENABLE) && networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW_ENABLE] != null)
+                            {
+                                bool adReviewEnabled = Boolean.Parse(networkInfoSettings[SERVICE_JSON_KEY_AD_REVIEW_ENABLE].ToString());
+                                serialized.FindProperty("_applovinAdReview").boolValue = adReviewEnabled;
+                            }
                         }
                     }
                 }
                 serialized.ApplyModifiedProperties();
             }
+        }
+
+        private static void UpdateLauncherGradleManifestPlaceholders()
+        {
+            var s = new SerializedObject(Load());
+            UpdateLauncherGradleManifestPlaceholders(
+                s.FindProperty("_mediaID_aos").stringValue,
+                s.FindProperty("_mediaSecret_aos").stringValue,
+                s.FindProperty("_subDomain").stringValue);
         }
 
         private static void UpdateLauncherGradleManifestPlaceholders(string mediaId, string mediaSecret, string subDomain)

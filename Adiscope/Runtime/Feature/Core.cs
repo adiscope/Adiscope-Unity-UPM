@@ -64,6 +64,8 @@ namespace Adiscope.Feature
 
         public void SetUserId(string userId) { this.client.SetUserId(userId); }
 
+        public void SetUserIdChild(string userId, int child) { this.client.SetUserIdChild(userId, child); }
+
         public void GetUnitStatus(string unitId, Action<AdiscopeError, UnitStatus> callback) { this.client.GetUnitStatus(unitId, callback); }
 
         public void SetRewardedCheckParam(string param) { this.client.SetRewardedCheckParam(param); }
