@@ -1,8 +1,8 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.3.1-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.3.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.3.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.3.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
@@ -17,32 +17,31 @@
 
 | Ad Network          | Android Version | iOS Version  |
 |---------------------|-----------------|--------------|
-| AdMob               | 24.8.0          | 12.14.0      |
-| Amazon              | 11.1.1          | 5.3.3        |
-| AppLovin            | 13.5.1          | 13.5.1       |
-| BidMachine          | 3.5.0           | 3.5.1        |
-| Bigo                | 5.6.2           | 5.0.0        |
+| AdMob               | 25.2.0          | 13.2.0       |
+| Amazon              | -               | -            |
+| AppLovin            | 13.6.2          | 13.6.2       |
+| BidMachine          | 3.6.1           | 3.6.1        |
+| Bigo                | 5.8.2           | 5.1.2        |
 | Chartboost          | 9.11.0          | 9.11.0       |
-| DT Exchange         | 8.4.2           | 8.4.3        |
-| InMobi              | 11.1.0          | 11.0.0       |
-| Ironsource          | 9.2.0           | 9.2.0.0      |
-| Liftoff(Vungle)     | 7.6.3           | 7.6.3        |
-| Line                | 2.9.20251028    | 2.9.20251119 |
-| Meta(Fan)           | 6.21.0          | 6.20.1       |
-| Mintegral(Mobvista) | 17.0.61         | 8.0.4        |
-| Moloco              | 4.5.0           | 4.2.0        |
-| Ogury               | 6.2.1           | 5.1.1        |
-| Pangle              | 7.8.5.2         | 7.8.5.5      |
-| Pubmatic            | 4.11.0          | 4.11.0       |
-| Smaato              | 22.7.2          | -            |
-| TNKPub              | 7.25.03         | 1.24         |
+| DT Exchange         | 8.4.4           | 8.4.6        |
+| InMobi              | 11.2.0          | 11.2.0       |
+| Ironsource          | 9.4.0.0         | 9.4.0.0      |
+| Liftoff(Vungle)     | 7.7.3           | 7.7.2        |
+| Line                | 3000.0.1        | 3.0.1        |
+| Meta(Fan)           | 6.21.0          | 6.21.1       |
+| Mintegral(Mobvista) | 17.1.51         | 8.1.3        |
+| Moloco              | 4.8.0           | 4.5.1        |
+| Ogury               | 6.2.2           | 5.2.1        |
+| Pangle              | 7.9.1.3         | 8.0.0.9      |
+| Pubmatic            | 4.11.0          | 5.1.0        |
+| TNKPub              | 7.25.05         | 1.24         |
 | Unity Ads           | 4.16.6          | 4.16.5       |
-| Verve               | 3.7.1           | -            |
+| Verve               | 3.8.1           | -            |
 
-> 기존 gms SDK 사용중인 퍼블리셔는 admob 혹은 max 어댑터 사용 시 24버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
-> - gms 22 버전: 애디스콥 `3.3.0`~`4.0.1`
+> 기존 gms SDK 사용중인 퍼블리셔는 admob 혹은 max 어댑터 사용 시 25버전으로 마이그레이션 필요 [(관련 문서)](https://developers.google.com/admob/android/migration?hl=en)
 > - gms 23 버전: 애디스콥 `4.1.0`~`4.3.2`
-> - gms 24 버전: 애디스콥 `4.4.0` 이상
+> - gms 24 버전: 애디스콥 `4.4.0`~`5.3.1`
+> - gms 25 버전: 애디스콥 `5.4.0` 이상
 
 </div>
 </details>
@@ -599,6 +598,8 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
 #### B. Callback 등록
 ```csharp
 if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.OnLoaded += OnRewardedInterstitialAdLoadedCallback;
+    rewaredInterstitialAd.OnFailedToLoad += OnRewardedInterstitialAdFailedToLoadCallback;
     rewaredInterstitialAd.OnGetUnitStatus += OnRewardedInterstitialGetUnitStatusCallback;
     rewaredInterstitialAd.OnSkip += OnRewardedInterstitialAdSkipCallback;
     rewaredInterstitialAd.OnOpened += OnRewardedInterstitialAdOpenedCallback;
@@ -611,7 +612,18 @@ if (rewaredInterstitialAd != null) {
 ```
 <br/>
 
-#### C. PreLoadAll
+#### C. Load
+```csharp
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.LoadRewardedInterstitial(UNIT_ID);
+} else {
+    // Reinitialize
+}
+```
+- 입력된 유닛의 Load 진행
+<br/>
+
+#### D. PreLoadAll
 ```csharp
 if (rewaredInterstitialAd != null) {
     rewaredInterstitialAd.PreLoadAllRewardedInterstitial();
@@ -619,11 +631,10 @@ if (rewaredInterstitialAd != null) {
     // Reinitialize
 }
 ```
-- Initialize Call Back 후 1회 설정 권장
 - 관리자가 설정된 활성화된 모든 유닛들을 Load 진행
 <br/>
 
-#### D. Unit 지정 PreLoad
+#### E. Unit 지정 PreLoad
 ```csharp
 if (rewaredInterstitialAd != null) {
     rewaredInterstitialAd.PreLoadRewardedInterstitial(new string[] { UNIT_ID1, UNIT_ID2, ... });
@@ -631,11 +642,25 @@ if (rewaredInterstitialAd != null) {
     // Reinitialize
 }
 ```
-- Initialize Call Back 후 1회 설정 권장
 - 입력된 유닛들을 Load 진행
 <br/>
 
-#### E. Show
+#### F. IsLoaded
+```csharp
+if (rewaredInterstitialAd != null) {
+    if (rewaredInterstitialAd.IsLoadedRewardedInterstitial(UNIT_ID)) {
+        // show ad here
+    } else {
+        // do something else
+    }
+} else {
+    // Reinitialize
+}
+```
+- 광고가 Load 되었는지 상태를 확인
+<br/>
+
+#### G. Show
 ```csharp
 if (rewaredInterstitialAd != null) {
     rewaredInterstitialAd.ShowRewardedInterstitial(UNIT_ID);
@@ -643,13 +668,25 @@ if (rewaredInterstitialAd != null) {
     // Reinitialize
 }
 ```
-- 해당 유닛이 Load되어 있으면 안내 팝업을 보여 준 뒤 해당 광고를 사용자에게 보여줌
-- ShowRewardedInterstitial method는 중복하여 호출 할 수 없음
-- `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
-- `OnClosed`와 `OnFailedToShow`가 호출 되면 내부에서 해당 유닛을 자동 Load 시킴
+- 해당 유닛이 Load되어 있으면 해당 광고를 사용자에게 바로 보여줌
+- show method는 중복하여 호출 할 수 없음
+- `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 <br/>
 
-#### F. Unit Status Info
+#### H. Show With Popup
+```csharp
+if (rewaredInterstitialAd != null) {
+    rewaredInterstitialAd.ShowWithPopupRewardedInterstitial(UNIT_ID);
+} else {
+    // Reinitialize
+}
+```
+- 해당 유닛이 Load되어 있으면 안내 팝업을 보여 준 뒤 해당 광고를 사용자에게 보여줌
+- show method는 중복하여 호출 할 수 없음
+- `ShowWithPopupRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+<br/>
+
+#### I. Unit Status Info
 ```csharp
 if (rewaredInterstitialAd != null) {
     rewaredInterstitialAd.GetUnitStatusRewardedInterstitial(UNIT_ID);
@@ -660,7 +697,7 @@ if (rewaredInterstitialAd != null) {
 - 해당 유닛의 수익화 여부, 활성화 여부를 알 수 있음
 <br/>
 
-#### G. Callback Reward
+#### J. Callback Reward
 ```csharp
 private void OnRewardedInterstitialRewardedCallback(object sender, Adiscope.Model.RewardItem args) {
     // RewardItem.UnitId - 해당 rewarded video ad의 unitId (ShowRewardedInterstitial 시 입력한 값)
@@ -683,21 +720,28 @@ private void OnRewardedInterstitialGetUnitStatusCallback(object sender, Adiscope
     // args.isLive()    수익화 여부
     // args.isActive()  활성화 여부
 }
+private void OnRewardedInterstitialAdLoadedCallback(object sender, Adiscope.Model.LoadResult args) {
+    // RewardedInterstitial Load Success
+}
+private void OnRewardedInterstitialAdFailedToLoadCallback(object sender, Adiscope.Model.LoadFailure args) {
+    // RewardedInterstitial Load Fail
+}
 private void OnRewardedInterstitialAdSkipCallback(object sender, Adiscope.Model.ShowResult args) {
     // RewardedInterstitial Skip for 안내 팝업
 }
 private void OnRewardedInterstitialAdOpenedCallback(object sender, Adiscope.Model.ShowResult args) {
-    // Rewarded Video 열림
+    // RewardedInterstitial Video 열림
 }
 private void OnRewardedInterstitialAdClosedCallback(object sender, Adiscope.Model.ShowResult args) {
-    // Rewarded Video 닫힘
+    // RewardedInterstitial Video 닫힘
 }
 private void OnRewardedInterstitialAdFailedToShowCallback(object sender, Adiscope.Model.ShowFailure args) {
-    // Rewarded Video Show Fail
+    // RewardedInterstitial Video Show Fail
 }
 ```
 - `GetUnitStatusRewardedInterstitial` 조회 시 `OnGetUnitStatus`가 호출
-- `ShowRewardedInterstitial` Skip 시 `OnSkip`, 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
+- `ShowRewardedInterstitial` 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
+- `ShowWithPopupRewardedInterstitial` Skip 시 `OnSkip`, 성공 시 `OnOpened`, `OnClosed`가 순차적으로 호출되고, 실패시 `OnFailedToShow`가 호출
 - `OnFailedToShow`시 [ApdiscopeError 참고](./docs/error_info.md) 
 - Callback은 Unity의 main thread에서 호출 
 <br/><br/><br/>

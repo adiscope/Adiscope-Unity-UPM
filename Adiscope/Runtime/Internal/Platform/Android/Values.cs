@@ -62,6 +62,7 @@ namespace Adiscope.Internal.Platform.Android
         public const string MTD_SET_REWARDED_INTERSTITIAL_AD_LISTENER = "setRewardedInterstitialAdListener";
         public const string MTD_REWARDED_INTERSTITIAL_LOAD = "preloadUnit";
         public const string MTD_REWARDED_INTERSTITIAL_LOAD_ALL = "preloadAll";
+        public const string MTD_REWARDED_INTERSTITIAL_SHOW_WITH_POPUP = "showWithPopup";
 
         public const string MTD_SHOW_DEBUG = "showDebug";
 

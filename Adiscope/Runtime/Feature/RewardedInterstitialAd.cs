@@ -14,6 +14,12 @@ namespace Adiscope.Feature
         public event EventHandler<UnitStatus> OnGetUnitStatus;
         public event EventHandler<UnitStatus> OnGetUnitStatusBackground;
 
+        public event EventHandler<LoadResult> OnLoaded;
+        public event EventHandler<LoadResult> OnLoadedBackground;
+
+        public event EventHandler<LoadFailure> OnFailedToLoad;
+        public event EventHandler<LoadFailure> OnFailedToLoadBackground;
+
         public event EventHandler<ShowResult> OnSkip;
         public event EventHandler<ShowResult> OnSkipBackground;
 
@@ -48,6 +54,12 @@ namespace Adiscope.Feature
             this.client.OnGetUnitStatus += (sender, args) => { OnGetUnitStatus?.Invoke(sender, args); };
             this.client.OnGetUnitStatusBackground += (sender, args) => { OnGetUnitStatusBackground?.Invoke(sender, args); };
 
+            this.client.OnLoaded += (sender, args) => { OnLoaded?.Invoke(sender, args); };
+            this.client.OnLoadedBackground += (sender, args) => { OnLoadedBackground?.Invoke(sender, args); };
+
+            this.client.OnFailedToLoad += (sender, args) => { OnFailedToLoad?.Invoke(sender, args); };
+            this.client.OnFailedToLoadBackground += (sender, args) => { OnFailedToLoadBackground?.Invoke(sender, args); };
+
             this.client.OnSkip += (sender, args) => { OnSkip?.Invoke(sender, args); };
             this.client.OnSkipBackground += (sender, args) => { OnSkipBackground?.Invoke(sender, args); };
 
@@ -64,11 +76,17 @@ namespace Adiscope.Feature
             this.client.OnRewardedBackground += (sender, args) => { OnRewardedBackground?.Invoke(sender, args); };
         }
 
+        public void LoadRewardedInterstitial(string unitId) { client.LoadRewardedInterstitial(unitId); }
+
         public void PreLoadAllRewardedInterstitial() { client.PreLoadAllRewardedInterstitial(); }
 
         public void PreLoadRewardedInterstitial(string[] unitIds) { client.PreLoadRewardedInterstitial(unitIds); }
 
+        public bool IsLoadedRewardedInterstitial(string unitId) { return client.IsLoadedRewardedInterstitial(unitId); }
+
         public bool ShowRewardedInterstitial(string unitId) { return client.ShowRewardedInterstitial(unitId);}
+
+        public bool ShowWithPopupRewardedInterstitial(string unitId) { return client.ShowWithPopupRewardedInterstitial(unitId);}
 
         public bool GetUnitStatusRewardedInterstitial(string unitId) {return client.GetUnitStatusRewardedInterstitial(unitId); }
     }
