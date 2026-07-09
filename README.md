@@ -281,7 +281,7 @@ if (offerwallAd != null) {
 OfferwallFilterType[] typeList = new OfferwallFilterType[] {  };
 // new OfferwallFilterType[] { OfferwallFilterType.CPS }
 if (offerwallAd != null) {
-    if (offerwallAd.Show("unit1", typeList)) {
+    if (offerwallAd.Show("UNIT1", typeList)) {
         // Success
     } else {
         // This Show request is duplicated
@@ -291,6 +291,7 @@ if (offerwallAd != null) {
 }
 ```
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### D. Callbacks
@@ -374,6 +375,7 @@ if (rewardedVideoAd != null) {
 }
 ```
 - 해당 유닛에 속한 ad 네크워크들의 광고를 Load
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 - `OnLoaded` callback이 호출되면 Load가 완료
 - `Load`가 실행되면 `OnLoaded` 와 `OnFailedToLoad` 중 하나의 callback은 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
@@ -399,6 +401,7 @@ if (rewardedVideoAd != null) {
 }
 ```
 - 광고가 Load 되었는지 상태를 확인
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### E. Show
@@ -507,6 +510,7 @@ if (interstitialAd != null) {
 }
 ```
 - 해당 유닛에 속한 ad 네크워크들의 광고를 Load
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 - `OnInterstitialAdLoaded` callback이 호출되면 Load가 완료
 - Interstitial의 `Load`와 `Show`는 pair로 호출
 - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음 번 Show를 준비
@@ -528,6 +532,7 @@ if (interstitialAd != null) {
 }
 ```
 - 광고가 Load 되었는지 상태를 확인
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### E. Show
@@ -620,6 +625,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 입력된 유닛의 Load 진행
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### D. PreLoadAll
@@ -642,6 +648,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 입력된 유닛들을 Load 진행
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### F. IsLoaded
@@ -657,6 +664,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 광고가 Load 되었는지 상태를 확인
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### G. Show
@@ -668,6 +676,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 해당 유닛이 Load되어 있으면 해당 광고를 사용자에게 바로 보여줌
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 - show method는 중복하여 호출 할 수 없음
 - `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 <br/>
@@ -681,6 +690,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 해당 유닛이 Load되어 있으면 안내 팝업을 보여 준 뒤 해당 광고를 사용자에게 보여줌
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 - show method는 중복하여 호출 할 수 없음
 - `ShowWithPopupRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 <br/>
@@ -694,6 +704,7 @@ if (rewaredInterstitialAd != null) {
 }
 ```
 - 해당 유닛의 수익화 여부, 활성화 여부를 알 수 있음
+- 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
 #### J. Callback Reward
