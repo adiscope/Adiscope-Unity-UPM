@@ -95,3 +95,29 @@ Adiscope.Sdk.GetOptionSetter().SetVolumeOff(false);    // 광고 소리 킴(Defa
 Adiscope.Sdk.GetOptionSetter().SetVolumeOff(true);     // 광고 소리 끔
 ```
 - `Admob`, `AppLovin`, `Mintegral`, `Verve` 만 적용 가능
+
+
+### iOS 광고 시청시 UnityPause 처리
+
+```csharp
+Adiscope.Feature.OptionSetter.SetiOSAppPauseOnBackground(true);
+```
+
+광고 시청 시 UnityPause(YES)를 호출하고 
+
+광고 종료 후 UnityPause(NO)를 호출합니다.
+
+
+### 광고 중복 호출 방지 
+
+```csharp
+Adiscope.Feature.OptionSetter.BlockMultiAdShow(true);
+```
+
+해당 값 설정시 서로 다른 광고를 중복으로 show 요청 했을 경우 첫번째 광고가 재생중이면 나머지 show 요청을 무시합니다.
+
+**두번째 이후의 show() 함수는 false를 반환**
+
+가능하면 다른 타입의 광고를 동시에 show하지 않도록 개발하시는 것이 좋습니다.
+
+해당 옵션은 show 타이밍을 컨트롤 하기 어려운 경우에만 사용 하시는 것을 권장합니다.

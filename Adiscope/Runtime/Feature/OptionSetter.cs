@@ -1,7 +1,9 @@
-﻿using Adiscope.Internal;
+using Adiscope.Internal;
 using Adiscope.Internal.Interface;
 using Adiscope.Internal.Platform;
 using System;
+using System.Runtime.InteropServices;
+using UnityEngine;
 
 namespace Adiscope.Feature
 {
@@ -109,6 +111,95 @@ namespace Adiscope.Feature
         public void ShowAdmobMediationDebugger() 
         { 
             client.ShowAdmobMediationDebugger();
+        }
+
+        // ---- Unity pause / ad show guard ----
+
+#if UNITY_IOS && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        private static extern void UnityPause(int pause);
+        [DllImport("__Internal")]
+        private static extern int UnityIsPaused();
+#endif
+
+        private static bool _pauseOnBackground = false;
+        private static bool _blockMultiCallShow = false;
+        private static long _showStartTimeMs = 0;
+        private const long BLOCK_DURATION_MS = 2 * 60 * 1000;
+
+        public static void SetiOSAppPauseOnBackground(bool pause)
+        {
+            _pauseOnBackground = pause;
+        }
+
+        public static void BlockMultiAdShow(bool block)
+        {
+            _blockMultiCallShow = block;
+        }
+
+        public static bool IsPaused()
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            return UnityIsPaused() == 1;
+#else
+            return Time.timeScale == 0f;
+#endif
+        }
+
+        public static bool canAdShow()
+        {
+            if (_blockMultiCallShow && _showStartTimeMs > 0)
+            {
+                long elapsed = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - _showStartTimeMs;
+                if (elapsed < BLOCK_DURATION_MS)
+                    return false;
+            }
+            return true;
+        }
+
+        public static void PresentFullscreen()
+        {
+            _showStartTimeMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+            if (_pauseOnBackground) Pause();
+        }
+
+        public static void DismissFullScreen()
+        {
+            if (IsPaused()) Resume();
+        }
+
+        public static void Pause()
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            UnityPause(1);
+#elif UNITY_ANDROID && !UNITY_EDITOR
+            using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            using (var activity = player.GetStatic<AndroidJavaObject>("currentActivity"))
+            {
+                activity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+                {
+                    player.CallStatic("pause");
+                }));
+            }
+#else
+//            Time.timeScale = 0f;
+//            AudioListener.pause = true;
+#endif
+        }
+
+        public static void Resume()
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            UnityPause(0);
+#elif UNITY_ANDROID && !UNITY_EDITOR
+            using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            {
+                player.CallStatic("resume");
+            }
+#else
+//            Time.timeScale = 1f;
+//            AudioListener.pause = false;
+#endif
         }
     }
 }
