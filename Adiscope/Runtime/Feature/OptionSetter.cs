@@ -173,14 +173,14 @@ namespace Adiscope.Feature
 #if UNITY_IOS && !UNITY_EDITOR
             UnityPause(1);
 #elif UNITY_ANDROID && !UNITY_EDITOR
-            using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-            using (var activity = player.GetStatic<AndroidJavaObject>("currentActivity"))
-            {
-                activity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
-                {
-                    player.CallStatic("pause");
-                }));
-            }
+            // using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            // using (var activity = player.GetStatic<AndroidJavaObject>("currentActivity"))
+            // {
+            //     activity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
+            //     {
+            //         player.CallStatic("pause");
+            //     }));
+            // }
 #else
 //            Time.timeScale = 0f;
 //            AudioListener.pause = true;
@@ -192,10 +192,10 @@ namespace Adiscope.Feature
 #if UNITY_IOS && !UNITY_EDITOR
             UnityPause(0);
 #elif UNITY_ANDROID && !UNITY_EDITOR
-            using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
-            {
-                player.CallStatic("resume");
-            }
+            // using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+            // {
+            //     player.CallStatic("resume");
+            // }
 #else
 //            Time.timeScale = 1f;
 //            AudioListener.pause = false;
