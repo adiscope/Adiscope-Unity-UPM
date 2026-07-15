@@ -165,6 +165,7 @@ namespace Adiscope.Feature
 
         public static void DismissFullScreen()
         {
+            _showStartTimeMs = 0;
             if (IsPaused()) Resume();
         }
 
