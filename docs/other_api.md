@@ -56,16 +56,22 @@ Adiscope.Sdk.GetOptionGetter().GetNetworkVersions();
 ```csharp
 Adiscope.FrameworkSettings.MediaID_AOS;
 ```
+- Adiscope.FrameworkSettings(MediaID_AOS, MediaID_iOS, SubDomain 등)는 Unity 에디터에서만 동작하는 클래스
+- Runtime 스크립트(게임플레이 코드)에서는 참조할 수 없음
 
 ### iOS Media Id
 ```csharp
 Adiscope.FrameworkSettings.MediaID_IOS;
 ```
+- Adiscope.FrameworkSettings(MediaID_AOS, MediaID_iOS, SubDomain 등)는 Unity 에디터에서만 동작하는 클래스
+- Runtime 스크립트(게임플레이 코드)에서는 참조할 수 없음
 
 ### Sub Domain (for showDetail)
 ```csharp
 Adiscope.FrameworkSettings.SubDomain;
 ```
+- Adiscope.FrameworkSettings(MediaID_AOS, MediaID_iOS, SubDomain 등)는 Unity 에디터에서만 동작하는 클래스
+- Runtime 스크립트(게임플레이 코드)에서는 참조할 수 없음
 
 ### Set Rewarded Check Param
 ```csharp
