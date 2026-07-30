@@ -22,6 +22,7 @@ namespace Adiscope
         private const string SERVICE_JSON_KEY_SETTINGS      = "settings";
         private const string SERVICE_JSON_KEY_REWARDEDVIDEO = "rewardedVideoAd";
         private const string SERVICE_JSON_KEY_INTERSTITIAL  = "interstitialAd";
+        private const string SERVICE_JSON_KEY_REWARDED_INTERSTITIAL  = "rewardedInterstitialAd";
 
         private const string PATH_ADISCOPE_EDITOR           = "/Adiscope/Editor";
         private static string SettingsPath                  = "Assets/Adiscope/Editor/Adiscope.asset";
@@ -260,8 +261,9 @@ namespace Adiscope
                         Dictionary<string, object> networkInfoSettings = networkInfo[SERVICE_JSON_KEY_SETTINGS] as Dictionary<string, object>;
                         bool rewardedVideoAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDEDVIDEO].ToString());
                         bool interstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_INTERSTITIAL].ToString());
+                        bool rewardedInterstitialAdEnabled = Boolean.Parse(networkInfoAds[SERVICE_JSON_KEY_REWARDED_INTERSTITIAL].ToString());
                         int adapter = serialized.FindProperty("_" + adNetworkName + "Adapter").intValue;
-                        if (rewardedVideoAdEnabled || interstitialAdEnabled) {
+                        if (rewardedVideoAdEnabled || interstitialAdEnabled || rewardedInterstitialAdEnabled) {
                             if (isAndroid) {
                                 if (adapter < 1) {
                                     serialized.FindProperty("_" + adNetworkName + "Adapter").intValue = 2;
