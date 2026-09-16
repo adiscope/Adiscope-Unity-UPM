@@ -300,7 +300,7 @@ android {{
 
             // 상세 이동을 위해서 추가
             handler.AddActivity(
-                    "<activity android:name=\"com.nps.adiscope.core.offerwall.adv.act.AdvancedOfferwallActivity\" android:configChanges=\"orientation|screenSize|keyboardHidden\" " +
+                    "<activity android:name=\"com.nps.adiscope.core.offerwall.adv.act.AdvancedOfferwallActivity\" android:configChanges=\"orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden\" " +
                     "android:exported=\"true\" android:theme=\"@android:style/Theme.NoTitleBar\" android:screenOrientation=\"portrait\" android:hardwareAccelerated=\"true\" >" +
                         "<intent-filter>" +
                             "<action android:name=\"android.intent.action.VIEW\"/>" +
@@ -517,9 +517,9 @@ android {{
         // private const string ADISCOPE_FILE_PATH = "https://github.com/adiscope/Adiscope-Unity-UPM-Beta/releases/download/";
         private const string LUCKY_EVENT_FILE_PATH  = ADISCOPE_FILE_PATH + "5.3.0/";
         private const string ADMOB_FILE_PATH        = ADISCOPE_FILE_PATH + "5.4.0/";
-        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "5.2.0/";
-        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "5.4.0/";
-        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.4.0/";
+        private const string CHARTBOOST_FILE_PATH   = ADISCOPE_FILE_PATH + "5.5.0/";
+        private const string MAX_FILE_PATH          = ADISCOPE_FILE_PATH + "5.5.0/";
+        private const string PANGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.5.0/";
         private const string VUNGLE_FILE_PATH       = ADISCOPE_FILE_PATH + "5.4.0/";
         private const string TNKPUB_FILE_PATH       = ADISCOPE_FILE_PATH + "5.4.0/";
 

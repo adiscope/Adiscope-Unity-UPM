@@ -1,8 +1,8 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.4.3-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.4.3-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.4.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.4.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.5.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.5.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.5.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
@@ -21,7 +21,7 @@
 | AppLovin            | 13.6.2          | 13.6.2       |
 | BidMachine          | 3.6.1           | 3.6.1        |
 | Bigo                | 5.8.2           | 5.1.2        |
-| Chartboost          | 9.11.0          | 9.11.0       |
+| Chartboost          | 9.14.0          | 9.11.0       |
 | DT Exchange         | 8.4.4           | 8.4.6        |
 | InMobi              | 11.2.0          | 11.2.0       |
 | Ironsource          | 9.4.0.0         | 9.4.0.0      |
@@ -31,7 +31,7 @@
 | Mintegral(Mobvista) | 17.1.51         | 8.1.3        |
 | Moloco              | 4.8.0           | 4.5.1        |
 | Ogury               | 6.2.2           | 5.2.1        |
-| Pangle              | 7.9.1.3         | 8.0.0.9      |
+| Pangle              | 8.1.0.5         | 8.2.1.0      |
 | Pubmatic            | 4.11.0          | 5.1.0        |
 | TNKPub              | 7.25.05         | 1.24         |
 | Unity Ads           | 4.16.6          | 4.16.5       |
@@ -211,6 +211,7 @@ Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
 - iOS는 Build된 Project에서 `Info.plist` 파일에서 `AdiscopeMediaId`가 있어야 함 ([Info.plist 확인](./docs/upm_result.md#7-infoplist%EC%9D%98-adiscopemediaid-%ED%99%95%EC%9D%B8-ios-%EC%A0%84%EC%9A%A9))
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
+- Initialize에 실패(`isSuccess = false`)한 경우 Initialize를 다시 호출하여 재시도할 수 있음
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
   - ⚠️ 정책 미준수시 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize)
@@ -233,22 +234,45 @@ Adiscope.Sdk.GetCoreInstance().Initialize(MEDIA_ID, MEDIA_SECRET, CALLBACK_TAG, 
 ```
 - 반드시 unity의 main thread에서 실행
 - App 실행 시 1회 설정 권장
+- Initialize에 실패(`isSuccess = false`)한 경우 Initialize를 다시 호출하여 재시도할 수 있음
 - Adiscope에서는 Google Play 가족 정책을 준수해야 함 (Android 전용 - [Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
   - ⚠️ 정책 미준수시 광고에 제한이 생김 (광고 물량 축소 및 오퍼월 진입 불가)
 > - [Other Initialize API](./docs/other_api.md#initialize) 
+
+<br/>
+
+#### 다. Initialize 호출 동작 (Android 전용)
+- SDK 5.5.0 이상에서는 Initialize 여부와 관계없이 광고 Instance를 가져올 수 있으므로, Instance 생성 및 Callback 등록을 Initialize 호출 전에 처리할 수 있음
+  - 기존과 같이 Initialize 성공 후 Instance를 가져오는 방식도 그대로 사용 가능
+  - iOS는 Initialize 전에 Instance를 가져오면 null을 반환하므로, Initialize 전에 처리할 경우 플랫폼 분기 필요
+- Initialize 전에 광고 Load/Show를 호출하면 각 광고의 `OnFailedToLoad`/`OnFailedToShow`로 `NOT_INITIALIZED`(14)가 전달됨 ([AdiscopeError 참고](./docs/error_info.md))
+- Initialize가 진행 중일 때 Initialize를 다시 호출하면 마지막으로 전달한 callback으로 교체되며, callback은 1회만 호출됨
+- 이미 Initialize된 상태에서 Initialize를 호출하면 즉시 callback으로 `isSuccess = true`가 전달됨
+- SDK 5.4.x 이하는 Initialize callback으로 `isSuccess = true`를 전달 받은 뒤 광고 Instance를 가져와야 함
 
 <br/><br/>
 
 ### 3. 사용자 정보 설정
 ```csharp
 private string USER_ID = "";        // set unique user id to identify the user in reward information
-private int USER_TYPE = 0;          // none: 0, adult: 1, child: 2
+private int? USER_AGE = null;       // 매체에서 수집하고 있는 유저의 만 나이
+int USER_TYPE;                      // none: 0, adult: 1, child: 2
+if (USER_AGE == null) {
+    USER_TYPE = 0;                  // 나이를 알 수 없음
+} else if (USER_AGE < 13) {
+    USER_TYPE = 2;                  // 만 13세 미만: 반드시 Child 설정 필요
+} else {
+    USER_TYPE = 1;                  // 만 13세 이상
+}
 Adiscope.Sdk.GetCoreInstance().SetUserIdChild(USER_ID, USER_TYPE);
 ```
 - ⚠️ `Offerwall`, `RewardedVideo`, `Interstitial`, `RewardedInterstitial`를 사용하기 위해 유저 식별값과 유저 타입을 필수 설정
-- SDK 초기화 이전 또는 광고 로드 전에 호출되어야 함
+- SDK 초기화 이전 또는 광고 로드 전에 호출되어야 함 (Initialize 호출 전 설정 권장)
 - userId: 64자까지 설정 가능
 - userType: None(0), Adult(1), Child(2)
+- (Android 전용) 만 13세 미만 유저는 Google Play 가족 정책 준수를 위해 **반드시 `Child(2)`로 설정**해야 함 ([Adiscope Google Play 가족 정책 확인](./docs/familiespolicy.md))
+  - 만 13세 이상 매체는 모두 성인으로 판단하므로 `None(0)`으로 두어도 정책 및 광고 동작에 문제 없음
+  - 어린이 대상 매체에서 `None(0)`으로 설정하면 값이 없으므로 보수적으로 어린이로 판단함
 <br/><br/><br/>
 
 ### 4. Offerwall
@@ -263,6 +287,7 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
 ```
 - Offerwall Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Offerwall Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+- (Android 전용) SDK 5.5.0 이상에서는 Initialize 여부와 관계없이 Instance를 반환하므로 Initialize 전에 Instance 생성 및 Callback 등록 가능 ([Initialize 호출 동작](#다-initialize-호출-동작-android-전용))
 <br/>
 
 #### B. Callback 등록
@@ -284,13 +309,14 @@ if (offerwallAd != null) {
     if (offerwallAd.Show("UNIT1", typeList)) {
         // Success
     } else {
-        // This Show request is duplicated
+        // This Show request is duplicated (Android: or not initialized)
     }
 } else {
     // Reinitialize
 }
 ```
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+- (Android 전용) Initialize 전 호출 시 `false`를 반환하며 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 - 광고 유닛명은 반드시 대문자로 전달해야 함
 <br/>
 
@@ -347,6 +373,7 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
 ```
 - Rewarded Video Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Rewarded Video Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+- (Android 전용) SDK 5.5.0 이상에서는 Initialize 여부와 관계없이 Instance를 반환하므로 Initialize 전에 Instance 생성 및 Callback 등록 가능 ([Initialize 호출 동작](#다-initialize-호출-동작-android-전용))
 <br/>
 
 #### B. Callback 등록
@@ -386,6 +413,7 @@ if (rewardedVideoAd != null) {
   - Abusing 방지를 위해 Rewarded Video Ad를 연속으로 보여주는 것을 제한하여 한번 광고를 보고 나면 일정 시간이 지난 후에 다시 Show를 할 수 있도로록 Admin page에서 서비스 설정 가능
 - Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
 - (**Optional**) Load의 시간이 필요해 ProgressBar 노출 추천
+- (Android 전용) Initialize 전 호출 시 `OnFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### D. IsLoaded
@@ -413,7 +441,7 @@ if (rewardedVideoAd != null) {
         if (rewardedVideoAd.Show()) {
             // Success
         } else {
-            // This Show request is duplicated
+            // This Show request is duplicated (Android: or not initialized)
         }
     } else {
         // ad is not loaded
@@ -428,6 +456,7 @@ if (rewardedVideoAd != null) {
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
     - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음번 Show를 준비
+- (Android 전용) Initialize 전 호출 시 `false`를 반환하며 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### F. Callback Reward
@@ -483,6 +512,7 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
 ```
 - Interstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - Interstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+- (Android 전용) SDK 5.5.0 이상에서는 Initialize 여부와 관계없이 Instance를 반환하므로 Initialize 전에 Instance 생성 및 Callback 등록 가능 ([Initialize 호출 동작](#다-initialize-호출-동작-android-전용))
 <br/>
 
 #### B. Callback 등록
@@ -517,6 +547,7 @@ if (interstitialAd != null) {
 - 광고가 Show되는 동안 다음 광고를 Load를 할 수도 있지만 이는 사용하는 mediation ad network company의 종류에 따라 달라질 수 있으므로 항상 보장되는 동작은 아님
 - Load 동작 수행 중에 Load를 여러 번 호출할 수 없음
 - (**Optional**) Load의 시간이 필요해 ProgressBar 노출 추천
+- (Android 전용) Initialize 전 호출 시 `OnFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### D. IsLoaded
@@ -544,7 +575,7 @@ if (interstitialAd != null) {
         if (interstitialAd.Show()) {
             // Success
         } else {
-            // This Show request is duplicated
+            // This Show request is duplicated (Android: or not initialized)
         }
     } else {
         // ad is not loaded
@@ -559,6 +590,7 @@ if (interstitialAd != null) {
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - Rewarded Video Ad의 `Load`와 `Show`는 pair로 호출
     - Load를 한 후 Show를 하고, 광고를 Show한 후에는 다시 Load를 하여 다음번 Show를 준비
+- (Android 전용) Initialize 전 호출 시 `false`를 반환하며 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### F. Callback
@@ -597,6 +629,7 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
 ```
 - RewardedInterstitial Ad Instance는 global singleton instance이므로 여러개의 instance를 생성할 수 없음
 - RewardedInterstitial Ad의 callback event handler는 등록과 해제가 자유로우나 globally static하므로 중복 등록되지 않도록 유의
+- (Android 전용) SDK 5.5.0 이상에서는 Initialize 여부와 관계없이 Instance를 반환하므로 Initialize 전에 Instance 생성 및 Callback 등록 가능 ([Initialize 호출 동작](#다-initialize-호출-동작-android-전용))
 <br/>
 
 #### B. Callback 등록
@@ -626,6 +659,7 @@ if (rewaredInterstitialAd != null) {
 ```
 - 입력된 유닛의 Load 진행
 - 광고 유닛명은 반드시 대문자로 전달해야 함
+- (Android 전용) Initialize 전 호출 시 `OnFailedToLoad`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### D. PreLoadAll
@@ -679,6 +713,7 @@ if (rewaredInterstitialAd != null) {
 - 광고 유닛명은 반드시 대문자로 전달해야 함
 - show method는 중복하여 호출 할 수 없음
 - `ShowRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+- (Android 전용) Initialize 전 호출 시 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### H. Show With Popup
@@ -693,6 +728,7 @@ if (rewaredInterstitialAd != null) {
 - 광고 유닛명은 반드시 대문자로 전달해야 함
 - show method는 중복하여 호출 할 수 없음
 - `ShowWithPopupRewardedInterstitial`가 실행되면 (return값이 True일 경우) `OnSkip`와 `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
+- (Android 전용) Initialize 전 호출 시 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 <br/>
 
 #### I. Unit Status Info

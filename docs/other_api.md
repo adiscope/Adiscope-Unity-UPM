@@ -36,6 +36,8 @@ Adiscope.Sdk.GetCoreInstance().Initialize((isSuccess) => {
 ```csharp
 Adiscope.Sdk.GetCoreInstance().IsInitialized();
 ```
+- Initialize 상태 확인용 함수
+- (Android 전용) SDK 5.5.0 이상에서는 광고 Instance를 가져오기 전에 확인할 필요 없음 ([Initialize 호출 동작](../README.md#다-initialize-호출-동작-android-전용))
 
 ### SDK Versions
 ```csharp
