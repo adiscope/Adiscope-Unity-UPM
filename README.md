@@ -1,8 +1,8 @@
 # Adiscope Unity Package Manager
-[![GitHub package.json version](https://img.shields.io/badge/Unity-5.5.0-blue)](../../releases)
-[![GitHub package.json version](https://img.shields.io/badge/Android-5.5.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/iOS-5.5.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
-[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.5.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
+[![GitHub package.json version](https://img.shields.io/badge/Unity-5.6.0-blue)](../../releases)
+[![GitHub package.json version](https://img.shields.io/badge/Android-5.6.0-blue)](https://github.com/adiscope/Adiscope-Android-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/iOS-5.6.0-blue)](https://github.com/adiscope/Adiscope-iOS-Sample)
+[![GitHub package.json version](https://img.shields.io/badge/Flutter-5.6.0-blue)](https://pub.dev/packages/adiscope_flutter_plugin)
 [![GitHub package.json version](https://img.shields.io/badge/ReactNative-5.3.0-blue)](https://www.npmjs.com/package/@adiscope.ad/adiscope-react-native)
 
 - ⚠️ **Unity Editor 2022.x ~ 2022.3.9f1 에서 iOS xcode16 빌드 시 사용 불가**
@@ -17,23 +17,23 @@
 
 | Ad Network          | Android Version | iOS Version  |
 |---------------------|-----------------|--------------|
-| AdMob               | 25.2.0          | 13.2.0       |
+| AdMob               | 25.2.0          | 13.11.0      |
 | AppLovin            | 13.6.2          | 13.6.2       |
 | BidMachine          | 3.6.1           | 3.6.1        |
 | Bigo                | 5.8.2           | 5.1.2        |
 | Chartboost          | 9.14.0          | 9.11.0       |
-| DT Exchange         | 8.4.4           | 8.4.6        |
-| InMobi              | 11.2.0          | 11.2.0       |
-| Ironsource          | 9.4.0.0         | 9.4.0.0      |
-| Liftoff(Vungle)     | 7.7.3           | 7.7.2        |
+| DT Exchange         | 8.4.7           | 8.4.6        |
+| InMobi              | 11.5.0          | 11.5.0       |
+| Ironsource          | 9.6.0           | 9.4.0.0      |
+| Liftoff(Vungle)     | 7.7.8           | 7.7.2        |
 | Line                | 3000.0.1        | 3.0.1        |
 | Meta(Fan)           | 6.21.0          | 6.21.1       |
 | Mintegral(Mobvista) | 17.1.51         | 8.1.3        |
 | Moloco              | 4.8.0           | 4.5.1        |
 | Ogury               | 6.2.2           | 5.2.1        |
 | Pangle              | 8.1.0.5         | 8.2.1.0      |
-| Pubmatic            | 4.11.0          | 5.1.0        |
-| TNKPub              | 7.25.05         | 1.24         |
+| Pubmatic            | 5.4.1           | 5.1.0        |
+| TNKPub              | 7.25.05         | 1.25         |
 | Unity Ads           | 4.16.6          | 4.16.5       |
 | Verve               | 3.8.1           | -            |
 
@@ -318,6 +318,7 @@ if (offerwallAd != null) {
 - `Show`가 실행되면 (return값이 True일 경우) `OnOpened`와 `OnFailedToShow` 중 하나가 항상 호출되고, `OnOpened`가 호출되었다면 이후 `OnClosed`가 항상 호출
 - (Android 전용) Initialize 전 호출 시 `false`를 반환하며 `OnFailedToShow`로 `NOT_INITIALIZED`(14) 전달
 - 광고 유닛명은 반드시 대문자로 전달해야 함
+- placement 값을 함께 전달하려면 [F. Placement 전달](#f-placement-전달) 참고
 <br/>
 
 #### D. Callbacks
@@ -359,6 +360,27 @@ if (Adiscope.Sdk.GetCoreInstance().IsInitialized()) {
     // Reinitialize
 }
 ```
+<br/>
+
+#### F. Placement 전달
+```csharp
+private string PLACEMENT = "";      // 영문 대소문자·숫자만 사용 가능
+OfferwallFilterType[] typeList = new OfferwallFilterType[] {  };
+
+// Show
+offerwallAd.Show("UNIT1", typeList, PLACEMENT);
+
+// 상세 이동 - 값 전달 방식
+offerwallAd.ShowOfferwallDetail(UNIT_ID, typeList, ITEM_ID, PLACEMENT);
+
+// 상세 이동 - URL 전달 방식
+offerwallAd.ShowOfferwallDetailFromUrl(URL, PLACEMENT);
+```
+- SDK 5.6.0 이상에서 `Show`, `ShowOfferwallDetail`, `ShowOfferwallDetailFromUrl`에 placement 값을 함께 전달
+- 오퍼월 V2에서만 적용되며, 오퍼월 V1에서는 placement 값을 사용하지 않고 기존 함수와 동일하게 동작
+- placement에 영문 대소문자·숫자 외 문자가 있으면 `OnFailedToShow`로 `INVALID_REQUEST`(4) 전달 (Android는 `false` 반환)
+- placement가 `null`이거나 빈 문자열이면 placement 없이 호출한 것과 동일하게 동작
+- return 값과 Callback은 placement가 없는 기존 함수와 동일
 <br/><br/><br/>
 
 ### 5. RewardedVideo

@@ -1,0 +1,5 @@
+<dependencies>
+  <iosPods>
+    <iosPod name="AdiscopeMediaChartBoost" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+  </iosPods>
+</dependencies>

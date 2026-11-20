@@ -1,0 +1,5 @@
+<dependencies>
+  <iosPods>
+    <iosPod name="AdiscopeMediaAdManager" version="5.6.0" bitcodeEnabled="false" addToAllTargets="false" />
+  </iosPods>
+</dependencies>

@@ -86,5 +86,31 @@ namespace Adiscope.Feature
         {
             return client.ShowOfferwallDetailFromUrl(url);
         }
+
+        public bool Show(string unitId, OfferwallFilterType[] filters, string placement)
+        {
+            return client.Show(unitId, ToFilterStrings(filters), placement);
+        }
+
+        public bool ShowOfferwallDetail(string unitId, OfferwallFilterType[] filters, string itemId, string placement)
+        {
+            return client.ShowOfferwallDetail(unitId, ToFilterStrings(filters), itemId, placement);
+        }
+
+        public bool ShowOfferwallDetailFromUrl(string url, string placement)
+        {
+            return client.ShowOfferwallDetailFromUrl(url, placement);
+        }
+
+        private static string[] ToFilterStrings(OfferwallFilterType[] filters)
+        {
+            List<string> array = new List<string>();
+
+            foreach (OfferwallFilterType filter in filters)
+            {
+                array.Add(filter.ToString());
+            }
+            return array.ToArray();
+        }
     }
 }

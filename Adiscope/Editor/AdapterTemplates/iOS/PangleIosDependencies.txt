@@ -1,0 +1,5 @@
+<dependencies>
+  <iosPods>
+    <iosPod name="AdiscopeMediaPangle" version="5.5.0" bitcodeEnabled="false" addToAllTargets="false" />
+  </iosPods>
+</dependencies>

@@ -1,0 +1,22 @@
+<dependencies>
+  <iosPods>
+    <iosPod name="AdiscopeMediaMax" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterAdManager" version="5.6.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterAdMob" version="5.6.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterBidMachine" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterBigo" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterChartBoost" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterDTExchange" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterFan" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterInMobi" version="5.6.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterIronSource" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterLine" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterMobVista" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterMoloco" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterOgury" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterPangle" version="5.5.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterPubMatic" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterUnityAds" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+    <iosPod name="AdiscopeMediaMaxAdapterVungle" version="5.4.0" bitcodeEnabled="false" addToAllTargets="false" />
+  </iosPods>
+</dependencies>
